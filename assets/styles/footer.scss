@@ -6,7 +6,15 @@ hr
 
 .footer-font-size-text
 {
-  font-size: 1.25rem;
+  font-size: 1.6rem;
+}
+
+@media (min-width: 992px)
+{
+  .footer-font-size-text
+  {
+    font-size: 1rem;
+  }
 }
 
 footer h3
@@ -14,10 +22,32 @@ footer h3
   font-size: 1.875rem;
 }
 
+.title-h3
+{
+  font-size: 2rem;
+}
+
+@media (min-width: 992px)
+{
+  .title-h3
+  {
+    font-size: 1.5rem;
+  }
+}
+
 .img-rooster-footer
 {
-height: 9.375rem;
-width: 9.375rem;
+height: 16rem;
+width: 16rem;
+}
+
+@media (min-width: 992px)
+{
+  .img-rooster-footer
+  {
+    height: 12rem;
+    width: 12rem;
+  }
 }
 
 .icons-footer
@@ -28,7 +58,7 @@ width: 9.375rem;
 
 .icons-stipe
 {
-  width: 9.375rem;
+  width: 12rem;
   object-fit: contain;
 }
 
