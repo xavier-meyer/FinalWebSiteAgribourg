@@ -1,16 +1,110 @@
-img
+
+// carrousel
+
+.img-carrousel
 {
-  max-height: 600px;
+  max-height: 500px;
   object-fit: cover;
 }
 
 .p-carrousel
 {
-  font-size: 20px;
+  color: #22B14C;
+  font-size: 2.188rem;
 }
 
-hr
+.h2-font-size-home
+{
+  font-size: 2.188rem;
+}
+
+//hr
+//{
+//  background-color: #22B14C;
+//}
+
+@media(min-width:992px)
+{
+  .p-carrousel{
+    font-size: 1.6rem;
+  }
+  .h2-font-size-home
+  {
+    font-size: 1.6rem;
+  }
+  .img-carrousel
+  {
+    max-height:450px;
+  }
+}
+
+@media(min-width: 1200px)
+{
+  .img-carrousel
+  {
+    max-height: 600px;
+  }
+}
+
+//card
+
+.card
+{
+  --bs-card-border-width: 0;
+}
+
+.card-body
 {
   background-color: #22B14C;
+}
+
+.card-img-top
+{
+    max-height: 200px;
+    object-fit: cover;
+
+}
+
+.card-text, .card-title, .card-promo
+{
+    color: white;
+}
+
+.card-title
+{
+  font-size: 2rem;
+}
+
+.card-text, .card-promo
+{
+  font-size:1.8rem;
+}
+
+.btn-button-card
+{
+  background-color: orangered;
+  color:white;
+  font-size:1.6rem;
+}
+
+.icon-card
+{
+  height: 30px;
+}
+
+@media(min-width:992px)
+{
+  .card-title, .card-text, .card-promo {
+    font-size: 0.9rem;
+  }
+  .btn-button-card
+  {
+    font-size: 0.7rem;
+  }
+  .icon-card
+  {
+    height: 20px;
+  }
+
 }
 

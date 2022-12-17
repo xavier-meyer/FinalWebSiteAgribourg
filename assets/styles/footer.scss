@@ -1,20 +1,12 @@
 
-hr
-{
-  background-color: #22B14C;
-}
+//hr
+//{
+//  background-color: #22B14C;
+//}
 
 .footer-font-size-text
 {
   font-size: 1.6rem;
-}
-
-@media (min-width: 992px)
-{
-  .footer-font-size-text
-  {
-    font-size: 1rem;
-  }
 }
 
 footer h3
@@ -27,27 +19,10 @@ footer h3
   font-size: 2rem;
 }
 
-@media (min-width: 992px)
-{
-  .title-h3
-  {
-    font-size: 1.5rem;
-  }
-}
-
 .img-rooster-footer
 {
 height: 16rem;
 width: 16rem;
-}
-
-@media (min-width: 992px)
-{
-  .img-rooster-footer
-  {
-    height: 12rem;
-    width: 12rem;
-  }
 }
 
 .icons-footer
@@ -62,8 +37,30 @@ width: 16rem;
   object-fit: contain;
 }
 
-footer
+@media (min-width: 992px)
 {
-  overflow-x: hidden;
+  .img-rooster-footer
+  {
+    height: 9rem;
+    width: 9rem;
+  }
+  .title-h3
+  {
+    font-size: 1.2rem;
+  }
+  .footer-font-size-text
+  {
+    font-size: 0.8rem;
+  }
+  footer h3
+  {
+    font-size: 1.2rem;
+  }
+  .icons-footer
+  {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
 }
+
 

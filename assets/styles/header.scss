@@ -1,4 +1,9 @@
 
+body
+{
+  overflow-x: hidden;
+}
+
 //GENERAL
 ::before,
 ::after {
@@ -22,12 +27,6 @@ h1 {
   font-size: 2.5rem;
 }
 
-@media(min-width: 992px) {
-  h1 {
-    font-size: 1.875rem;
-  }
-
-}
 .bg-grey {
   background-color: #D9D9D9;
   width: auto;
@@ -43,15 +42,20 @@ h1 {
   width: 8rem;
 }
 
+.img-cart {
+  height:6rem;
+  width: 6rem;
+}
+
 @media(min-width:992px) {
   .img-rooster  {
     height: 10rem;
     width: 10rem;
   }
-  .img-cart {
-    height:6rem;
-    width: 6rem;
+  h1 {
+    font-size: 1.875rem;
   }
+
 }
 
  //NAVBAR
@@ -61,19 +65,18 @@ h1 {
   font-size:2.188rem;
 }
 
-@media(min-width: 992px) {
+@media(min-width:992px) {
   .nav-link {
     font-size: 1.25rem;
   }
-
-}
-
-@media(min-width: 992px) {
-
   .navbar-collapse {
     justify-content: space-between;
   }
 }
+
+
+
+
 
 
 
