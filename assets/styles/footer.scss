@@ -1,9 +1,4 @@
 
-//hr
-//{
-//  background-color: #22B14C;
-//}
-
 .footer-font-size-text
 {
   font-size: 1.6rem;
@@ -35,6 +30,12 @@ width: 16rem;
 {
   width: 12rem;
   object-fit: contain;
+}
+
+.link-footer
+{
+  text-decoration: none;
+  color:black;
 }
 
 @media (min-width: 992px)

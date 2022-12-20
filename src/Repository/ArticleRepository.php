@@ -54,7 +54,11 @@ class ArticleRepository extends ServiceEntityRepository
             SELECT * FROM article
             WHERE article.catproduit = "2"  
             AND article.artprixpromo IS NOT NULL
-            LIMIT 12
+            UNION 
+            SELECT * FROM article
+            WHERE article.catproduit = "3"
+            AND article.artprixpromo IS NOT NULL    
+            LIMIT 10
         ';
 
         $stmt = $conn->prepare($sql);
