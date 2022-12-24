@@ -1,0 +1,53 @@
+
+.h1_historique_entreprise
+{
+  margin: 30px 0 30px 0;
+  text-align: center;
+}
+
+.container_historique_entreprise
+{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.container_historique_entreprise h3
+{
+  font-size: 1.875rem;
+}
+
+.container_historique_description
+{
+  width: 60%;
+}
+
+.hr_historique_entreprise
+{
+  border: 1px solid #22B14C;
+}
+
+.hr_historique_entreprise_top
+{
+  border: 1px solid #22B14C;
+  margin-top:15px;
+}
+
+.p_historique_description
+{
+  font-size:1.6rem;
+  padding: 10px 0 10px 0;
+}
+
+@media(min-width: 992px) {
+  .p_historique_description
+  {
+    font-size: 1rem;
+  }
+  .container_historique_entreprise h3
+  {
+    font-size: 1.2rem;
+  }
+}
+
