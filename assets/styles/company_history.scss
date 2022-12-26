@@ -1,16 +1,16 @@
 
 .h1_historique_entreprise
 {
-  margin: 30px 0 30px 0;
+  margin: 50px 0 50px 0;
   text-align: center;
 }
 
 .container_historique_entreprise
 {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .container_historique_entreprise h3
@@ -23,31 +23,43 @@
   width: 60%;
 }
 
+.center-hr
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .hr_historique_entreprise
 {
-  border: 1px solid #22B14C;
+  border-left: 2px solid #22b14c;
+  display: inline-block;
+  height: 130px;
 }
 
-.hr_historique_entreprise_top
-{
-  border: 1px solid #22B14C;
-  margin-top:15px;
-}
-
-.p_historique_description
-{
-  font-size:1.6rem;
-  padding: 10px 0 10px 0;
+.p_historique_description {
+  font-size: 1.6rem;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(34, 177, 76, 0.2);
+  margin: 0 25px 0 25px;
 }
 
 @media(min-width: 992px) {
-  .p_historique_description
-  {
+
+  .p_historique_description {
     font-size: 1rem;
   }
-  .container_historique_entreprise h3
-  {
+  .container_historique_entreprise h3 {
     font-size: 1.2rem;
+  }
+  .hr_historique_entreprise {
+    border-left: 2px solid #22b14c;
+    display: inline-block;
+    height: 70px;
+  }
+  .container_historique_description {
+    width: 40%;
   }
 }
 

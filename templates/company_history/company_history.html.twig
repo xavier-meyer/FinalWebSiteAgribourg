@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1 class="h1_historique_entreprise">Notre histoire</h1>
-    <hr class="hr_historique_entreprise_top">
     {% for item in histoireEntreprise %}
         <div class="container_historique_entreprise">
             <div>
@@ -14,6 +13,8 @@
                 <p class="p_historique_description">{{  item.histdescription }}</p>
             </div>
         </div>
-        <hr class="hr_historique_entreprise">
+        <div class="center-hr">
+            <hr class="hr_historique_entreprise">
+        </div>
     {%  endfor %}
 {% endblock %}
