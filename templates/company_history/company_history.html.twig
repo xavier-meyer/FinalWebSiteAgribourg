@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompagnyHistoryController{% endblock %}
+
+{% block body %}
+    <h1 class="h1_historique_entreprise">Notre histoire</h1>
+    {% for item in histoireEntreprise %}
+        <div class="container_historique_entreprise">
+            <div>
+                <h3>{{ item.histannee }}</h3>
+            </div>
+            <div class="container_historique_description">
+                <p class="p_historique_description">{{  item.histdescription }}</p>
+            </div>
+        </div>
+        <div class="center-hr">
+            {%  if not loop.last %}
+            <hr class="hr_historique_entreprise">
+            {%  endif  %}
+        </div>
+    {%  endfor %}
+{% endblock %}
