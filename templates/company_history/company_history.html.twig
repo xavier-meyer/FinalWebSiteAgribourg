@@ -14,7 +14,9 @@
             </div>
         </div>
         <div class="center-hr">
+            {%  if not loop.last %}
             <hr class="hr_historique_entreprise">
+            {%  endif  %}
         </div>
     {%  endfor %}
 {% endblock %}
