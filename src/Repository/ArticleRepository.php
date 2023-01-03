@@ -42,30 +42,39 @@ class ArticleRepository extends ServiceEntityRepository
 
     //  @return Article[] Returns an array of Article objects
 
-    public function displayArticlesByCategory(): array
+    public function displayArticlesByCategory(array $categs): array
     {
-        $conn = $this-> getEntityManager()->getConnection();
+        return $this->createQueryBuilder('m')
+            ->where('m.catproduit IN (:catproduit)')
+            ->setParameter('catproduit', $categs)
+            ->andWhere('m.artprixpromo IS NOT NULL')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+}
+   /*    $conn = $this-> getEntityManager()->getConnection();
 
         $sql = '
             SELECT * FROM article
             WHERE article.catproduit = "1"
-            AND article.artprixpromo IS NOT NULL  
-            UNION  
-            SELECT * FROM article
-            WHERE article.catproduit = "2"  
             AND article.artprixpromo IS NOT NULL
-            UNION 
+            UNION
+            SELECT * FROM article
+            WHERE article.catproduit = "2"
+            AND article.artprixpromo IS NOT NULL
+            UNION
             SELECT * FROM article
             WHERE article.catproduit = "3"
-            AND article.artprixpromo IS NOT NULL    
+            AND article.artprixpromo IS NOT NULL
             LIMIT 10
         ';
 
         $stmt = $conn->prepare($sql);
         $result = $stmt->executeQuery();
 
-        return $result->fetchAllAssociative();
-    }
+        return $result->fetchAllAssociative();*/
+
 
 //    public function displayArticlesByCategoryLegume() : array
 //    {
@@ -84,7 +93,7 @@ class ArticleRepository extends ServiceEntityRepository
 //        return $result1->fetchAllAssociative();
 
 
-}
+
 
 
 //      return $this->createQueryBuilder('a')
