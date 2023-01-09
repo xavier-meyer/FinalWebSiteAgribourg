@@ -53,6 +53,8 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 }
+
+
    /*    $conn = $this-> getEntityManager()->getConnection();
 
         $sql = '

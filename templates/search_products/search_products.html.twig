@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SearchProductsController!{% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center fw-bold">Nos produits</h1>
+    <div class="d-flex justify-content-center align-items-center flex-column">
+        <button type="button" class="btn btn-search-fruits my-3 my-md-0">Fruits</button>
+        <button type="button" class="btn btn-search-legumes my-3 my-md-0">Legumes</button>
+        <button type="button" class="btn btn-search-paniers my-3 my-md-0">Nos paniers</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center flex-column my-5">
+        <label class="label-search my-3"  for="name">Rechercher un produit</label>
+        <input class="input-search my-3" type="text" id="name" name="name">
+        <input class="input-search-submit my-3" type="submit" value="rechercher">
+    </div>
+
+{% endblock %}

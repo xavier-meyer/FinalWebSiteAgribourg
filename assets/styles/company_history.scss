@@ -1,7 +1,7 @@
 
 .h1_historique_entreprise
 {
-  margin: 50px 0 50px 0;
+  margin: 3.125rem 0 3.125rem 0;
   text-align: center;
 }
 
@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .container_historique_entreprise h3
@@ -34,18 +34,18 @@
 {
   border-left: 2px solid #22b14c;
   display: inline-block;
-  height: 130px;
+  height: 8.125rem;
 }
 
 .p_historique_description {
   font-size: 1.6rem;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 1.25rem;
+  border-radius: 0.625rem;
   background: rgba(34, 177, 76, 0.2);
-  margin: 0 25px 0 25px;
+  margin: 0 1.5625rem 0 1.5625rem;
 }
 
-@media(min-width: 992px) {
+@media(min-width: 768px) {
 
   .p_historique_description {
     font-size: 1rem;
@@ -56,7 +56,7 @@
   .hr_historique_entreprise {
     border-left: 2px solid #22b14c;
     display: inline-block;
-    height: 70px;
+    height: 4.375rem;
   }
   .container_historique_description {
     width: 40%;
