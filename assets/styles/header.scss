@@ -23,58 +23,33 @@ h1 {
   color: #22B14C;
 }
 
-h1 {
-  font-size: 2.5rem;
-}
-
-.bg-grey {
-  background-color: #D9D9D9;
-  width: auto;
-}
-
-.img-rooster {
-  height: 12rem;
-  width: 12rem;
-}
-
-.img-cart {
-  height: 8rem;
-  width: 8rem;
-}
-
-.img-cart {
-  height:6rem;
-  width: 6rem;
-}
-
-@media(min-width:992px) {
-  .img-rooster  {
-    height: 10rem;
-    width: 10rem;
-  }
-  h1 {
-    font-size: 1.875rem;
-  }
-
-}
-
  //NAVBAR
 
 .nav-link
 {
-  font-size:2.188rem;
+  font-size: 1.3rem ;
 }
 
-@media(min-width:992px) {
-  .nav-link {
-    font-size: 1.25rem;
-  }
+@media(min-width:768px) {
   .navbar-collapse {
     justify-content: space-between;
   }
 }
 
+@media(min-width: 992px) {
+  .nav-link
+  {
+    font-size: 1.1rem;
+  }
+}
 
+@media(min-width: 1200px)
+{
+  .nav-link
+  {
+    font-size: 1.3rem;
+  }
+}
 
 
 

@@ -13,7 +13,7 @@ class NomProduitRuntime implements RuntimeExtensionInterface
     // filtre php excert
     public function limiterNbDeCaracteresNomProduit($value) : string
     {
-        if (strlen( $value) < 20) {
+        if (strlen( $value) < 13) {
             return $value ;
         } else {
            $new = wordwrap($value, 14);
