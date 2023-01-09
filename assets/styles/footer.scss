@@ -1,35 +1,8 @@
 
-.footer-font-size-text
-{
-  font-size: 1.6rem;
-}
-
-footer h3
-{
-  font-size: 1.875rem;
-}
-
-.title-h3
-{
-  font-size: 2rem;
-}
-
-.img-rooster-footer
-{
-height: 16rem;
-width: 16rem;
-}
-
-.icons-footer
-{
-  height:2.5rem;
-  width:2.5rem;
-}
 
 .icons-stipe
 {
-  width: 12rem;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .link-footer
@@ -38,30 +11,13 @@ width: 16rem;
   color:black;
 }
 
-@media (min-width: 992px)
+.height-div-footer
 {
-  .img-rooster-footer
-  {
-    height: 9rem;
-    width: 9rem;
-  }
-  .title-h3
-  {
-    font-size: 1.2rem;
-  }
-  .footer-font-size-text
-  {
-    font-size: 1rem;
-  }
-  footer h3
-  {
-    font-size: 1.2rem;
-  }
-  .icons-footer
-  {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
+  height: 15.625rem;
 }
 
-
+.img-icons
+{
+  height: 1.75rem;
+  width: 1.75rem;
+}
