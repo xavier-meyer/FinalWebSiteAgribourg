@@ -10,17 +10,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1.25rem;
+  flex-direction: column;
 }
 
 .container_historique_entreprise h3
 {
   font-size: 1.875rem;
-}
-
-.container_historique_description
-{
-  width: 60%;
 }
 
 .center-hr
@@ -38,27 +33,41 @@
 }
 
 .p_historique_description {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   padding: 1.25rem;
   border-radius: 0.625rem;
   background: rgba(34, 177, 76, 0.2);
-  margin: 0 1.5625rem 0 1.5625rem;
+  margin: 1.5rem 1.5625rem 0 1.5625rem;
 }
 
-@media(min-width: 992px) {
+@media(min-width: 768px) {
 
   .p_historique_description {
     font-size: 1rem;
+    width: 60%;
   }
   .container_historique_entreprise h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+
   }
   .hr_historique_entreprise {
     border-left: 2px solid #22b14c;
     display: inline-block;
     height: 4.375rem;
   }
-  .container_historique_description {
+  .container_historique_entreprise {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media(min-width:992px)
+{
+  .p_historique_description {
+    font-size: 1rem;
     width: 40%;
   }
 }

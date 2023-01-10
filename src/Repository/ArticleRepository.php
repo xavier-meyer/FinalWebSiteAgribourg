@@ -52,7 +52,18 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function displayArticlesByFrutCategory(array $categsFrut) : array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.catproduit IN (:catproduit)')
+            ->setParameter('catproduit', $categsFrut)
+            ->setMaxResults(10)
+            -> getQuery()
+            ->getResult();
+    }
 }
+
    /*    $conn = $this-> getEntityManager()->getConnection();
 
         $sql = '

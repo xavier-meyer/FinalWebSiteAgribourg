@@ -7,8 +7,14 @@
 
 .link-footer
 {
-  text-decoration: none;
-  color:black;
+ text-decoration: none;
+ color:black;
+}
+
+.img-icons
+{
+  height: 1.75rem;
+  width: 1.75rem;
 }
 
 .height-div-footer
@@ -16,8 +22,9 @@
   height: 15.625rem;
 }
 
-.img-icons
-{
-  height: 1.75rem;
-  width: 1.75rem;
+@media(min-width: 1200px) {
+  .img-rooster-footer {
+    height: 10rem;
+    width: 10rem;
+  }
 }
