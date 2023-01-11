@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SearchProductsController!{% endblock %}
+{% block title %} SearchProductsBasketController{% endblock %}
+
 {% block body %}
-    <h1 class="my-5 text-center fw-bold">Nos Fruits</h1>
+    <h1 class="my-5 text-center fw-bold">Nos Paniers</h1>
     <div class="d-flex justify-content-center align-items-center flex-column flex-sm-row justify-content-lg-around my-5">
         <a href="{{ path("app_search_products") }}" type="button" class="btn btn-search-fruits my-3 my-md-0">Fruits</a>
         <a href="{{ path("app_search_products_vegetables") }}" type="button" class="btn btn-search-legumes my-3 my-md-0">Légumes</a>
@@ -14,7 +15,7 @@
         <input class="input-search-submit my-3 my-md-0" type="submit" value="rechercher">
     </div>
     <div class="row d-flex justify-content-center justify-content-md-center align-items-center my-5">
-        {% for item in articlesFrut %}
+        {% for item in  articlesBaskets %}
             <div class="card col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 me-3 my-4">
                 <img src="{{ asset("build/images/"~item.artimage~"") }}" class="card-img-top" alt="">
                 <div class="card-body">
@@ -25,26 +26,13 @@
                         <div>
                             {#  conditions si le produit est en promotion #}
                             {% if item.artprixpromo is not null and item.artprixunitaire is null %}
-                                <p class="card-text">{{ item.artprixpromo }}€/kg</p>
+                                <p class="card-text">0€/pièce</p>
                             {% elseif item.artprixpromo is not null and item.artprixunitaire is not null %}
-                                <p class="card-text">{{ item.artprixpromo }}€/pièce</p>
-                            {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.catproduit == "3" %}
-                                <p class="card-text">{{ item.artprixpromo }}€/panier</p>
-                            {% elseif item.artprixpromo is not null and item.artprixaukg is null and item.artprixunitaire is not null %}
-                                <p class="card-text">{{ item.artprixpromo }}€/pièce</p>
-                            {% elseif item.artprixpromo is not null and item.artprixaukg is null and item.artprixunitaire is not null %}
-                                <p class="card-text">{{ item.artprixpromo }}€/pièce</p>
-
+                                <p class="card-text">{{ item.artprixpromo }}€/piéce</p>
                                 {# conditions si le produit n'est pas en promotion #}
-                            {% elseif item.artprixpromo is null and item.artprixaukg is not null %}
-                                <p class="card-text">{{ item.artprixaukg }}€/kg</p>
-                            {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null and item.artnomproduit == "Radis roses BIO" %}
-                                <p class="card-text">{{ item.artprixunitaire }}€/botte</p>
-                            {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null and item.artnomproduit == "Asperges BIO" or item.artnomproduit == "Petit pois BIO" %}
-                                <p class="card-text">{{ item.artprixunitaire }}€/bocal</p>
-                            {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.catproduit == "3" %}
-                                <p class="card-text">{{ item.artprixunitaire }}€/panier</p>
-                            {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null %}
+                            {% elseif item.artprixpromo is not null and item.artprixunitaire is null %}
+                                <p class="card-text">0€/panier</p>
+                            {% elseif item.artprixpromo is null and item.artprixunitaire is not null %}
                                 <p class="card-text">{{ item.artprixunitaire }}€/pièce</p>
                             {% endif %}
                         </div>

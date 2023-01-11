@@ -62,23 +62,56 @@ class ArticleRepository extends ServiceEntityRepository
             -> getQuery()
             ->getResult();
     }
+
+//    public function searchArticlesInputByLetter(array $categFruts, string $quelquechose) : array
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->where('m.catproduit IN (:catproduit)')
+//            ->setParameter('catproduit', $categFruts)
+//            ->andWhere("m.artnomproduit LIKE '$quelquechose%'")
+//            ->setMaxResults(6)
+//            ->getQuery()
+//            ->getResult();
+//    }
+
+    public function displayArticlesByVegetableCategory(array $categsVegetable) : array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.catproduit IN (:catproduit)')
+            ->setParameter('catproduit', $categsVegetable)
+            ->setMaxResults(10)
+            -> getQuery()
+            ->getResult();
+    }
+
+
+    public function displayArticlesByBasketsCategory(array $categsBasket) : array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.catproduit IN (:catproduit)')
+            ->setParameter('catproduit', $categsBasket)
+            ->setMaxResults(10)
+            -> getQuery()
+            ->getResult();
+    }
+
 }
 
    /*    $conn = $this-> getEntityManager()->getConnection();
 
-        $sql = '
-            SELECT * FROM article
-            WHERE article.catproduit = "1"
-            AND article.artprixpromo IS NOT NULL
-            UNION
-            SELECT * FROM article
-            WHERE article.catproduit = "2"
-            AND article.artprixpromo IS NOT NULL
-            UNION
-            SELECT * FROM article
-            WHERE article.catproduit = "3"
-            AND article.artprixpromo IS NOT NULL
-            LIMIT 10
+//        $sql = '
+//            SELECT * FROM article
+//            WHERE article.catproduit = "1"
+//            AND article.artprixpromo IS NOT NULL
+//            UNION
+//            SELECT * FROM article
+//            WHERE article.catproduit = "2"
+//            AND article.artprixpromo IS NOT NULL
+//            UNION
+//            SELECT * FROM article
+//            WHERE article.catproduit = "3"
+//            AND article.artprixpromo IS NOT NULL
+//            LIMIT 10
         ';
 
         $stmt = $conn->prepare($sql);
