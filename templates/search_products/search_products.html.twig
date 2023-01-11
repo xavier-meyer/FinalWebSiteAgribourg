@@ -3,11 +3,12 @@
 {% block title %}SearchProductsController!{% endblock %}
 {% block body %}
     <h1 class="my-5 text-center fw-bold">Nos Fruits</h1>
-    <div class="d-flex justify-content-center align-items-center flex-column flex-sm-row justify-content-lg-around my-5">
+    <form action="{{ path('app_search_products') }}" class="d-flex justify-content-center align-items-center flex-column flex-sm-row justify-content-lg-around my-5">
         <a href="{{ path("app_search_products") }}" type="button" class="btn btn-search-fruits my-3 my-md-0">Fruits</a>
         <a href="{{ path("app_search_products_vegetables") }}" type="button" class="btn btn-search-legumes my-3 my-md-0">Légumes</a>
         <a href="{{ path("app_search_products_basket") }}"class="btn btn-search-paniers my-3 my-md-0">Nos paniers</a>
-    </div>
+    </form>
+
     <div class="d-flex justify-content-center align-items-center flex-column flex-md-row mt-5">
         <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
         <input class="input-search my-3 my-md-0 me-md-2" type="text" id="name" name="name">

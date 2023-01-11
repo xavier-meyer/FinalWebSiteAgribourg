@@ -17,12 +17,21 @@ class SearchProductsController extends AbstractController
         $articlesFrut = $articleRepository->displayArticlesByFrutCategory([1]);
 
 
-//        $quelquechose = $articleRepository->searchArticlesInputByLetter([1,2,3], $request);
-
         return $this->render('search_products/search_products.html.twig', [
             'controller_name' => 'SearchProductsController',
             'articlesFrut' => $articlesFrut,
-//            'test' => $quelquechose
+        ]);
+    }
+
+    #[Route('/search', name: 'app_search')]
+    public function search(ArticleRepository $articleRepository, Request $request ): Response
+    {
+        $key = $request->get('name');
+
+
+        return $this->render('search_products/search_products.html.twig', [
+            'controller_name' => 'SearchProductsController',
+            'articlesFrut' => $articleRepository->maRequete($key),
         ]);
     }
 }

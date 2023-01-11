@@ -63,17 +63,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    public function searchArticlesInputByLetter(array $categFruts, string $quelquechose) : array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->where('m.catproduit IN (:catproduit)')
-//            ->setParameter('catproduit', $categFruts)
-//            ->andWhere("m.artnomproduit LIKE '$quelquechose%'")
-//            ->setMaxResults(6)
-//            ->getQuery()
-//            ->getResult();
-//    }
-
     public function displayArticlesByVegetableCategory(array $categsVegetable) : array
     {
         return $this->createQueryBuilder('m')
@@ -84,17 +73,23 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
     public function displayArticlesByBasketsCategory(array $categsBasket) : array
     {
         return $this->createQueryBuilder('m')
             ->where('m.catproduit IN (:catproduit)')
             ->setParameter('catproduit', $categsBasket)
             ->setMaxResults(10)
-            -> getQuery()
+            ->getQuery()
             ->getResult();
     }
 
+    public function maRequete($where): array
+    {
+        $queryBuilder = $this->createQueryBuilder("article");
+        $queryBuilder->where(' article.artnomproduit like :w');
+        $queryBuilder->setParameter(':w',  $where . '%');
+        return $queryBuilder->getQuery()->getResult(); // on renvoie le résultat
+    }
 }
 
    /*    $conn = $this-> getEntityManager()->getConnection();
