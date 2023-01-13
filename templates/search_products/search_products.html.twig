@@ -3,16 +3,23 @@
 {% block title %}SearchProductsController!{% endblock %}
 {% block body %}
     <h1 class="my-5 text-center fw-bold">Nos Fruits</h1>
-    <form action="{{ path('app_search_products') }}" class="d-flex justify-content-center align-items-center flex-column flex-sm-row justify-content-lg-around my-5">
+    <div class="d-flex justify-content-center align-items-center flex-column flex-sm-row justify-content-lg-around my-5">
         <a href="{{ path("app_search_products") }}" type="button" class="btn btn-search-fruits my-3 my-md-0">Fruits</a>
         <a href="{{ path("app_search_products_vegetables") }}" type="button" class="btn btn-search-legumes my-3 my-md-0">Légumes</a>
         <a href="{{ path("app_search_products_basket") }}"class="btn btn-search-paniers my-3 my-md-0">Nos paniers</a>
-    </form>
-
+    </div>
     <div class="d-flex justify-content-center align-items-center flex-column flex-md-row mt-5">
-        <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
-        <input class="input-search my-3 my-md-0 me-md-2" type="text" id="name" name="name">
-        <input class="input-search-submit my-3 my-md-0" type="submit" value="rechercher">
+        <form action="{{ path('app_search') }}">
+            <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
+            <input class="input-search my-3 my-md-0 me-md-2" type="text" id="name" name="name">
+            <input class="input-search-submit my-3 my-md-0" type="submit" value="rechercher">
+        </form>
+    </div>
+    <div class="mt-5 w-auto">
+{#        on affiches un message d'erreur grace à la variable 'message_error' passé en paramétre à la vue twig si aucun résultat trouvé#}
+        {% if error_message is defined %}
+            <div class="alert alert-success text-div-alert">{{ error_message }}</div>
+        {% endif %}
     </div>
     <div class="row d-flex justify-content-center justify-content-md-center align-items-center my-5">
         {% for item in articlesFrut %}

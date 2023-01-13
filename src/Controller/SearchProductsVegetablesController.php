@@ -19,4 +19,6 @@ class SearchProductsVegetablesController extends AbstractController
             'articlesVegetables' => $articlesVegetables
         ]);
     }
+
+
 }
