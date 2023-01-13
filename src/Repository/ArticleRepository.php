@@ -54,16 +54,16 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function displayArticlesByFrutCategory(array $categsFrut) : array
+    public function displayArticlesByFrutCategory(array $categsFrut): array
     {
         return $this->createQueryBuilder('m')
             ->where('m.catproduit IN (:catproduit)')
             ->setParameter('catproduit', $categsFrut)
-            -> getQuery()
+            ->getQuery()
             ->getResult();
     }
 
-    public function displayArticlesByVegetableCategory(array $categsVegetable) : array
+    public function displayArticlesByVegetableCategory(array $categsVegetable): array
     {
         return $this->createQueryBuilder('m')
             ->where('m.catproduit IN (:catproduit)')
@@ -72,7 +72,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function displayArticlesByBasketsCategory(array $categsBasket) : array
+    public function displayArticlesByBasketsCategory(array $categsBasket): array
     {
         return $this->createQueryBuilder('m')
             ->where('m.catproduit IN (:catproduit)')
@@ -80,6 +80,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
 
 //    dans ce repository, on stockes dans $_session : $_session['error_message'] un message d erreur si la requete ne retournes aucun résultat
     //        repository page produits search fruits
@@ -89,14 +90,13 @@ class ArticleRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder("article");
         $queryBuilder->where(' article.artnomproduit like :w');
         $queryBuilder->andWhere('article.catproduit = 1');
-        $queryBuilder->setParameter(':w',  $where . '%');
+        $queryBuilder->setParameter(':w', $where . '%');
         $result = $queryBuilder->getQuery()->getResult();
-        if(empty($result)) {
+        if (empty($result)) {
             $_SESSION['error_message'] = "Aucun résultat trouvé";
         }
         return $result;
     }
-
     //        repository page produits search legumes
     public function searchInputValueVegetables($where): array
     {
@@ -110,8 +110,21 @@ class ArticleRepository extends ServiceEntityRepository
         }
         return $result;
     }
-
+    //        repository page produits search panier
+    public function searchInputValueBaskets($where): array
+    {
+        $queryBuilder = $this->createQueryBuilder("article");
+        $queryBuilder->where(' article.artnomproduit like :w');
+        $queryBuilder->andWhere('article.catproduit = 3');
+        $queryBuilder->setParameter(':w',  '%' . $where . '%');
+        $result = $queryBuilder->getQuery()->getResult();
+        if(empty($result)) {
+            $_SESSION['error_message'] = "Aucun résultat trouvé";
+        }
+        return $result;
+    }
 }
+
 
 
    /*    $conn = $this-> getEntityManager()->getConnection();
