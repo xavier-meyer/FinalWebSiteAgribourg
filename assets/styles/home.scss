@@ -15,15 +15,6 @@
 
 // card
 
-.card
-{
-  border-radius: 10px !important;
-  padding: 0;
-  overflow: hidden;
-  background: rgba(34, 177, 76, 0.75);
-
-}
-
 .card-body, .btn-background-green
 {
   background-color: #22B14C;
@@ -82,6 +73,36 @@
   text-align: center;
 }
 
+// cards fct js changer background + bouton voir le produit au click sur la card
+
+.card
+{
+  border-radius: 10px !important;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(34, 177, 76, 0.75);
+}
+
+.selected {
+  /* styles pour la carte sélectionnée */
+  background-color: #22b14c;
+  opacity: 0.5;
+}
+
+.product-link {
+  /* styles pour le lien "Voir le produit" */
+  color: white;
+  text-decoration: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.3rem;
+  border: 2px solid white;
+  padding: 4px;
+  border-radius: 5px;
+}
+
 // responsive carrousel
 
 @media(min-width:576px)
@@ -120,6 +141,7 @@
   {
     object-fit: cover;
     height: 12.5rem;
+
   }
   .position-button-bottom-home-page a
   {
