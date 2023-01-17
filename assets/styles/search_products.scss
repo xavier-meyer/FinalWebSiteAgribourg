@@ -1,10 +1,18 @@
 
+// autres
+
+.h1_historique_entreprise
+{
+  margin: 3.125rem 0 3.125rem 0;
+  text-align: center;
+}
+
 // buttons filtres
 
 .btn-search-fruits, .btn-search-legumes, .btn-search-paniers
 {
-  padding: 10px 20px 10px 20px;
-  margin-right: 20px;
+  padding: .625rem 1.25rem .625rem 1.25rem;
+  margin-right: 1.25rem;
   font-size: 1.5rem;
 }
 

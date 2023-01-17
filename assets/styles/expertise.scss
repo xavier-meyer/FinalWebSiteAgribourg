@@ -1,0 +1,43 @@
+
+.h1_expertise_entreprise
+{
+  margin: 3.125rem 0 3.125rem 0;
+  text-align: center;
+}
+
+.container_expertise_entreprise
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(37,177,76,0.22);
+  padding: 10px;
+  border-radius: 10px;
+  width:90%;
+  margin:auto;
+}
+
+.container_expertise_entreprise h3
+{
+  font-size: 1.4rem;
+}
+
+.container_expertise_entreprise_content
+{
+  text-align: center;
+  margin: auto;
+}
+
+.margin_top_p_savoir_faire
+{
+  margin: 20px;
+}
+
+@media(min-width: 992px)
+{
+  .container_expertise_entreprise {
+    width: 60%;
+  }
+}
+

@@ -12,7 +12,7 @@
     {% block header %}{% include "header.html.twig" %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('js/card-click.js') }}"></script>
+            <script defer src="{{ asset('js/card-click.js') }}"></script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
