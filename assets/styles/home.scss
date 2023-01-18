@@ -73,7 +73,10 @@
   text-align: center;
 }
 
-// cards fct js changer background + bouton voir le produit au click sur la card
+.background-black
+{
+  background: rgba(0,0,0,0.25);
+}
 
 .card
 {
@@ -83,24 +86,30 @@
   background: rgba(34, 177, 76, 0.75);
 }
 
+// cards fct js changer background + bouton voir le produit au click sur la card
+
 .selected {
   /* styles pour la carte sélectionnée */
   background-color: #22b14c;
-  opacity: 0.5;
+  opacity: 0.7;
+  margin: 0 1rem 0 1rem;
 }
 
-.product-link {
-  /* styles pour le lien "Voir le produit" */
-  color: white;
+.lien-produit-class
+{
+  color:white;
+  font-size:1.3rem;
   text-decoration: none;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.3rem;
-  border: 0.125rem solid white;
-  padding: 0.25rem;
-  border-radius: 0.313rem;
+  border: 0.215rem solid white;
+  border-radius: 0.625rem;
+  text-align: center;
+  padding: 0.313rem;
+  margin-top:0.625rem;
+}
+
+.link-product
+{
+  display: none;
 }
 
 // responsive carrousel

@@ -45,11 +45,17 @@ class ArticleRepository extends ServiceEntityRepository
 
     public function displayArticlesByCategory(array $categs): array
     {
+            //Création d'un constructeur de requête
         return $this->createQueryBuilder('m')
+            //Filtrer les résultats en fonction de la catégorie de l'article
             ->where('m.catproduit IN (:catproduit)')
+            //Définir les catégories spécifiées dans le tableau en tant que paramètre pour la requête
             ->setParameter('catproduit', $categs)
+            //Filtrer les résultats pour n'inclure que les articles qui ont un prix en promotion
             ->andWhere('m.artprixpromo IS NOT NULL')
+            //Limiter le nombre de résultats retournés à 10
             ->setMaxResults(10)
+            //Obtenir les résultats de la requête sous forme d'un tableau
             ->getQuery()
             ->getResult();
     }
