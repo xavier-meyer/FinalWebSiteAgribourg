@@ -3,11 +3,11 @@
 {% block title %} SearchProductsBasketController{% endblock %}
 
 {% block body %}
-    <h1 class="h1_search_products text-center my-5">Nos Paniers</h1>
+    <h1 class="h1-font-size text-center my-5">Nos Paniers</h1>
     <div class="d-flex justify-content-center align-items-center flex-column flex-sm-row justify-content-lg-around my-5">
         <a href="{{ path("app_search_products") }}" type="button" class="btn btn-search-fruits my-3 my-md-0">Fruits</a>
         <a href="{{ path("app_search_products_vegetables") }}" type="button" class="btn btn-search-legumes my-3 my-md-0">Légumes</a>
-        <a href="{{ path("app_search_products_basket") }}"class="btn btn-search-paniers my-3 my-md-0">Nos paniers</a>
+        <a href="{{ path("app_search_products_basket") }}" class="btn btn-search-paniers my-3 my-md-0">Nos paniers</a>
     </div>
     <form class="d-flex justify-content-center align-items-center flex-column flex-md-row mt-5" action="{{ path('app_search_baskets') }}">
         <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
@@ -27,29 +27,25 @@
 
                 {# on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
                 <a class="link-product" href="{{ path('app_details_products', {'id': item.id}) }}">Voir le produit</a>
-                <div class="card-body">
-                    <h3 class="card-title">
+                <div class="card-body background-color-green">
+                    <h3 class="card-title text-white">
                     {# on appliques le filtre sur le nom du produit#}
                         {{ item.artnomproduit |nombre_characteres_nom_produit }}
                     </h3>
                     <div class="d-flex justify-content-between my-2">
                         <div>
-                            {#  conditions si le produit est en promotion #}
                             {#  on utilises les propriétés définies dans l'entité article en Base de données pour sélectionner le prix à afficher #}
-                            {% if item.artprixpromo is not null and item.artprixunitaire is null %}
-                                <p class="card-text">0€/pièce</p>
-                            {% elseif item.artprixpromo is not null and item.artprixunitaire is not null %}
-                                <p class="card-text">{{ item.artprixpromo }}€/piéce</p>
-                                {# conditions si le produit n'est pas en promotion #}
-                            {% elseif item.artprixpromo is not null and item.artprixunitaire is null %}
-                                <p class="card-text">0€/panier</p>
-                            {% elseif item.artprixpromo is null and item.artprixunitaire is not null %}
-                                <p class="card-text">{{ item.artprixunitaire }}€/pièce</p>
+                            {#  conditions si le produit est en promotion #}
+                            {% if item.artprixpromo is not null %}
+                                <p class="card-text text-white">{{ item.artprixpromo }}€/panier</p>
+                            {#  conditions si le produit n'est pas en promotion #}
+                            {% else %}
+                                <p class="card-text text-white">{{ item.artprixunitaire }}€/panier</p>
                             {% endif %}
                         </div>
                         <div>
                             {% if item.artremise is not null %}
-                                <p class="card-promo">-{{ item.artremise }}%</p>
+                                <p class="card-promo text-white">-{{ item.artremise }}%</p>
                             {% endif %}
                         </div>
                     </div>

@@ -16,7 +16,7 @@ class NomProduitRuntime implements RuntimeExtensionInterface
         if (strlen( $value) < 20) {
             return $value ;
         } else {
-           $new = wordwrap($value, 18);
+           $new = wordwrap($value, 16);
            $new = explode("\n", $new);
             $new = $new[0] . '...';
 

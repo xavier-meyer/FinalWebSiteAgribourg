@@ -3,7 +3,7 @@
 {% block title %}CompagnyHistoryController{% endblock %}
 
 {% block body %}
-    <h1 class="h1_historique_entreprise">Notre histoire</h1>
+    <h1 class="h1-font-size">Notre histoire</h1>
     {% for item in histoireEntreprise %}
         <div class="container_historique_entreprise">
             <div>
@@ -12,6 +12,7 @@
             <p class="p_historique_description">{{  item.histdescription }}</p>
         </div>
         <div class="center-hr">
+        {# on affiches le hr sauf pour le dernier élement #}
             {%  if not loop.last %}
             <hr class="hr_historique_entreprise">
             {%  endif  %}

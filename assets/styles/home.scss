@@ -1,4 +1,13 @@
 
+// h1
+
+.h1-font-size
+{
+  margin: 3.125rem 0 3.125rem 0;
+  text-align: center;
+  font-size: 2rem;
+}
+
 // carrousel
 
 .img-carrousel
@@ -9,15 +18,16 @@
 
 .p-carrousel
 {
-  color: #22B14C;
-  font-size:1.5rem;
+  font-size:1.4rem;
 }
 
 // card
 
-.card-body, .btn-background-green
+.card
 {
-  background-color: #22B14C;
+  border-radius: 0.635rem !important;
+  padding: 0;
+  overflow: hidden;
 }
 
 .card-img-top
@@ -25,11 +35,6 @@
   height: 11.25rem;
   object-fit: cover;
 
-}
-
-.card-text, .card-title, .card-promo
-{
-    color: white;
 }
 
 .card-title
@@ -41,6 +46,15 @@
 {
   font-size:1rem;
 }
+
+// background card
+
+.background-color-green
+{
+  background-color: #22b14c;
+}
+
+// bouton sur card
 
 .btn-button-card, .btn-home-page
 {
@@ -73,20 +87,7 @@
   text-align: center;
 }
 
-.background-black
-{
-  background: rgba(0,0,0,0.25);
-}
-
-.card
-{
-  border-radius: 0.635rem !important;
-  padding: 0;
-  overflow: hidden;
-  background: rgba(34, 177, 76, 0.75);
-}
-
-// cards fct js changer background + bouton voir le produit au click sur la card
+// cards fonction card-hover.js changer background + bouton voir le produit au survol sur la card
 
 .selected {
   /* styles pour la carte sélectionnée */
@@ -110,6 +111,16 @@
 .link-product
 {
   display: none;
+}
+
+// responsive titres
+
+@media(min-width: 576px)
+{
+  .p-carrousel
+  {
+    font-size:1.3rem;
+  }
 }
 
 // responsive carrousel
