@@ -1,4 +1,5 @@
 
+
 // h1
 
 .h1-font-size
@@ -18,7 +19,7 @@
 
 .p-carrousel
 {
-  font-size:1.4rem;
+  font-size:1.8rem;
 }
 
 // card
@@ -47,19 +48,10 @@
   font-size:1rem;
 }
 
-// background card
-
-.background-color-green
-{
-  background-color: #22b14c;
-}
-
 // bouton sur card
 
 .btn-button-card, .btn-home-page
 {
-  background-color: #e75824;
-  color:white;
   font-size:1.1rem;
 }
 
@@ -68,45 +60,12 @@
   height: 1.875rem;
 }
 
-.position-button-bottom-home-page
+.link-button-home
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 4.375rem;
-}
-
-.position-button-bottom-home-page a
-{
-  text-decoration: none;
-  background-color:#e75824;
-  color: white;
   font-size: 1.3rem;
-  padding:0.9375rem;
-  border-radius:0.625rem;
-  text-align: center;
 }
 
-// cards fonction card-hover.js changer background + bouton voir le produit au survol sur la card
 
-.selected {
-  /* styles pour la carte sélectionnée */
-  background-color: #22b14c;
-  opacity: 0.7;
-  margin: 0 1rem 0 1rem;
-}
-
-.lien-produit-class
-{
-  color:white;
-  font-size:1.3rem;
-  text-decoration: none;
-  border: 0.215rem solid white;
-  border-radius: 0.625rem;
-  text-align: center;
-  padding: 0.313rem;
-  margin-top:0.625rem;
-}
 
 .link-product
 {
@@ -119,7 +78,7 @@
 {
   .p-carrousel
   {
-    font-size:1.3rem;
+    font-size:1.6rem;
   }
 }
 
@@ -163,7 +122,7 @@
     height: 12.5rem;
 
   }
-  .position-button-bottom-home-page a
+  .link-button-home
   {
     font-size: 1.3rem;
   }

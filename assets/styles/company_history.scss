@@ -21,7 +21,7 @@
 
 .hr_historique_entreprise
 {
-  border-left: 2px solid #22b14c;
+  border-left: 2px solid #054916;
   display: inline-block;
   height: 8.125rem;
 }
@@ -30,9 +30,16 @@
   font-size: 1.1rem;
   padding: 1.25rem;
   border-radius: 0.625rem;
-  background: rgba(34, 177, 76, 0.2);
   margin: 1.5rem 1.5625rem 0 1.5625rem;
 }
+
+.container_p_historique_description
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 @media(min-width: 768px) {
 
@@ -45,7 +52,7 @@
 
   }
   .hr_historique_entreprise {
-    border-left: 2px solid #22b14c;
+    border-left: 2px solid #054916;
     display: inline-block;
     height: 4.375rem;
   }

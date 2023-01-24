@@ -1,12 +1,4 @@
 
-// autres
-
-.h1_historique_entreprise
-{
-  margin: 3.125rem 0 3.125rem 0;
-  text-align: center;
-}
-
 // buttons filtres
 
 .btn-search-fruits, .btn-search-legumes, .btn-search-paniers
@@ -18,18 +10,18 @@
 
 .btn-search-fruits
 {
-  background: rgba(34, 177, 76, 0.5);
+  background: rgba(5, 73, 22, 0.20);
 }
 
 .btn-search-legumes
 {
-  background: rgba(34, 177, 76, 0.75);
+  background: rgba(5, 73, 22, 0.50);
 }
 
-.btn-search-paniers
-{
+.btn-search-paniers {
   background-color: black;
   color: white;
+
 }
 
 // cards
@@ -38,11 +30,8 @@
   margin-bottom: 1rem;
 }
 
-.input-search
-{
-  background: rgba(34, 177, 76, 0.2);
-  border-radius: 0.625rem;
-  border: 0.125rem solid rgba(34, 177, 76, 0.75);
+.input-search {
+  border: 0.125rem solid rgba(5, 73, 22, 0.50);
 }
 
 .label-search
@@ -53,11 +42,7 @@
 .input-search-submit
 {
   font-size: 1.3rem;
-  background-color: #22b14c;
-  padding: 0.5rem;
-  color: white;
-  border: 0.0625rem solid rgba(34, 177, 76, 0.2);
-  border-radius: 0.125rem;
+  border: 0.0625rem solid rgba(5, 73, 22, 0.50);
 }
 
 //div alert

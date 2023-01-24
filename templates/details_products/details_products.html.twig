@@ -116,10 +116,20 @@
             </div>
         </div>
     </div>
-    {# bloc description, commande, disponibilité #}
+    {# fin bloc description, commande, disponibilité #}
+    {# bloc conseils #}
+    <div class="d-flex justify-content-center align-items-center my-3">
+        <div class="card my-3 col-8 col-sm-6 col-md-8 col-lg-7">
+            <div class="card-body background-color-green-light">
+                <h3 class="card-title text-black my-3">Conseils:</h3>
+                <p class="card-text text-black">{{ item.artconseils }}</p>
+            </div>
+        </div>
+    </div>
+    {# fin bloc conseils #}
     <div class="d-flex justify-content-center align-items-center col-12">
         {# bouton pour ajouter le produit au panier #}
-        <a href="#" class="btn btn-button-card d-flex justify-content-between align-items-center my-4 col-8 col-sm-5 col-md-3 col-xl-2">
+        <a href="#" class="btn btn-button-card d-flex justify-content-between align-items-center my-4 col-8 col-sm-4 col-md-3 col-xl-2">
             <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3"  alt="moyen d'ajouter ce produit au panier">Ajouter au panier
         </a>
     </div>

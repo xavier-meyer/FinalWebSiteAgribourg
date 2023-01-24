@@ -6,9 +6,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: rgba(37,177,76,0.22);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 0.625rem;
+  border-radius: 0.625rem;
   width:90%;
   margin:auto;
 }
@@ -16,12 +15,6 @@
 .container_expertise_entreprise h3
 {
   font-size: 1.4rem;
-}
-
-.container_expertise_entreprise_content
-{
-  text-align: center;
-  margin: auto;
 }
 
 .margin_top_p_savoir_faire
