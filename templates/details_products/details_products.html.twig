@@ -3,7 +3,7 @@
 {% block title %}DetailsProductsController{% endblock %}
 
 {% block body %}
-    <h1 class="h1-font-size text-center my-5">Votre produit</h1>
+    <h1 class="h1-font-size text-center my-5 main-color">Votre produit</h1>
     <div class="row d-flex justify-content-center align-items-center">
         <div class="card mb-3 col-8 col-sm-6 col-md-8 col-lg-7">
             <div class="row g-0">
@@ -56,23 +56,23 @@
                         {# section tableau card produit#}
                         <div>
                             <table class="table rounded">
-                                <thead class="bg-green">
+                                <thead class="background-main-color rounded-2">
                                     <tr>
-                                        <th scope="col" class="text-white">nom</th>
+                                        <th scope="col" class="text-color-card-products">nom</th>
 
-                                        <th scope="col" class="text-white">PrixTTC</th>
+                                        <th scope="col" class="text-color-card-products">PrixTTC</th>
 
                                         {# si un produit est vendu au kg, on affiches Qté(en kg) sinon à l'unité nbproduits #}
                                         {% if item.artquantite is not null and item.artprixunitaire is not null or item.catproduit == "3" %}
-                                        <th scope="col" class="text-white">nbproduit</th>
+                                        <th scope="col" class="text-color-card-products">nbproduit</th>
                                         {% elseif item.artquantite is not null %}
-                                            <th scope="col" class="text-white">Qté(en kg)</th>
+                                            <th scope="col" class="text-color-card-products">Qté(en kg)</th>
                                         {% elseif item.artnbproduits is not null%}
-                                            <th scope="col" class="text-white">nbproduit</th>
+                                            <th scope="col" class="text-color-card-products">nbproduit</th>
                                         {%  endif %}
                                     </tr>
                                 </thead>
-                                <tbody class="background-color-green-light">
+                                <tbody class="background-secondary-color">
                                     <tr>
                                         <td>{{ item.artnomproduit |nombre_characteres_nom_produit }}</td>
                                         <td>
@@ -106,7 +106,7 @@
     {# bloc description, commande, disponibilité #}
     <div class="d-flex justify-content-center align-items-center my-3">
         <div class="card my-3 col-8 col-sm-6 col-md-8 col-lg-7">
-            <div class="card-body background-color-green-light">
+            <div class="card-body background-secondary-color">
                 <h3 class="card-title text-black my-3">Description du produit:</h3>
                 <p class="card-text text-black">{{ item.artdescription }}</p>
                 <h3 class="card-title text-black my-3">Votre commande:</h3>
@@ -120,7 +120,7 @@
     {# bloc conseils #}
     <div class="d-flex justify-content-center align-items-center my-3">
         <div class="card my-3 col-8 col-sm-6 col-md-8 col-lg-7">
-            <div class="card-body background-color-green-light">
+            <div class="card-body background-secondary-color">
                 <h3 class="card-title text-black my-3">Conseils:</h3>
                 <p class="card-text text-black">{{ item.artconseils }}</p>
             </div>
@@ -129,13 +129,13 @@
     {# fin bloc conseils #}
     <div class="d-flex justify-content-center align-items-center col-12">
         {# bouton pour ajouter le produit au panier #}
-        <a href="#" class="btn btn-button-card d-flex justify-content-between align-items-center my-4 col-8 col-sm-4 col-md-3 col-xl-2">
+        <a href="#" class="btn btn-button-card d-flex justify-content-between align-items-center my-4 col-8 col-sm-4 col-md-3 col-xl-2 background-color-card-button text-color-card-products">
             <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3"  alt="moyen d'ajouter ce produit au panier">Ajouter au panier
         </a>
     </div>
     <div class="mt-5 d-flex justify-content-around align-items-center">
         {# bouton pour revenir à la page précédente fonction JS goBack() #}
-        <a onclick="goBack()" type="button" class="button_go_back">Allez à la page précédente</a>
+        <a onclick="goBack()" type="button" class="button_go_back text-color-card-products">Allez à la page précédente</a>
     </div>
 {% endblock %}
 

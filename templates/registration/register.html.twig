@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <h1 class="h1-font-size text-center my-5 main-color">Inscription</h1>
+
+    <div class="d-flex justify-content-center align-items-center">
+        {# modifier fond ecran formulaire #}
+        {{ form_start(registrationForm, { 'attr': {'class': 'form'} }) }}
+        <div class="row d-flex justify-content-start justify-content-lg-center">
+            <div class="col-10 col-sm-6 col-xl-5">
+                <label for="{{ registrationForm.prenom.vars.id }}" class="label-prenom">Prenom*</label>
+                {{ form_widget(registrationForm.prenom, {'attr': { 'class': 'input-prenom'}}) }}
+            </div>
+            <div class="col-10 col-sm-6 col-xl-5">
+                <label for="{{ registrationForm.nom.vars.id }}" class="label-nom">Nom*</label>
+                {{ form_widget(registrationForm.nom, {'attr': { 'class': 'input-nom'}}) }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-start justify-content-lg-center">
+            <div class="col-10 col-sm-6 col-xl-5">
+                <label for="{{ registrationForm.email.vars.id }}" class="label-email">Email*</label>
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'input-email'}}) }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-start justify-content-lg-center">
+            <div class="col-10 col-sm-6 col-xl-5">
+                <label for="{{ registrationForm.plainPassword.vars.id }}" class="label-password">Mot de passe*</label>
+                {{ form_widget(registrationForm.plainPassword, {'attr': { 'class': 'input-password'}}) }}
+            </div>
+            <div class="col-10 col-sm-6 col-xl-5">
+                <label for="{{ registrationForm.passwordVerification.vars.id }}" class="label-check-password">Confirmer*</label>
+                {{ form_widget(registrationForm.passwordVerification, {'attr': { 'class': 'input-check-password'}}) }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-start justify-content-xl-start ms-xl-5">
+            <div class="col-10 col-sm-6 col-xl-5">
+                <label for="{{ registrationForm.agreeTerms.vars.id }}" class="label-agreeTerms">{{ form_label(registrationForm.agreeTerms) }}</label>
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'input-agreeTerms'}}) }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-start justify-content-xl-start ms-xl-5">
+            <div class="col-10 col-sm-6 col-xl-5">
+                <button type="submit" class="btn text-color-card-products background-main-color rounded-2 my-3 button-submit-form-register">S'inscrire</button>
+            </div>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
