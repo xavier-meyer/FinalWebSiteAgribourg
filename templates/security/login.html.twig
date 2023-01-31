@@ -19,10 +19,10 @@
 
                 <label for="inputEmail" class="my-3 label-search" >Email</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                       class="background-main-color text-color-card-products rounded-2" autocomplete="email" required autofocus>
+                       class="background-main-color text-color-card-products rounded-2 col-10 col-sm-6 col-xl-5 text-center p-1" autocomplete="email" required autofocus>
                 <label for="inputPassword" class="my-3 label-search" >Password</label>
                 <input type="password" name="password" id="inputPassword"
-                       class="background-main-color text-color-card-products rounded-2" autocomplete="current-password" required>
+                       class="background-main-color text-color-card-products rounded-2 col-10 col-sm-6 col-xl-5 p-1" autocomplete="current-password" required>
 
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}"
@@ -39,7 +39,6 @@
                 S'inscrire
             </a>
         </div>
-
     </div>
     </div>
 {% endblock %}

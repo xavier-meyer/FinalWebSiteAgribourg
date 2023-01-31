@@ -1,7 +1,7 @@
 
 // label
 
-.label-prenom, .label-nom, .label-email, .label-check-password, .label-password, .button-submit-form-register
+.label-prenom, .label-nom, .label-email, .label-check-password, .label-password, .button-submit-form-register, .label-telephone
 {
   font-size: 1.3rem;
   margin: 0.8rem 0 0.8rem 0;
@@ -9,9 +9,10 @@
 
 // input
 
-.input-prenom, .input-nom, .input-email, .input-password, .input-check-password, .input-agreeTerms
+.input-prenom, .input-nom, .input-email, .input-password, .input-check-password, .input-agreeTerms, .input-telephone
 {
   background-color: #054916;
+  color:#d9d9d9;
 
 }
 
@@ -29,7 +30,7 @@
 
 @media(min-width:768px)
 {
-  .label-prenom, .label-nom, .label-email, .label-check-password, .label-password, .button-submit-form-register
+  .label-prenom, .label-nom, .label-email, .label-check-password, .label-password, .button-submit-form-register, .label-telephone
   {
     font-size: 1rem;
   }
