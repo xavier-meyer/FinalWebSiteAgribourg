@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShoppingBasketController!{% endblock %}
+
+{% block body %}
+{{ dump(app.session.get('Basket')) }}
+{% endblock %}

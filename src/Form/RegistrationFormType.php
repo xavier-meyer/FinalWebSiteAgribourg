@@ -11,11 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
-//use Symfony\Component\validator\Constraints as Assert;
 
 class RegistrationFormType extends AbstractType
 {
@@ -66,12 +66,15 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
-    //                    new regex([
-//                        'pattern' => '/^[\w-]{1,20}+@([\w-]+\.)+[\w-]{2,4}$/',
-//                        'message' => "L'email n'est pas valide",
-//                    ])
-//                ]
 
+            ->add('telephone', TelType::class, [
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^(?:\+33|0033|0)\d{9}$/',
+                        'message' => "Le numéro de téléphone n'est pas valide.",
+                    ]),
+                ]
+            ])
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -93,23 +96,19 @@ class RegistrationFormType extends AbstractType
                         'message' => "Votre mot de passe doit contenir au moins une majuscule
                         , une minuscule, un chiffre, un caractère spécial et un mimimum de 12 caractères.",
                     ])
-
                 ],
             ])
-            ->add('telephone', TelType::class, [
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^(?:\+33|0033|0)\d{9}$/',
-                        'message' => "Le numéro de téléphone n'est pas valide.",
-                    ]),
-                ]
-            ])
+
             ->add('passwordVerification', PasswordType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Vérifier votre mot de passe',
                     ]),
+//                    new EqualTo([
+//                        'propertyPath' => 'getPlainPassword',
+//                        'message' => 'Les mots de passe ne correspondent pas.',
+//                    ]),
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -120,8 +119,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ]);
-    }
 
+    }
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -129,3 +128,4 @@ class RegistrationFormType extends AbstractType
         ]);
     }
 }
+
