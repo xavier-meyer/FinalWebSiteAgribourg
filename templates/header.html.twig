@@ -3,7 +3,9 @@
     <div class="d-flex align-items-center justify-content-around justify-content-sm-between">
         <img src="{{ asset("build/images/coq_new.svg") }}"  alt="corporate identity rooster logo" class="rounded-circle m-3 col-3 col-sm-2 col-xl-1">
         <h1 class="text-uppercase text-center mt-3 col-6 col-sm-4 main-color">Agribourg</h1>
-        <a href="{{ path('app_shopping_basket') }}"><img src="{{ asset("build/images/cart.png") }}" alt="" class="col-3 col-sm-1 d-none d-sm-block img-cart"></a>
+      <a href="{{ path('app_shopping_basket') }}">
+            <img src="{{ asset("build/images/cart.png") }}" alt="" class="col-3 col-sm-1 d-none d-sm-block img-cart">
+        </a>
     </div>
 </div>
 <nav class="navbar navbar-expand-lg mt-2 background-main-color">
@@ -43,7 +45,7 @@
                 </li>
                 <li class="nav-item">
                     {%  if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('profile_admin') }}" class="text-color-card-products nav-link">Dashboard</a>
+                        <a href="{{ path('dashboard') }}" class="text-color-card-products nav-link">Dashboard</a>
                     {%  endif %}
                 </li>
                 <li class="nav-item">

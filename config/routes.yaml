@@ -18,10 +18,11 @@ profile_user_show:
         _role: ROLE_USER
 
 
-profile_admin:
-    path: /admin
-    controller: App\Controller\Admin\DashboardController::index
-    methods : [get]
-    requirements:
-        _role: ROLE_ADMIN
+#dashboard:
+#    path: /admin
+#    controller: App\Controller\Admin\DashboardController::indexTest
+#    methods : [POST, GET]
+#    requirements:
+#        _role: ROLE_ADMIN
+
 

@@ -27,65 +27,89 @@
     <p class="my-5 text-center fw-bold p-carrousel col-10 mx-auto" >Venez découvrir nos paniers de fruits et légumes frais</p>
     <h1 class="my-5 text-center fw-bold h1-font-size main-color">Nos bons plans</h1>
     <div class="row d-flex justify-content-center justify-content-md-center align-items-center">
-        {% for item in articles %}
-        {# la classe cards_hover est utilisée par la fonction JS card-hover.js pour sélectionner les cards#}
+        {% for item in products %}
+{#         la classe cards_hover est utilisée par la fonction JS card-hover.js pour sélectionner les cards#}
         <div class="card cards_hover col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 me-3 my-4">
-            <img src="{{ asset("build/images/"~item.artimage~"") }}" class="card-img-top" alt="">
+            <img src="{{ asset("build/images/"~item.product_image~"") }}" class="card-img-top" alt="">
 
-            {# on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
+{#             on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
             <a class="link-product" href="{{ path('app_details_products', {'id': item.id}) }}">Voir le produit</a>
             <div class="card-body background-main-color">
                 <h3 class="card-title text-color-card-products">
-                    {# on appliques un filtre pour limiter le nombre de caractères affichées #}
-                    {{ item.artnomproduit |nombre_characteres_nom_produit }}
+{#                     on appliques un filtre pour limiter le nombre de caractères affichées#}
+                    {{ item.product_name |nombre_characteres_nom_produit }}
                 </h3>
                 <div class="d-flex justify-content-between my-2">
                     <div>
-                        {#  conditions si le produit est en promotion #}
-                        {#  on utilises les propriétés définies dans l'entité article en Base de données pour sélectionner le prix à afficher #}
-                        {% if item.artprixpromo is not null and item.artprixunitaire is null %}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/kg</p>
-                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.artnomproduit == "Radis roses BIO" %}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/botte</p>
-                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.artnomproduit == "Asperges BIO" or  item.artnomproduit == "Petit pois BIO"%}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/bocal</p>
-                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.catproduit == "3" %}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/panier</p>
-                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null %}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/pièce</p>
-                        {% elseif item.artprixpromo is not null and item.artprixaukg is null and item.artprixunitaire is not null %}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/pièce</p>
-                        {% elseif item.artprixpromo is not null and item.artprixaukg is null and item.artprixunitaire is not null %}
-                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/pièce</p>
-
-                        {# conditions si le produit n'est pas en promotion #}
-                        {% elseif item.artprixpromo is null and item.artprixaukg is not null %}
-                            <p class="card-text text-color-card-products">{{ item.artprixaukg }}€/kg</p>
-                        {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null and item.artnomproduit == "Radis roses BIO" %}
-                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/botte</p>
-                        {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null and item.artnomproduit == "Asperges BIO" or item.artnomproduit == "Petit pois BIO" %}
-                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/bocal</p>
-                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.catproduit == "3" %}
-                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/panier</p>
-                        {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null %}
-                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/pièce</p>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {% if item.artremise is not null %}
-                            <p class="card-promo text-color-card-products">-{{ item.artremise }}%</p>
+                        {% if item.price_unit == 'kg' %}
+                            <p class="card-text text-color-card-products">{{ item.price }}€/kg</p>
+                        {% elseif item.price_unit == 'piece' %}
+                            <p class="card-text text-color-card-products">{{ item.price }}€/pièce</p>
+                        {% elseif item.price_unit == 'botte' %}
+                            <p class="card-text text-color-card-products ">{{ item.price }}€/botte</p>
+                        {% elseif item.price_unit == 'bocal' %}
+                            <p class="card-text text-color-card-products">{{ item.price }}€/bocal</p>
+                        {% elseif item.price_unit == 'panier' %}
+                            <p class="card-text text-color-card-products">{{ item.price }}€/panier</p>
                         {% endif %}
                     </div>
                 </div>
                 <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card d-flex justify-content-between align-items-center my-2 my-lg-0 background-color-card-button text-color-card-products">
                     <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3" alt="moyen d'ajouter ce produit au panier">Ajouter au panier
                 </a>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-    <div class="d-flex justify-content-center align-items-center">
-        <a href="{{ path("app_search_products") }}" class="btn btn-button-card text-decoration-none link-button-home text-color-card-products
-        col-6 col-sm-4 col-md-3 col-xl-2 p-2 rounded-2 background-color-card-button my-5" >Voir tous les produits</a>
-    </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <a href="{{ path("app_search_products") }}" class="btn btn-button-card text-decoration-none link-button-home text-color-card-products
+            col-6 col-sm-4 col-md-3 col-xl-2 p-2 rounded-2 background-color-card-button my-5" >Voir tous les produits</a>
+        </div>
 {% endblock %}
+
+
+                {#                          conditions si le produit est en promotion#}
+{#                          on utilises les propriétés définies dans l'entité article en Base de données pour sélectionner le prix à afficher#}
+{#                        {% if item.artprixpromo is not null and item.artprixunitaire is null %}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/kg</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.artnomproduit == "Radis roses BIO" %}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/botte</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.artnomproduit == "Asperges BIO" or  item.artnomproduit == "Petit pois BIO"%}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/bocal</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.catproduit == "3" %}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/panier</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null %}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/pièce</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixaukg is null and item.artprixunitaire is not null %}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/pièce</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixaukg is null and item.artprixunitaire is not null %}#}
+{#                            <p class="card-text text-color-card-products ">{{ item.artprixpromo }}€/pièce</p>#}
+
+{#                         conditions si le produit n'est pas en promotion#}
+{#                        {% elseif item.artprixpromo is null and item.artprixaukg is not null %}#}
+{#                            <p class="card-text text-color-card-products">{{ item.artprixaukg }}€/kg</p>#}
+{#                        {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null and item.artnomproduit == "Radis roses BIO" %}#}
+{#                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/botte</p>#}
+{#                        {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null and item.artnomproduit == "Asperges BIO" or item.artnomproduit == "Petit pois BIO" %}#}
+{#                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/bocal</p>#}
+{#                        {% elseif item.artprixpromo is not null and item.artprixunitaire is not null and item.catproduit == "3" %}#}
+{#                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/panier</p>#}
+{#                        {% elseif item.artprixpromo is null and item.artprixaukg is null and item.artprixunitaire is not null %}#}
+{#                            <p class="card-text text-color-card-products">{{ item.artprixunitaire }}€/pièce</p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        {% if item.artremise is not null %}#}
+{#                            <p class="card-promo text-color-card-products">-{{ item.artremise }}%</p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#                <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card d-flex justify-content-between align-items-center my-2 my-lg-0 background-color-card-button text-color-card-products">#}
+{#                    <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3" alt="moyen d'ajouter ce produit au panier">Ajouter au panier#}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+
