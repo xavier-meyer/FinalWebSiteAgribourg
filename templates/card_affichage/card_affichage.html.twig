@@ -1,0 +1,13 @@
+
+
+{% if item.price_unit == 'kg' %}
+    <p class="card-text text-color-card-products">{{ item.price }}€/kg</p>
+{% elseif item.price_unit == 'pièce' %}
+    <p class="card-text text-color-card-products">{{ item.price }}€/pièce</p>
+{% elseif item.price_unit == 'botte' %}
+    <p class="card-text text-color-card-products ">{{ item.price }}€/botte</p>
+{% elseif item.price_unit == 'bocal' %}
+    <p class="card-text text-color-card-products">{{ item.price }}€/bocal</p>
+{% elseif item.price_unit == 'panier' %}
+    <p class="card-text text-color-card-products">{{ item.price }}€/panier</p>
+{% endif %}

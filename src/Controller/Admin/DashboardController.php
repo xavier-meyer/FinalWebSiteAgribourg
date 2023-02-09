@@ -10,10 +10,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class DashboardController extends AbstractDashboardController
 {
-    #[Route("/admin", name: "dashboard")]
+
+    #[Route("/admin", name: "app_admin")]
     public function indexTest(): Response
     {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);

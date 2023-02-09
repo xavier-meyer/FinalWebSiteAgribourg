@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,13 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileUserController extends AbstractController
 {
 //    #[Route('/profil/user', name: 'profile_user')]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        $articles = $articleRepository->displayArticlesByCategory([1, 2, 3]);
+        $products = $productRepository->displayArticlesByCategory(['fruit', 'légume', 'panier']);
 
         return $this->render('home/home.html.twig', [
             'controller_name' => 'ProfileUserController',
-            'articles' => $articles,
+            'products' =>  $products,
 
         ]);
     }
@@ -37,6 +38,7 @@ class ProfileUserController extends AbstractController
             ]);
         }
 }
+
 
 
 

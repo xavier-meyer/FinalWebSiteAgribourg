@@ -2,20 +2,19 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SearchProductsController extends AbstractController
 {
     // controleur afficher les produits de la catégorie fruit
     #[Route('/search/products', name: 'app_search_products')]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        $articlesFrut = $articleRepository->displayArticlesByFrutCategory([1]);
+        $articlesFrut = $productRepository->displayArticlesByFrutCategory(['fruit']);
 
 
         return $this->render('search_products/search_products.html.twig', [
@@ -25,28 +24,38 @@ class SearchProductsController extends AbstractController
         ]);
     }
 
+//    le bloc try contient le code qui peut potentiellement générer une exception.
+//    Si aucun produit n'est trouvé, une exception est lancée avec le message "Aucun résultat trouvé".
+//
+//    Le bloc catch intercepte l'exception lancée dans le bloc try
+//    et affiche le message d'erreur en utilisant la méthode getMessage sur l'objet d'exception $e.
+//
+
     // controleur afficher produits de la base de la données en fonction de la recherche de l'utilisateur
     #[Route('/search', name: 'app_search')]
-    public function search(ArticleRepository $articleRepository, Request $request): Response
+    public function search(ProductRepository $productRepository, Request $request): Response
     {
-        /*  si le résultat de la requete dans articleRepository est vide, on retournes dans la vue TWIG le message d erreur stocké en session
-          sinon on affiches le résultat, les produits concernées*/
-
         $search = $request->get('name');
-        $result = $articleRepository->searchInputValueFrut($search);
 
-        if (empty($_SESSION['error_message'])) {
+        try {
+            $result = $productRepository->searchInputValueFrut($search);
+            if (empty($result)) {
+                throw new \Exception("Aucun résultat trouvé");
+            }
             return $this->render('search_products/search_products.html.twig', [
                 'controller_name' => 'SearchProductsController',
-                'articlesFrut' => $articleRepository-> searchInputValueFrut($search),
+                'articlesFrut' => $productRepository->searchInputValueFrut($search),
                 'result' => $result,
+
             ]);
-        } else {
+        } catch (\Exception $e) {
             return $this->render('search_products/search_products.html.twig', [
                 'controller_name' => 'SearchProductsController',
-                'articlesFrut' => $articleRepository-> searchInputValueFrut($search),
-                'error_message' => $_SESSION['error_message']
+                'articlesFrut' => $productRepository->searchInputValueFrut($search),
+                'error_message' => $e->getMessage()
             ]);
         }
     }
 }
+
+

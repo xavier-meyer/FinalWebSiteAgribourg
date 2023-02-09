@@ -39,7 +39,7 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-//    requete card page home
+//    requete cards page home
 
     public function displayArticlesByCategory(array $categs): array
     {
@@ -50,7 +50,7 @@ class ProductRepository extends ServiceEntityRepository
             //Définir les catégories spécifiées dans le tableau en tant que paramètre pour la requête
             ->setParameter('product_category', $categs)
             //Filtrer les résultats pour n'inclure que les articles qui ont un prix
-            ->andWhere('m.product_price < 5')
+            ->andWhere('m.product_price < 3')
             //Limiter le nombre de résultats retournés à 10
             ->setMaxResults(10)
             //Obtenir les résultats de la requête sous forme d'un tableau
@@ -58,7 +58,79 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // requete cards page produit fruit
 
+    public function displayArticlesByFrutCategory(array $categsFrut): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.product_category IN (:product_category)')
+            ->setParameter('product_category', $categsFrut)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // requete cards page produit légume
+
+    public function displayArticlesByVegetableCategory(array $categsFrut): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.product_category IN (:product_category)')
+            ->setParameter('product_category', $categsFrut)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // requete cards page produit panier
+
+    public function displayArticlesByBasketsCategory(array $categsBasket): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.product_category IN (:product_category)')
+            ->setParameter('product_category', $categsBasket)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    //  repository page produits search fruits
+    // fonctionnalité: chercher les produits par l'input en fonction des entrées de l'utilisateur
+
+    public function searchInputValueFrut($where): array
+    {
+        $queryBuilder = $this->createQueryBuilder("article");
+        $queryBuilder->where(' article.product_name like :w');
+        $queryBuilder->andWhere("article.product_category = 'fruit'");
+        $queryBuilder->setParameter(':w', $where . '%');
+        $result = $queryBuilder->getQuery()->getResult();
+        return $result;
+    }
+
+//    $result: Ce tableau sera ensuite retourné par la méthode searchInputValueFrut pour être utilisé dans le contrôleur pour
+//    l'affichage des résultats de la recherche de l'utilisateur.
+
+
+//            repository page produits search legumes
+    public function searchInputValueVegetables($where): array
+    {
+        $queryBuilder = $this->createQueryBuilder("article");
+        $queryBuilder->where(' article.product_name like :w');
+        $queryBuilder->andWhere("article.product_category = 'légume' ");
+        $queryBuilder->setParameter(':w', $where . '%');
+        $result = $queryBuilder->getQuery()->getResult();
+        return $result;
+    }
+
+//            repository page produits search panier
+    public function searchInputValueBaskets($where): array
+    {
+        $queryBuilder = $this->createQueryBuilder("article");
+        $queryBuilder->where(' article.product_name like :w');
+        $queryBuilder->andWhere("article.product_category = 'panier' ");
+        $queryBuilder->setParameter(':w',  '%' . $where . '%');
+        $result = $queryBuilder->getQuery()->getResult();
+        return $result;
+    }
+}
 
 //    /**
 //     * @return Product[] Returns an array of Product objects
@@ -84,4 +156,4 @@ class ProductRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+

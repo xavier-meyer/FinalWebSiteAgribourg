@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ProductRepository $productRepository): Response
     {
-        $products = $productRepository->displayArticlesByCategory(['fruit']);
+        $products = $productRepository->displayArticlesByCategory(['fruit', 'légume', 'panier']);
 
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',

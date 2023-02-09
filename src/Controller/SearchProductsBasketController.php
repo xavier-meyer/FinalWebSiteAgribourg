@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,10 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchProductsBasketController extends AbstractController
 {
-    #[Route('/search/products/basket', name: 'app_search_products_basket')]
-    public function index(ArticleRepository $articleRepository): Response
+    #[Route('/search/products/basket', name: 'app_search_products_baskets')]
+    public function index(ProductRepository $productRepository): Response
     {
-        $articlesBaskets = $articleRepository-> displayArticlesByBasketsCategory([3]);
+        $articlesBaskets = $productRepository-> displayArticlesByBasketsCategory(['panier']);
 
         return $this->render('search_products_baskets/search_products_baskets.html.twig', [
             'controller_name' => 'SearchProductsBasketController',
@@ -22,26 +22,27 @@ class SearchProductsBasketController extends AbstractController
     }
 
     // controleur afficher produits de la base de la données en fonction de la recherche de l'utilisateur
-    #[Route('/search/baskets', name: 'app_search_baskets')]
-    public function search(ArticleRepository $articleRepository, Request $request): Response
+    #[Route('/search/basket', name: 'app_search_baskets')]
+    public function search(ProductRepository $productRepository, Request $request): Response
     {
-        /*  si le résultat de la requete dans articleRepository est vide, on retournes dans la vue TWIG le message d erreur stocké en session
-          sinon on affiches le résultat, les produits concernées*/
-
         $search = $request->get('name');
-        $result = $articleRepository->searchInputValueBaskets($search);
 
-        if (empty($_SESSION['error_message'])) {
+        try {
+            $result = $productRepository->searchInputValueBaskets($search);
+            if (empty($result)) {
+                throw new \Exception("Aucun résultat trouvé");
+            }
             return $this->render('search_products_baskets/search_products_baskets.html.twig', [
                 'controller_name' => 'SearchProductsBasketController',
-                'articlesBaskets' => $articleRepository->searchInputValueBaskets($search),
+                'articlesBaskets' => $productRepository->searchInputValueBaskets($search),
                 'result' => $result,
+
             ]);
-        } else {
+        } catch (\Exception $e) {
             return $this->render('search_products_baskets/search_products_baskets.html.twig', [
                 'controller_name' => 'SearchProductsBasketController',
-                'articlesBaskets' => $articleRepository->searchInputValueBaskets($search),
-                'error_message' => $_SESSION['error_message']
+                'articlesBaskets' => $productRepository->searchInputValueBaskets($search),
+                'error_message' => $e->getMessage()
             ]);
         }
     }

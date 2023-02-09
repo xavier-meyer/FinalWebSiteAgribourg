@@ -28,12 +28,6 @@
                     <a class="nav-link text-color-card-products" href="{{ path('app_expertise') }}">Savoir-faire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-color-card-products" href="#">Témoignages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-color-card-products" href="#">Contacts</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-color-card-products d-block d-sm-none" href="#">Panier</a>
                 </li>
             </ul>
@@ -45,7 +39,7 @@
                 </li>
                 <li class="nav-item">
                     {%  if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('dashboard') }}" class="text-color-card-products nav-link">Dashboard</a>
+                        <a href="{{ path('app_admin') }}" class="text-color-card-products nav-link">Dashboard</a>
                     {%  endif %}
                 </li>
                 <li class="nav-item">
@@ -67,6 +61,7 @@
         </div>
     </div>
 </nav>
+
 
 
 

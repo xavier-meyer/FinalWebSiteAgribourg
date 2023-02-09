@@ -43,49 +43,49 @@ class ArticleRepository extends ServiceEntityRepository
 
     //  @return Article[] Returns an array of Article objects
 
-    public function displayArticlesByCategory(array $categs): array
-    {
-            //Création d'un constructeur de requête
-        return $this->createQueryBuilder('m')
-            //Filtrer les résultats en fonction de la catégorie de l'article
-            ->where('m.catproduit IN (:catproduit)')
-            //Définir les catégories spécifiées dans le tableau en tant que paramètre pour la requête
-            ->setParameter('catproduit', $categs)
-            //Filtrer les résultats pour n'inclure que les articles qui ont un prix en promotion
-            ->andWhere('m.artprixpromo IS NOT NULL')
-            //Limiter le nombre de résultats retournés à 10
-            ->setMaxResults(10)
-            //Obtenir les résultats de la requête sous forme d'un tableau
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function displayArticlesByFrutCategory(array $categsFrut): array
-    {
-        return $this->createQueryBuilder('m')
-            ->where('m.catproduit IN (:catproduit)')
-            ->setParameter('catproduit', $categsFrut)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function displayArticlesByVegetableCategory(array $categsVegetable): array
-    {
-        return $this->createQueryBuilder('m')
-            ->where('m.catproduit IN (:catproduit)')
-            ->setParameter('catproduit', $categsVegetable)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function displayArticlesByBasketsCategory(array $categsBasket): array
-    {
-        return $this->createQueryBuilder('m')
-            ->where('m.catproduit IN (:catproduit)')
-            ->setParameter('catproduit', $categsBasket)
-            ->getQuery()
-            ->getResult();
-    }
+//    public function displayArticlesByCategory(array $categs): array
+//    {
+//            //Création d'un constructeur de requête
+//        return $this->createQueryBuilder('m')
+//            //Filtrer les résultats en fonction de la catégorie de l'article
+//            ->where('m.catproduit IN (:catproduit)')
+//            //Définir les catégories spécifiées dans le tableau en tant que paramètre pour la requête
+//            ->setParameter('catproduit', $categs)
+//            //Filtrer les résultats pour n'inclure que les articles qui ont un prix en promotion
+//            ->andWhere('m.artprixpromo IS NOT NULL')
+//            //Limiter le nombre de résultats retournés à 10
+//            ->setMaxResults(10)
+//            //Obtenir les résultats de la requête sous forme d'un tableau
+//            ->getQuery()
+//            ->getResult();
+//    }
+//
+//    public function displayArticlesByFrutCategory(array $categsFrut): array
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->where('m.catproduit IN (:catproduit)')
+//            ->setParameter('catproduit', $categsFrut)
+//            ->getQuery()
+//            ->getResult();
+//    }
+//
+//    public function displayArticlesByVegetableCategory(array $categsVegetable): array
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->where('m.catproduit IN (:catproduit)')
+//            ->setParameter('catproduit', $categsVegetable)
+//            ->getQuery()
+//            ->getResult();
+//    }
+//
+//    public function displayArticlesByBasketsCategory(array $categsBasket): array
+//    {
+//        return $this->createQueryBuilder('m')
+//            ->where('m.catproduit IN (:catproduit)')
+//            ->setParameter('catproduit', $categsBasket)
+//            ->getQuery()
+//            ->getResult();
+//    }
 
 
 //    dans ce repository, on stockes dans $_session : $_session['error_message'] un message d erreur si la requete ne retournes aucun résultat

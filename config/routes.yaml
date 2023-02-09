@@ -17,12 +17,13 @@ profile_user_show:
     requirements:
         _role: ROLE_USER
 
-
 #dashboard:
 #    path: /admin
-#    controller: App\Controller\Admin\DashboardController::indexTest
-#    methods : [POST, GET]
+#    methods : [GET]
 #    requirements:
-#        _role: ROLE_ADMIN
+#        _controller: App\Controller\Admin\IndexTestController::indexTest
+#        crudAction: "^(?!index$).*"
+#        crudControllerFqcn: "^(?!App\\Controller\\Admin\\ProductCrudController$).*"
+##        _role: ROLE_ADMIN
 
 
