@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +13,15 @@ class DetailsProductsController extends AbstractController
 //    sera utilisée pour récupérer le produit à partir du référentiel.
 
     #[Route('/details/products/{id}', name: 'app_details_products')]
-    public function index(ArticleRepository $articleRepository, $id): Response
+    public function index(ProductRepository $productRepository, $id): Response
     {
 
-       $detailsProducts = $articleRepository->find($id);
+       $detailsProducts = $productRepository->find($id);
 
         return $this->render('details_products/details_products.html.twig', [
 
-            'item' => $detailsProducts
+            'item' => $detailsProducts,
+
         ]);
     }
 }

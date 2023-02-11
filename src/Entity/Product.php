@@ -82,7 +82,7 @@ class Product
         return $this->product_price;
     }
 
-    public function getproductprice(): ?float
+    public function getproduct_price(): ?float
     {
         return $this->product_price;
     }
@@ -99,7 +99,7 @@ class Product
         return $this->product_price_unit;
     }
 
-    public function getproductpriceunit(): ?string
+    public function getproduct_price_unit(): ?string
     {
         return $this->product_price_unit;
     }
@@ -135,7 +135,7 @@ class Product
         return $this;
     }
 
-    public function getProductDescription(): ?string
+    public function getProduct_description(): ?string
     {
         return $this->product_description;
     }
@@ -147,7 +147,7 @@ class Product
         return $this;
     }
 
-    public function getProductAdvice(): ?string
+    public function getProduct_advice(): ?string
     {
         return $this->product_advice;
     }

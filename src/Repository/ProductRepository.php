@@ -95,41 +95,40 @@ class ProductRepository extends ServiceEntityRepository
     //  repository page produits search fruits
     // fonctionnalité: chercher les produits par l'input en fonction des entrées de l'utilisateur
 
-    public function searchInputValueFrut($where): array
+    public function searchInputValueFrut(string $where): array
     {
-        $queryBuilder = $this->createQueryBuilder("article");
-        $queryBuilder->where(' article.product_name like :w');
-        $queryBuilder->andWhere("article.product_category = 'fruit'");
-        $queryBuilder->setParameter(':w', $where . '%');
-        $result = $queryBuilder->getQuery()->getResult();
-        return $result;
+        return $this->createQueryBuilder('article')
+            ->where(' article.product_name like :w')
+            ->andWhere("article.product_category = 'fruit'")
+            ->setParameter(':w', $where . '%')
+            ->getQuery()
+            ->getResult();
     }
 
-//    $result: Ce tableau sera ensuite retourné par la méthode searchInputValueFrut pour être utilisé dans le contrôleur pour
-//    l'affichage des résultats de la recherche de l'utilisateur.
+    // repository page produits search legumes
 
-
-//            repository page produits search legumes
-    public function searchInputValueVegetables($where): array
+    public function searchInputValueVegetables(string $where): array
     {
-        $queryBuilder = $this->createQueryBuilder("article");
-        $queryBuilder->where(' article.product_name like :w');
-        $queryBuilder->andWhere("article.product_category = 'légume' ");
-        $queryBuilder->setParameter(':w', $where . '%');
-        $result = $queryBuilder->getQuery()->getResult();
-        return $result;
+        return $this->createQueryBuilder('article')
+            ->where(' article.product_name like :w')
+            ->andWhere("article.product_category = 'légume'")
+            ->setParameter(':w', $where . '%')
+            ->getQuery()
+            ->getResult();
     }
 
 //            repository page produits search panier
-    public function searchInputValueBaskets($where): array
+
+    public function searchInputValueBaskets(string $where): array
     {
-        $queryBuilder = $this->createQueryBuilder("article");
-        $queryBuilder->where(' article.product_name like :w');
-        $queryBuilder->andWhere("article.product_category = 'panier' ");
-        $queryBuilder->setParameter(':w',  '%' . $where . '%');
-        $result = $queryBuilder->getQuery()->getResult();
-        return $result;
+        return $this->createQueryBuilder('article')
+            ->where(' article.product_name like :w')
+            ->andWhere("article.product_category = 'panier'")
+            ->setParameter(':w', '%' . $where . '%')
+            ->getQuery()
+            ->getResult();
     }
+
 }
 
 //    /**
