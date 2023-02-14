@@ -30,7 +30,7 @@
                         {{ include('card_affichage/card_affichage.html.twig') }}
                     </div>
                     {# lien pour envoyer les produits selectionnés à la page panier#}
-                    <a href="#" class="btn btn-button-card d-flex justify-content-between align-items-center my-2 my-lg-0 background-color-card-button text-color-card-products">
+                    <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card d-flex justify-content-between align-items-center my-2 my-lg-0 background-color-card-button text-color-card-products">
                         <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3" alt="moyen d'ajouter des articles au panier">Ajouter au panier
                     </a>
                 </div>

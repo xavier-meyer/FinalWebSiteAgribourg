@@ -3,31 +3,42 @@
 {% block title %} ShoppingBasketController{% endblock %}
 
 {% block body %}
-{{ dump(app.session.get('Basket')) }}
-    <h1 class="h1-font-size text-center my-5 main-color">Votre panier</h1>
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="card background-secondary-color col-10 col-sm-8">
-            {# tableau panier produits#}
-            <div>
-                <table class="table rounded">
-                    <thead class="background-main-color rounded-2">
-                    <tr>
-                        <th scope="col" class="text-color-card-products">nom</th>
+        <h1 class="h1-font-size text-center my-5 main-color">Votre panier</h1>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="card background-secondary-color col-10 col-sm-8">
+                {# tableau panier produits#}
+                <div>
+                    <table class="table rounded">
+                        <thead class="background-main-color rounded-2">
+                        <tr>
+                            <th scope="col" class="text-color-card-products col-1">nom</th>
+                            <th scope="col" class="text-color-card-products col-1">PrixTTC</th>
+                            <th scope="col" class="text-color-card-products col-1">quantité</th>
+                        </tr>
+                        </thead>
+                        {%  for item in app.session.get('Basket') %}
+                            <tbody class="background-secondary-color">
+                            <tr>
+                                <td>{{ item['name'] }}</td>
+                                <td>{{ item['price'] }}€</td>
+                                <td>{{ item['quantity'] }} {{ item['price_unit'] }}</td>
+                            </tr>
 
-                        <th scope="col" class="text-color-card-products">PrixTTC</th>
-                    </tr>
-                    </thead>
-                    <tbody class="background-secondary-color">
-                    <tr>
-                        <td>{{ dump(app.session.get('product_name')) }}</td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </tbody>
+                            <tfoot class="background-main-color">
+                                <tr>
+                                    {%  if loop.last %}
+                                        <th class="text-color-card-products" scope="col">Total</th>
+                                        <th class="text-color-card-products" scope="col">{{ totalPriceController }}€ </th>
+                                    {%  endif %}
+                                </tr>
+                            </tfoot>
+                        {%  endfor %}
+                    </table>
+                </div>
+                {# fin section tableau card produit#}
             </div>
-            {# fin section tableau card produit#}
         </div>
-    </div>
     <div class="d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row">
         <div class="mt-5 d-flex justify-content-around align-items-center">
             {# bouton pour revenir à la page précédente fonction JS goBack() #}
