@@ -7,6 +7,13 @@ parameters:
 
 services:
 
+#    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+#        arguments:
+#            - 'mysql://root:@127.0.0.1:3306/agribourg_website?serverVersion=8&charset=utf8mb4'
+#            - { db_table: 'product_basket_session',
+#                db_id_col: 'product_session_id', db_data_col: 'product_session_data', db_time_col: 'product_session_time',
+#                db_lifetime_col: 'product_session_lifetime'}
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
