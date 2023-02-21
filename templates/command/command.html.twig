@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CommandeController{% endblock %}
+
+{% block body %}
+<div class="row d-flex justify-content-center align-items-center my-5">
+    <h1 class="h1-font-size text-center my-5 main-color">Votre commande</h1>
+    <div class="card background-secondary-color col-10 col-sm-8">
+        {# tableau commande produits#}
+        <div>
+            <table class="table rounded">
+                <thead class="background-main-color rounded-2">
+                <tr>
+                    <th scope="col" class="text-color-card-products col-1">nom</th>
+                    <th scope="col" class="text-color-card-products col-1">PrixTTC</th>
+                    <th scope="col" class="text-color-card-products col-1">quantité</th>
+                </tr>
+                </thead>
+                    {%  for item in totalProductsPrice %}
+                        {%  if  app.user == item.user %}
+                            <tbody class="background-secondary-color">
+                            <tr>
+                                <td>{{ item.commandProductName }}</td>
+                                <td>{{ item.commandProductPrice }}€</td>
+                                <td>{{ item.commandProductQuantity}}{{ item.commandProductPriceUnit }}</td>
+                            </tr>
+                            </tbody>
+                            <tfoot class="background-main-color">
+                            <tr>
+                                {%  if loop.last %}
+                                    <th class="text-color-card-products" scope="col">Total</th>
+                                    <th class="text-color-card-products" scope="col">{{ item.commandTotalPrice }}€ </th>
+                                {%  endif %}
+                            </tr>
+                            </tfoot>
+                        {%  endif %}
+                    {%  endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

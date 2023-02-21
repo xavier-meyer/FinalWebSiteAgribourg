@@ -17,10 +17,10 @@
 {#             on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
             <a class="link-product" href="{{ path('app_details_products', {'id': item.id}) }}">Voir le produit</a>
             <div class="card-body background-main-color">
-                <h3 class="card-title text-color-card-products">
+                <h2 class="card-title text-color-card-products">
 {#                     on appliques un filtre pour limiter le nombre de caractères affichées#}
                     {{ item.product_name |nombre_characteres_nom_produit }}
-                </h3>
+                </h2>
                 <div class="d-flex justify-content-between my-2">
                     <div>
                         {{ include('card_affichage/card_affichage.html.twig') }}

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -22,6 +23,7 @@ class DashboardController extends AbstractDashboardController
         } else {
             return $this->redirectToRoute('app_login');
         }
+
 
 //        return parent::index();
 
@@ -56,12 +58,18 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-//         yield MenuItem::linkToCrud('The Label', 'fas fa-list', Product::class);
         yield MenuItem::section('Product');
-        yield MenuItem::linkToCrud('Product', 'fa fa-user', Product::class)
+        yield MenuItem::linkToCrud('Product', 'fas fa-list', Product::class)
         ->setController(ProductCrudController::class);
+        yield MenuItem::section('User');
+        yield MenuItem::linkToCrud('User', 'fa fa-user', User::class)
+            ->setController(UserCrudController::class);
+        yield MenuItem::section('Command');
+        yield MenuItem::linkToCrud('Command', 'fas fa-list', User::class)
+            ->setController(CommandeCrudController::class);
 
-
+        yield MenuItem::section('Return');
+        yield MenuItem::linkToRoute('return to profil', 'fas fa-home', 'profile_user');
     }
 }
 

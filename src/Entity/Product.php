@@ -65,7 +65,7 @@ class Product
         return $this->product_image;
     }
 
-    public function getproductimage(): ?string
+    public function getProductImage(): ?string
     {
         return $this->product_image;
     }
@@ -77,12 +77,12 @@ class Product
         return $this;
     }
 
-    public function getprice(): ?float
+    public function getproduct_price(): ?float
     {
         return $this->product_price;
     }
 
-    public function getproduct_price(): ?float
+    public function getProductPrice(): ?float
     {
         return $this->product_price;
     }
@@ -94,12 +94,12 @@ class Product
         return $this;
     }
 
-    public function getprice_unit(): ?string
+    public function getproduct_price_unit() : ?string
     {
         return $this->product_price_unit;
     }
 
-    public function getproduct_price_unit(): ?string
+    public function getProductPriceUnit(): ?string
     {
         return $this->product_price_unit;
     }
@@ -135,7 +135,7 @@ class Product
         return $this;
     }
 
-    public function getProduct_description(): ?string
+    public function getProductDescription(): ?string
     {
         return $this->product_description;
     }
@@ -147,7 +147,7 @@ class Product
         return $this;
     }
 
-    public function getProduct_advice(): ?string
+    public function getProductAdvice(): ?string
     {
         return $this->product_advice;
     }

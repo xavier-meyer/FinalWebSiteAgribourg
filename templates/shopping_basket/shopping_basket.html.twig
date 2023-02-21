@@ -16,7 +16,7 @@
                             <th scope="col" class="text-color-card-products col-1">quantité</th>
                         </tr>
                         </thead>
-                        {%  for item in app.session.get('Basket') %}
+                        {% for item in app.session.get('Basket') %}
                             <tbody class="background-secondary-color">
                             <tr>
                                 <td>{{ item['name'] }}</td>

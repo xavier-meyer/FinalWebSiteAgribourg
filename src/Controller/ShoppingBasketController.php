@@ -89,3 +89,4 @@ class ShoppingBasketController extends AbstractController
     // On enregistre le panier dans la session
     // on effectues la somme des produits ajoutées et on affectes cette valeur à $totalprice
 
+

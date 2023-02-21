@@ -23,8 +23,8 @@ class Commande
     #[ORM\Column]
     private ?float $command_product_quantity = null;
 
-    #[ORM\Column]
-    private ?float $command_product_total_price = null;
+//    #[ORM\Column]
+//    private ?float $command_product_total_price = null;
 
     #[ORM\Column(length: 255)]
     private ?string $command_product_price_unit = null;
@@ -35,9 +35,18 @@ class Commande
     #[ORM\Column(nullable: true)]
     private ?float $command_total_price = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getcommand_product_name(): ?string
+    {
+        return $this->command_product_name;
     }
 
     public function getCommandProductName(): ?string
@@ -76,17 +85,17 @@ class Commande
         return $this;
     }
 
-    public function getCommandProductTotalPrice(): ?float
-    {
-        return $this->command_product_total_price;
-    }
-
-    public function setCommandProductTotalPrice(float $command_product_total_price): self
-    {
-        $this->command_product_total_price = $command_product_total_price;
-
-        return $this;
-    }
+//    public function getCommandProductTotalPrice(): ?float
+//    {
+//        return $this->command_product_total_price;
+//    }
+//
+//    public function setCommandProductTotalPrice(float $command_product_total_price): self
+//    {
+//        $this->command_product_total_price = $command_product_total_price;
+//
+//        return $this;
+//    }
 
     public function getCommandProductPriceUnit(): ?string
     {
@@ -123,4 +132,17 @@ class Commande
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
+

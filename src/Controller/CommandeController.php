@@ -13,7 +13,7 @@ use App\Repository\CommandeRepository;
 class CommandeController extends AbstractController
 {
     #[Route('/command', name: 'app_command')]
-    public function index(SessionInterface $session, CommandeRepository $commandRepository ): Response
+    public function index(SessionInterface $session, CommandeRepository $commandRepository): Response
     {
         // récuperer le panier depuis la session
 
@@ -34,9 +34,13 @@ class CommandeController extends AbstractController
 
             $lastProduct = end($basket);
 
-                // stocker la date de validation du panier
+            // user
 
-            $date  = new DateTimeImmutable();
+            $command->setUser($this->getUser());
+
+            // stocker la date de validation du panier
+
+            $date = new DateTimeImmutable();
 
             // on récupéres les valeurs de produits stockées en session via $item
             // on envoyes les données dans la base de données avec les setters
@@ -47,7 +51,7 @@ class CommandeController extends AbstractController
             $command->setCommandProductPriceUnit($item['price_unit']);
 
             $command->setCommandProductTotalPrice($itemTotalPrice);
-            if($item === $lastProduct) {
+            if ($item === $lastProduct) {
                 $command->setCommandTotalPrice($totalPrice);
             }
             $command->setCommandProductDate($date);
@@ -60,7 +64,27 @@ class CommandeController extends AbstractController
 
         }
 
-        return $this->render('order/order.html.twig');
+        // réinitialiser le panier dans la session
+        $session->set('Basket', []);
+
+        $totalProductsPrice = $commandRepository->findAll();
+
+        return $this->render('command/command.html.twig', [
+            'controller_name' => 'CommandeController',
+            'totalProductsPrice' => $totalProductsPrice
+        ]);
+    }
+
+    #[Route('/command/table/products', name: 'app_command_display_products')]
+    public function displayProducts(CommandeRepository $commandRepository): Response
+    {
+        $totalProductsPrice = $commandRepository->findAll();
+
+        return $this->render('profil_user/profil_user.html.twig', [
+            'controller_name' => 'CommandeController',
+            'totalProductsPrice' => $totalProductsPrice
+
+        ]);
     }
 }
 

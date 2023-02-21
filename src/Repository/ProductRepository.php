@@ -30,6 +30,8 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+
+
     public function remove(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
