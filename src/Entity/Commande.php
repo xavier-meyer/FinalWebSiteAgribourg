@@ -85,17 +85,17 @@ class Commande
         return $this;
     }
 
-//    public function getCommandProductTotalPrice(): ?float
-//    {
-//        return $this->command_product_total_price;
-//    }
-//
-//    public function setCommandProductTotalPrice(float $command_product_total_price): self
-//    {
-//        $this->command_product_total_price = $command_product_total_price;
-//
-//        return $this;
-//    }
+    public function getCommandProductTotalPrice(): ?float
+    {
+        return $this->command_product_total_price;
+    }
+
+    public function setCommandProductTotalPrice(float $command_product_total_price): self
+    {
+        $this->command_product_total_price = $command_product_total_price;
+
+        return $this;
+    }
 
     public function getCommandProductPriceUnit(): ?string
     {
