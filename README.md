@@ -11,11 +11,11 @@ symfony server:start
 
 npm run watch
 
-4/ s'assurer d'etre sur la branche master 
+4/ basculer sur la branche test
 
 git branch 
 
-affiche master dans le terminal
+affiche * test dans le terminal
 
 5/ afficher la page ou les pages
 
