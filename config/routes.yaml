@@ -3,27 +3,5 @@ controllers:
 
     type: attribute
 
-profile_user:
-    path: /profil/user
-    controller: App\Controller\ProfileUserController::index
-    methods : [GET]
-    requirements:
-        _role: ROLE_USER
-
-profile_user_show:
-    path: /profil/user/{id}
-    controller: App\Controller\ProfileUserController::showProfile
-    methods : [GET]
-    requirements:
-        _role: ROLE_USER
-
-#dashboard:
-#    path: /admin
-#    methods : [GET]
-#    requirements:
-#        _controller: App\Controller\Admin\IndexTestController::indexTest
-#        crudAction: "^(?!index$).*"
-#        crudControllerFqcn: "^(?!App\\Controller\\Admin\\ProductCrudController$).*"
-##        _role: ROLE_ADMIN
 
 

@@ -1,7 +1,7 @@
 
 // buttons filtres
 
-.btn-search-fruits, .btn-search-legumes, .btn-search-paniers
+.btn-search-fruits, .btn-search-legumes, .btn-search-paniers, .btn-search-fruts-exotic
 {
   padding: .625rem 1.25rem .625rem 1.25rem;
   margin-right: 1.25rem;
@@ -20,7 +20,12 @@
 
 .btn-search-paniers {
   background-color: black;
-  color: white;
+
+}
+
+.btn-search-fruts-exotic
+{
+  background: rgba(5, 73, 22, 0.70);
 
 }
 
@@ -63,3 +68,4 @@
   }
 
 }
+

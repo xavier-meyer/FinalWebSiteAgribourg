@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class SearchProductsController extends AbstractController
 {
     // controleur afficher les produits de la catégorie fruit
@@ -15,7 +16,6 @@ class SearchProductsController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         $articlesFrut = $productRepository->displayArticlesByFrutCategory(['fruit']);
-
 
         return $this->render('search_products/search_products.html.twig', [
             'controller_name' => 'SearchProductsController',

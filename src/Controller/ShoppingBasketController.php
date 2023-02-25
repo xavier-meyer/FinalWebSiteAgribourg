@@ -37,17 +37,14 @@ class ShoppingBasketController extends AbstractController
 
         $basket = $session->get('Basket', []);
         $product = $productRepository->find($id);
-        $productName = $product->getproduct_name();
-        $productPrice = $product->getproduct_price();
-        $productPriceUnit = $product->getproduct_price_unit();
+        $productName = $product->getProductName();
+        $productPrice = $product->getProductPrice();
         $totalPrice = 0;
-
 
         // Vérifier si le produit est déja dans le panier
         $foundProduct = false;
         foreach ($basket as $item) {
             if ($item['name'] === $productName) {
-                $item['quantity']++;
                 $foundProduct = true;
                 break;
             }
@@ -59,7 +56,6 @@ class ShoppingBasketController extends AbstractController
                 'name' => $productName,
                 'price' => $productPrice,
                 'quantity' => 1,
-                'price_unit' => $productPriceUnit,
 
             ];
 

@@ -46,14 +46,10 @@ class CommandeController extends AbstractController
             // on envoyes les données dans la base de données avec les setters
 
             $command->setCommandProductName($item['name']);
-            $command->setCommandProductPrice($item['price']);
             $command->setCommandProductQuantity($item['quantity']);
-            $command->setCommandProductPriceUnit($item['price_unit']);
 
             $command->setCommandProductTotalPrice($itemTotalPrice);
-            if ($item === $lastProduct) {
-                $command->setCommandTotalPrice($totalPrice);
-            }
+
             $command->setCommandProductDate($date);
 
             // stocker les produits dans une variable $orderProduct

@@ -1,13 +1,14 @@
 
 
-{% if item.product_price_unit == 'kg' %}
-    <p class="card-text text-color-card-products">{{ item.product_price }}€/kg</p>
-{% elseif item.product_price_unit == 'pièce' %}
-    <p class="card-text text-color-card-products">{{ item.product_price }}€/pièce</p>
-{% elseif item.product_price_unit == 'botte' %}
-    <p class="card-text text-color-card-products ">{{ item.product_price }}€/botte</p>
-{% elseif item.product_price_unit == 'bocal' %}
-    <p class="card-text text-color-card-products">{{ item.product_price }}€/bocal</p>
-{% elseif item.product_price_unit == 'panier' %}
-    <p class="card-text text-color-card-products">{{ item.product_price }}€/panier</p>
-{% endif %}
+{#{% if item.product_price_unit == 'kg' %}#}
+{#    <p class="card-text text-color-card-products">{{ item.product_price }}€/kg</p>#}
+{#{% elseif item.product_price_unit == 'pièce' %}#}
+{#    <p class="card-text text-color-card-products">{{ item.product_price }}€/pièce</p>#}
+{#{% elseif item.product_price_unit == 'botte' %}#}
+{#    <p class="card-text text-color-card-products ">{{ item.product_price }}€/botte</p>#}
+{#{% elseif item.product_price_unit == 'bocal' %}#}
+{#    <p class="card-text text-color-card-products">{{ item.product_price }}€/bocal</p>#}
+{#{% elseif item.product_price_unit == 'panier' %}#}
+{#    <p class="card-text text-color-card-products">{{ item.product_price }}€/panier</p>#}
+{#{% endif %}#}
+<p class="card-text text-color-card-products">{{ item.productPrice }}€</p>

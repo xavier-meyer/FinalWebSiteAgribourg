@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Commande;
 use App\Entity\Product;
+use App\Entity\Unit;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -15,15 +17,12 @@ class DashboardController extends AbstractDashboardController
 {
 
     #[Route("/admin", name: "app_admin")]
-    public function indexTest(): Response
+    public function index(): Response
     {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirect($adminUrlGenerator->setController(ProductCrudController::class)->generateUrl());
-        } else {
-            return $this->redirectToRoute('app_login');
-        }
 
+        return $this->redirect($adminUrlGenerator->setController(ProductCrudController::class)->generateUrl());
+    }
 
 //        return parent::index();
 
@@ -43,17 +42,13 @@ class DashboardController extends AbstractDashboardController
         //
         // return $this->render('some/path/my-dashboard.html.twig');
 
-    }
-
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('FinalWebSiteAgribourg');
 
-
     }
-
 
     public function configureMenuItems(): iterable
     {
@@ -65,8 +60,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class)
             ->setController(UserCrudController::class);
         yield MenuItem::section('Command');
-        yield MenuItem::linkToCrud('Command', 'fas fa-list', User::class)
+        yield MenuItem::linkToCrud('Command', 'fas fa-list', Commande::class)
             ->setController(CommandeCrudController::class);
+        yield MenuItem::section('Unit');
+        yield MenuItem::linkToCrud('Unit', 'fas fa-list', Unit::class)
+            ->setController(UnitCrudController::class);
 
         yield MenuItem::section('Return');
         yield MenuItem::linkToRoute('return to profil', 'fas fa-home', 'profile_user');

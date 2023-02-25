@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SearchProductsController!{% endblock %}
+{% block title %}SearchProductsFrutsExoticController{% endblock %}
 {% block body %}
-    <h1 class="h1-font-size text-center my-5 main-color">Nos Fruits</h1>
+    <h1 class="h1-font-size text-center my-5 main-color">Nos Fruits Exotiques</h1>
     {{ include('section_button_search_products.html.twig') }}
     <form class="d-flex justify-content-center align-items-center flex-column flex-md-row mt-5" action="{{ path('app_search') }}">
         <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
@@ -11,16 +11,16 @@
     </form>
 
     <div class="mt-5 w-auto">
-{#          on affiches un message d'erreur grace à la variable 'message_error' passé en paramétre à la vue twig si aucun résultat trouvé#}
+        {#          on affiches un message d'erreur grace à la variable 'message_error' passé en paramétre à la vue twig si aucun résultat trouvé#}
         {% if error_message is defined %}
             <div class="alert alert-success text-div-alert">{{ error_message }}</div>
         {% endif %}
     </div>
     <div class="row d-flex justify-content-center justify-content-md-center align-items-center my-5">
-        {% for item in articlesFrut %}
+        {% for item in articlesFrutsExotic %}
             <div class="card cards_hover col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 me-3 my-4">
                 <img src="{{ asset("build/images/"~item.productImage~"") }}" class="card-img-top" alt="image du produit">
-{#                 on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
+                {# on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
                 <a class="link-product" href="{{ path('app_details_products', {'id': item.id}) }}">Voir le produit</a>
                 <div class="card-body background-main-color">
                     <h3 class="card-title text-color-card-products">

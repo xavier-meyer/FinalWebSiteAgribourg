@@ -20,16 +20,14 @@
                         {%  if  app.user == item.user %}
                             <tbody class="background-secondary-color">
                             <tr>
-                                <td>{{ item.commandProductName }}</td>
-                                <td>{{ item.commandProductPrice }}€</td>
-                                <td>{{ item.commandProductQuantity}}{{ item.commandProductPriceUnit }}</td>
+                                <td></td>
                             </tr>
                             </tbody>
                             <tfoot class="background-main-color">
                             <tr>
                                 {%  if loop.last %}
                                     <th class="text-color-card-products" scope="col">Total</th>
-                                    <th class="text-color-card-products" scope="col">{{ item.commandTotalPrice }}€ </th>
+                                    <th class="text-color-card-products" scope="col"> </th>
                                 {%  endif %}
                             </tr>
                             </tfoot>
