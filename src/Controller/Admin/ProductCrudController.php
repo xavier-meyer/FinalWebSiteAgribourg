@@ -29,8 +29,12 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('product_name'),
 
             ImageField::new('product_image')
-                ->setBasePath('uploads/images/')
                 ->setUploadDir('assets/images/'),
+
+//                 formatValue: retourner une balise img qui contient l'emplacement de l'image avec une taille maximale de 50x50 pixels.
+//                ->formatValue(function ($value) {
+//                    return '<img src="' . ('assets/images/' . $value) . '" style="max-height:50px; max-width:50px" />';
+//                }),
 
             NumberField::new('product_price'),
             NumberField::new('product_stock'),
@@ -46,5 +50,4 @@ class ProductCrudController extends AbstractCrudController
             AssociationField::new('unit'),
         ];
     }
-
 }

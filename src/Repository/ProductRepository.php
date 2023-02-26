@@ -110,9 +110,9 @@ class ProductRepository extends ServiceEntityRepository
 
     public function searchInputValueFrut(string $where): array
     {
-        return $this->createQueryBuilder('article')
-            ->where(' article.product_name like :w')
-            ->andWhere("article.product_category = 'fruit'")
+        return $this->createQueryBuilder('m')
+            ->where(' m.product_name like :w')
+            ->andWhere("m.product_category = 'fruit'")
             ->setParameter(':w', $where . '%')
             ->getQuery()
             ->getResult();
@@ -122,25 +122,39 @@ class ProductRepository extends ServiceEntityRepository
 
     public function searchInputValueVegetables(string $where): array
     {
-        return $this->createQueryBuilder('article')
-            ->where(' article.product_name like :w')
-            ->andWhere("article.product_category = 'légume'")
+        return $this->createQueryBuilder('m')
+            ->where(' m.product_name like :w')
+            ->andWhere("m.product_category = 'légume'")
             ->setParameter(':w', $where . '%')
             ->getQuery()
             ->getResult();
     }
 
-//            repository page produits search panier
+    // repository page produits search panier
 
     public function searchInputValueBaskets(string $where): array
     {
-        return $this->createQueryBuilder('article')
-            ->where(' article.product_name like :w')
-            ->andWhere("article.product_category = 'panier'")
+        return $this->createQueryBuilder('m')
+            ->where(' m.product_name like :w')
+            ->andWhere("m.product_category = 'panier'")
             ->setParameter(':w', '%' . $where . '%')
             ->getQuery()
             ->getResult();
     }
+
+    // repository page produits search fruit exotique
+
+    public function searchInputValueFrutsExotic(string $where): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.product_name like :W')
+            ->andWhere("m.product_category = 'fruit exotique'")
+            ->setParameter(':W', $where . '%')
+            ->getQuery()
+            ->getResult();
+
+    }
+
 
 }
 

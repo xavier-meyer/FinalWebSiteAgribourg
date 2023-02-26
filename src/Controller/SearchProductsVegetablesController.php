@@ -13,7 +13,7 @@ class SearchProductsVegetablesController extends AbstractController
 {
     // controleur afficher les produits de la catégorie légume
     #[Route('/search/products/vegetables', name: 'app_search_products_vegetables')]
-    public function index(ProductRepository $productRepository): Response
+    public function displayVegetables(ProductRepository $productRepository): Response
     {
         $articlesVegetable = $productRepository->displayArticlesByFrutCategory(['légume']);
 
@@ -25,7 +25,7 @@ class SearchProductsVegetablesController extends AbstractController
     }
 
    #[Route('/search/vegetables', name: 'app_search_vegetables')]
-    public function search(ProductRepository $productRepository, Request $request): Response
+    public function searchVegetables(ProductRepository $productRepository, Request $request): Response
     {
         $search = $request->get('name');
 

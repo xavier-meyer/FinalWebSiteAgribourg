@@ -10,28 +10,8 @@
     <h1 class="my-5 text-center fw-bold h1-font-size main-color">Nos bons plans</h1>
     <div class="row d-flex justify-content-center justify-content-md-center align-items-center">
         {% for item in products %}
-{#         la classe cards_hover est utilisée par la fonction JS card-hover.js pour sélectionner les cards#}
-        <div class="card cards_hover col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 me-3 my-4">
-            <img src="{{ asset("build/images/"~item.productImage~"") }}" class="card-img-top" alt="">
-
-{#             on indique la page sur laquelle on envoyes les données via la root et on précises l'id pour le controlleur#}
-            <a class="link-product" href="{{ path('app_details_products', {'id': item.id}) }}">Voir le produit</a>
-            <div class="card-body background-main-color">
-                <h2 class="card-title text-color-card-products">
-{#                     on appliques un filtre pour limiter le nombre de caractères affichées#}
-                    {{ item.productName |nombre_characteres_nom_produit }}
-                </h2>
-                <div class="d-flex justify-content-between my-2">
-                    <div>
-                        {{ include('card_affichage/card_affichage.html.twig') }}
-                    </div>
-                </div>
-                <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card d-flex justify-content-between align-items-center my-2 my-lg-0 background-color-card-button text-color-card-products">
-                    <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3" alt="moyen d'ajouter ce produit au panier">Ajouter au panier
-                </a>
-                </div>
-            </div>
-            {% endfor %}
+            {{ include('card_affichage/card_affichage.html.twig') }}
+        {% endfor %}
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <a href="{{ path("app_search_products") }}" class="btn btn-button-card text-decoration-none link-button-home text-color-card-products

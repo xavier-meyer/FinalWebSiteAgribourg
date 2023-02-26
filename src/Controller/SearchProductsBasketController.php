@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SearchProductsBasketController extends AbstractController
 {
     #[Route('/search/products/basket', name: 'app_search_products_baskets')]
-    public function index(ProductRepository $productRepository): Response
+    public function displayBaskets(ProductRepository $productRepository): Response
     {
         $articlesBaskets = $productRepository-> displayArticlesByBasketsCategory(['panier']);
 
@@ -23,7 +23,7 @@ class SearchProductsBasketController extends AbstractController
 
     // controleur afficher produits de la base de la données en fonction de la recherche de l'utilisateur
     #[Route('/search/basket', name: 'app_search_baskets')]
-    public function search(ProductRepository $productRepository, Request $request): Response
+    public function searchBaskets(ProductRepository $productRepository, Request $request): Response
     {
         $search = $request->get('name');
 

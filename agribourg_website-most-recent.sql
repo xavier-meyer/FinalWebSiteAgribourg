@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 19 fév. 2023 à 21:19
+-- Généré le : dim. 26 fév. 2023 à 12:23
 -- Version du serveur : 5.7.36
 -- Version de PHP : 8.1.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `agribourg_website`
+-- Base de données : `agribourg_website_2`
 --
 
 -- --------------------------------------------------------
@@ -30,27 +30,51 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `command_product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `command_product_price` double NOT NULL,
   `command_product_quantity` double NOT NULL,
   `command_product_total_price` double NOT NULL,
-  `command_product_price_unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `command_product_date` date NOT NULL COMMENT '(DC2Type:date_immutable)',
-  `command_total_price` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `IDX_6EEAA67DA76ED395` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `commande`
+-- Structure de la table `commande_product`
 --
 
-INSERT INTO `commande` (`id`, `command_product_name`, `command_product_price`, `command_product_quantity`, `command_product_total_price`, `command_product_price_unit`, `command_product_date`, `command_total_price`) VALUES
-(50, 'Bananes BIO', 2.85, 1, 2.85, 'kg', '2023-02-19', NULL),
-(51, 'Oranges BIO', 2.65, 1, 2.65, 'kg', '2023-02-19', NULL),
-(52, 'Kiwi jaunes BIO', 0.65, 1, 0.65, 'pièce', '2023-02-19', 6.15),
-(53, 'Bananes BIO', 2.85, 1, 2.85, 'kg', '2023-02-19', NULL),
-(54, 'Oranges BIO', 2.65, 1, 2.65, 'kg', '2023-02-19', NULL),
-(55, 'Kiwi jaunes BIO', 0.65, 1, 0.65, 'pièce', '2023-02-19', 6.15);
+DROP TABLE IF EXISTS `commande_product`;
+CREATE TABLE IF NOT EXISTS `commande_product` (
+  `commande_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY (`commande_id`,`product_id`),
+  KEY `IDX_25F1760D82EA2E54` (`commande_id`),
+  KEY `IDX_25F1760D4584665A` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `doctrine_migration_versions`
+--
+
+DROP TABLE IF EXISTS `doctrine_migration_versions`;
+CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
+  `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `executed_at` datetime DEFAULT NULL,
+  `execution_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `doctrine_migration_versions`
+--
+
+INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+('DoctrineMigrations\\Version20230223083254', '2023-02-23 08:34:34', 496),
+('DoctrineMigrations\\Version20230223084028', '2023-02-23 08:41:16', 119);
 
 -- --------------------------------------------------------
 
@@ -153,48 +177,52 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_image` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_price` double NOT NULL,
-  `product_price_unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_stock` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_advice` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `unit_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D34A04ADF8BD700D` (`unit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `product`
 --
 
-INSERT INTO `product` (`id`, `product_name`, `product_image`, `product_price`, `product_price_unit`, `product_category`, `product_stock`, `product_description`, `product_advice`) VALUES
-(1, 'Fraises BIO', 'fraise.jpg', 11.2, 'kg', 'fruit', NULL, 'Nos tomates BIO sont cultivées par nos soins de manière biologique au sein de notre ferme à Bourg en Bresse.', 'Ces tomates sont juteuses, idéales pour agrémenter vos salades.'),
-(2, 'Pommes BIO', 'pommes.jpg', 3.85, 'kg', 'fruit', NULL, 'Nos pommes BIO se caractérisent par un  goût très sucré.', 'Ces pommes BIO sont idéales pour réaliser des compotes de pomme, des tartes.'),
-(3, 'Bananes BIO', 'bananes.jpg', 2.85, 'kg', 'fruit', NULL, 'Nos bananes BIO d\'origine antillaise sont bonnes pour la santé, riche en vitamines C.', 'Ces bananes BIO peuvent être consommées crues, cuites. Il est possible de réaliser un banana split.'),
-(4, 'Oranges BIO', 'oranges.jpg', 2.65, 'kg', 'fruit', NULL, 'Nos oranges BIO sont riches en vitamines C, juteuses et sans pépins.', 'Ces oranges BIO sont parfaites pour réaliser vos jus d\'oranges pressées.'),
-(5, 'Kiwi jaunes BIO', 'kiwis_jaunes_BIO.jpg', 0.65, 'pièce', 'fruit', NULL, 'Nos kiwis jaunes ont un goût sucré et sont riches en fibres.', 'Ces kiwis jaunes BIO sont idéales pour agrémenter vos salades de fruits.'),
-(6, 'Raisins blancs BIO', 'raisins_blancs_Bio.jpg', 5.75, 'kg', 'fruit', NULL, 'Nos raisins blancs BIO se caractérisent par un bon goût sucré.', 'Ces raisons blancs BIO sont idéales pour finir un bon repas.'),
-(7, 'Abricots BIO', 'abricots_Bio.jpg', 5, 'kg', 'fruit', NULL, 'Nos abricots BIO d\'origine ardéchoise, fruit star de l\'été moelleux, possèdent un goût sucré et une texture moelleuse.', 'Ces abricots BIO se dégustent en recettes sucrées et salées.'),
-(8, 'Pêches jaunes BIO', 'peches_Bio.jpg', 8.4, 'kg', 'fruit', NULL, 'Nos pêches jaunes BIO d\'origine ardéchoise, fruit star de l\'été, possèdent un gout sucré et une texture moelleuse.', 'Ces pêches jaunes BIO se dégustent en desserts sucrés comme un crumble de pêches.'),
-(9, 'Citrons BIO', 'citrons_Bio.jpg', 2.8, 'kg', 'fruit', NULL, 'Nos citrons BIO sont gorgées de vitamines C qui booste le système immunitaire.', 'Ces citrons BIO accompagnent harmonieusement les poissons.'),
-(10, 'Mangues BIO', 'mangues_Bio.jpg', 2.99, 'pièce', 'fruit', NULL, 'Nos mangues BIO d\'origine antillaise sont juteuses et délicieusement parfumées.', 'Ces mangues BIO sont très utilisées dans la conception de desserts comme mousse et sorbet.'),
-(11, 'Ananas BIO', 'ananas.jpg', 3.2, 'pièce', 'fruit', NULL, 'Nos ananas BIO d\'origine antillaise sont issus de l\'agriculture biologique.', 'Ces ananas BIO sont parfaites pour la préparation d\'ananas au sirop.'),
-(12, 'Carottes BIO', 'carottes.jpg', 2.9, 'kg', 'légume', NULL, 'Nos carottes BIO sont issus de l\'agriculture biologique.', 'Ces carottes BIO peuvent être préparées en boulettes de carottes au cumin ou en chips.'),
-(13, 'Courgettes BIO', 'courgettes.jpg', 5.57, 'kg', 'légume', NULL, 'Nos courgettes BIO possèdent une saveur douce et légère.', 'Ces courgettes BIO peuvent être cuisinées en spaghetti de courgettes vertes.'),
-(14, 'Radis roses BIO', 'radis_roses_en_botte.jpg', 3.5, 'botte', 'légume', NULL, 'Nos radis roses BIO sont bien croquants, au goût intense et piquant.', 'Ces radis roses BIO peuvent être dégustés à la poêle avec du beurre et de la ciboulette.'),
-(15, 'Patates douces BIO', 'patates_douces.jpg', 4.95, 'kg', 'légume', NULL, 'Nos patates douces BIO sont crémeuses et sucrées.', 'Ces patates douces BIO peuvent être poêlées en fines tranches, transformées en purée, en frites.'),
-(16, 'Concombres BIO', 'concombres.jpg', 2.99, 'pièce', 'légume', NULL, 'Nos concombres BIO se caractérisent par leur fraicheur remarquable.', 'Nos concombres BIO peuvent être mixées avec de la menthe, citron, poivre et sel pour faire un gaspacho.'),
-(17, 'Pommes de terre nouvelles BIO', 'pommes_de_terre_nouvelle.jpg', 6.7, 'kg', 'légume', NULL, 'Nos Pommes de terre nouvelle BIO possèdent un  goût finement sucré avec des légères notes de noisettes.', 'Ces pommes de terre nouvelle BIO peuvent être cuites à la poêle, à la vapeur ou au four. Leurs peaux est fine, il est inutile de les éplucher.'),
-(18, 'Asperges BIO', 'asperges_blanches.jpg', 9.95, 'bocal', 'légume', NULL, 'Nos asperges blanches BIO sont fondantes et délicieuses.', 'Ces asperges blanches BIO se marient bien avec de la sauce hollandaise pour faire une entrée réussie.'),
-(19, 'Artichaut BIO', 'artichauts.jpg', 3.08, 'pièce', 'légume', NULL, 'Nos artichauts BIO ont un cœur tendre et savoureux.', 'Les cœurs d\'artichauts se consomment cru avec une vinaigrette, cuit en casserole, en cocotte.'),
-(20, 'Blettes BIO', 'blettes.jpg', 5.95, 'kg', 'légume', NULL, 'Nos blettes BIO ont une texture et chair fondante en bouche.', 'Ces blettes BIO sont parfaites pour concocter un gratin avec une sauce béchamel.'),
-(21, 'Salade batavia BIO', 'salades_batavia.jpg', 1.95, 'pièce', 'légume', NULL, 'Nos salades batavia BIO possédent des  feuilles fraîches, tendres et craquantes.', 'Cette salade batavia BIO est idéale pour la conception de burger maison.'),
-(22, 'Petit pois BIO', 'petit_pois.jpg', 2.89, 'bocal', 'légume', NULL, 'Nos petit pois BIO sont bien croquants.', 'Ces petit pois BIO peuvent être un élément essentiel pour faire une jardinière.'),
-(23, 'Poivron rouge BIO', 'poivrons_rouge.jpg', 1.59, 'pièce', 'légume', NULL, 'Nos poivrons rouge BIO donneront du piquant à vos plats.', 'Ces poivrons rouge BIO se cuisinent en salade, tapas, dans une farce, dans un cake.'),
-(24, 'Chou vert frise BIO', 'chou_vert_frise.jpg', 3.21, 'pièce', 'légume', NULL, 'Nos choux vert frisé BIO sont excellents pour la santé.', 'Ces choux vert frisé BIO se cuisinent dans un gratin en champignon, en soupe au chou vert et légumes.'),
-(25, 'fruits et légumes BIO (2-3 personnes)', 'panier_fruit_legume_moyen.jpg', 21.5, 'panier', 'panier', NULL, 'Ce panier est composé de 5 à 8 fruits et légumes de saison BIO et parfois de produits exotiques.', 'Ce panier BIO permet de réaliser des succulentes recettes de saison.'),
-(26, 'fruits et légumes BIO pour grande famille', 'panier_fruits_legumes_grand.jpg', 60, 'panier', 'panier', NULL, 'Notre panier BIO composé de fruits et légumes, de 12 à 15 produits conviendra aux grandes familles. Son poids va de 12 à 15 kilos.', 'Ce panier BIO de fruits et légumes conviendra parfaitement pour réaliser des plats en famille et passer des moments conviviaux.'),
-(27, 'fruits et légumes BIO pour 1 personne', 'panier_fruits_legumes_individuel.jpg', 13.5, 'panier', 'panier', NULL, 'Notre panier est composé de 5 à 7 fruits et légumes BIO de saison et pèse de 2.5 à 3 kilos.', 'Ce panier composé de fruits et légumes BIO conviendra pour une personne pour réaliser des plats équilibré, savoureux et bons pour la santé.'),
-(28, 'fruits BIO (2/3 personnes)', 'panier_fruit_moyen.jpg', 21.9, 'panier', 'panier', NULL, 'Notre panier est composé de fruits de printemps ou d\'été BIO et parfois de fruits exotiques d\'un poids de 5 à 6 kilogrammes.', 'Ce panier de fruits BIO vous permettra de réaliser de belles salades de fruits.'),
-(29, 'fruits BIO grande famille', 'panier_fruit_grand.jpg', 36.5, 'panier', 'panier', NULL, 'Notre panier de fruits BIO de saison et parfois de fruits exotiques pèse de 7 à 8 kilogrammes.', 'Ce panier de fruits BIO conviendra à toutes les familles qui pourront déguster des fruits savoureux et variées autour d\'un bon repas et dans une atmosphère conviviale.');
+INSERT INTO `product` (`id`, `product_name`, `product_image`, `product_price`, `product_category`, `product_stock`, `product_description`, `product_advice`, `unit_id`) VALUES
+(1, 'Fraises BIO', 'fraise.jpg', 11.2, 'fruit', NULL, 'Nos fraises BIO sont cultivées par nos soins de manière biologique au sein de notre ferme à Bourg en Bresse.', 'Ces fraises sont idéales pour être déguster en dessert avec de la crème chantilly.', 1),
+(2, 'Pommes BIO', 'pommes.jpg', 3.85, 'fruit', NULL, 'Nos pommes BIO se caractérisent par un  goût très sucré.', 'Ces pommes BIO sont idéales pour réaliser des compotes de pomme, des tartes.', 1),
+(3, 'Bananes BIO', 'bananes.jpg', 2.85, 'fruit', NULL, 'Nos bananes BIO d\'origine antillaise sont bonnes pour la santé, riche en vitamines C.', 'Ces bananes BIO peuvent être consommées crues, cuites. Il est possible de réaliser un banana split.', 1),
+(4, 'Oranges BIO', 'oranges.jpg', 2.65, 'fruit', NULL, 'Nos oranges BIO sont riches en vitamines C, juteuses et sans pépins.', 'Ces oranges BIO sont parfaites pour réaliser vos jus d\'oranges pressées.', 1),
+(5, 'Kiwi jaunes BIO', 'kiwis_jaunes_BIO.jpg', 0.65, 'fruit', NULL, 'Nos kiwis jaunes ont un goût sucré et sont riches en fibres.', 'Ces kiwis jaunes BIO sont idéales pour agrémenter vos salades de fruits.', 2),
+(6, 'Raisins blancs BIO', 'raisins_blancs_Bio.jpg', 5.75, 'fruit', NULL, 'Nos raisins blancs BIO se caractérisent par un bon goût sucré.', 'Ces raisons blancs BIO sont idéales pour finir un bon repas.', 1),
+(7, 'Abricots BIO', 'abricots_Bio.jpg', 5, 'fruit', NULL, 'Nos abricots BIO d\'origine ardéchoise, fruit star de l\'été moelleux, possèdent un goût sucré et une texture moelleuse.', 'Ces abricots BIO se dégustent en recettes sucrées et salées.', 1),
+(8, 'Pêches jaunes BIO', 'peches_Bio.jpg', 8.4, 'fruit', NULL, 'Nos pêches jaunes BIO d\'origine ardéchoise, fruit star de l\'été, possèdent un gout sucré et une texture moelleuse.', 'Ces pêches jaunes BIO se dégustent en desserts sucrés comme un crumble de pêches.', 1),
+(9, 'Citrons BIO', 'citrons_Bio.jpg', 2.8, 'fruit', NULL, 'Nos citrons BIO sont gorgées de vitamines C qui booste le système immunitaire.', 'Ces citrons BIO accompagnent harmonieusement les poissons.', 2),
+(10, 'Mangues BIO', 'mangues_Bio.jpg', 2.99, 'fruit exotique', NULL, 'Nos mangues BIO d\'origine antillaise sont juteuses et délicieusement parfumées.', 'Ces mangues BIO sont très utilisées dans la conception de desserts comme mousse et sorbet.', 2),
+(11, 'Ananas BIO', 'ananas.jpg', 3.2, 'fruit exotique', NULL, 'Nos ananas BIO d\'origine antillaise sont issus de l\'agriculture biologique.', 'Ces ananas BIO sont parfaites pour la préparation d\'ananas au sirop.', 2),
+(12, 'Carottes BIO', 'carottes.jpg', 2.9, 'légume', NULL, 'Nos carottes BIO sont issus de l\'agriculture biologique.', 'Ces carottes BIO peuvent être préparées en boulettes de carottes au cumin ou en chips.', 1),
+(13, 'Courgettes BIO', 'courgettes.jpg', 5.57, 'légume', NULL, 'Nos courgettes BIO possèdent une saveur douce et légère.', 'Ces courgettes BIO peuvent être cuisinées en spaghetti de courgettes vertes.', 1),
+(14, 'Radis roses BIO', 'radis_roses_en_botte.jpg', 3.5, 'légume', NULL, 'Nos radis roses BIO sont bien croquants, au goût intense et piquant.', 'Ces radis roses BIO peuvent être dégustés à la poêle avec du beurre et de la ciboulette.', 4),
+(15, 'Patates douces BIO', 'patates_douces.jpg', 4.95, 'légume', NULL, 'Nos patates douces BIO sont crémeuses et sucrées.', 'Ces patates douces BIO peuvent être poêlées en fines tranches, transformées en purée, en frites.', 1),
+(16, 'Concombres BIO', 'concombres.jpg', 2.99, 'légume', NULL, 'Nos concombres BIO se caractérisent par leur fraicheur remarquable.', 'Nos concombres BIO peuvent être mixées avec de la menthe, citron, poivre et sel pour faire un gaspacho.', 2),
+(17, 'Pommes de terre nouvelles BIO', 'pommes_de_terre_nouvelle.jpg', 6.7, 'légume', NULL, 'Nos Pommes de terre nouvelle BIO possèdent un  goût finement sucré avec des légères notes de noisettes.', 'Ces pommes de terre nouvelle BIO peuvent être cuites à la poêle, à la vapeur ou au four. Leurs peaux est fine, il est inutile de les éplucher.', 1),
+(18, 'Asperges BIO', 'asperges_blanches.jpg', 9.95, 'légume', NULL, 'Nos asperges blanches BIO sont fondantes et délicieuses.', 'Ces asperges blanches BIO se marient bien avec de la sauce hollandaise pour faire une entrée réussie.', 3),
+(19, 'Artichaut BIO', 'artichauts.jpg', 3.08, 'légume', NULL, 'Nos artichauts BIO ont un cœur tendre et savoureux.', 'Les cœurs d\'artichauts se consomment cru avec une vinaigrette, cuit en casserole, en cocotte.', 2),
+(20, 'Blettes BIO', 'blettes.jpg', 5.95, 'légume', NULL, 'Nos blettes BIO ont une texture et chair fondante en bouche.', 'Ces blettes BIO sont parfaites pour concocter un gratin avec une sauce béchamel.', 2),
+(21, 'Salade batavia BIO', 'salades_batavia.jpg', 1.95, 'légume', NULL, 'Nos salades batavia BIO possédent des  feuilles fraîches, tendres et craquantes.', 'Cette salade batavia BIO est idéale pour la conception de burger maison.', 2),
+(22, 'Petit pois BIO', 'petit_pois.jpg', 2.89, 'légume', NULL, 'Nos petit pois BIO sont bien croquants.', 'Ces petit pois BIO peuvent être un élément essentiel pour faire une jardinière.', 3),
+(23, 'Poivron rouge BIO', 'poivrons_rouge.jpg', 1.59, 'légume', NULL, 'Nos poivrons rouge BIO donneront du piquant à vos plats.', 'Ces poivrons rouge BIO se cuisinent en salade, tapas, dans une farce, dans un cake.', 2),
+(24, 'Chou vert frise BIO', 'chou_vert_frise.jpg', 3.21, 'légume', NULL, 'Nos choux vert frisé BIO sont excellents pour la santé.', 'Ces choux vert frisé BIO se cuisinent dans un gratin en champignon, en soupe au chou vert et légumes.', 2),
+(25, 'fruits et légumes BIO (2-3 personnes)', 'panier_fruit_legume_moyen.jpg', 21.5, 'panier', NULL, 'Ce panier est composé de 5 à 8 fruits et légumes de saison BIO et parfois de produits exotiques.', 'Ce panier BIO permet de réaliser des succulentes recettes de saison.', 5),
+(26, 'fruits et légumes BIO pour grande famille', 'panier_fruits_legumes_grand.jpg', 60, 'panier', NULL, 'Notre panier BIO composé de fruits et légumes, de 12 à 15 produits conviendra aux grandes familles. Son poids va de 12 à 15 kilos.', 'Ce panier BIO de fruits et légumes conviendra parfaitement pour réaliser des plats en famille et passer des moments conviviaux.', 5),
+(27, 'fruits et légumes BIO pour 1 personne', 'panier_fruits_legumes_individuel.jpg', 13.5, 'panier', NULL, 'Notre panier est composé de 5 à 7 fruits et légumes BIO de saison et pèse de 2.5 à 3 kilos.', 'Ce panier composé de fruits et légumes BIO conviendra pour une personne pour réaliser des plats équilibré, savoureux et bons pour la santé.', 5),
+(28, 'fruits BIO (2/3 personnes)', 'panier_fruit_moyen.jpg', 21.9, 'panier', NULL, 'Notre panier est composé de fruits de printemps ou d\'été BIO et parfois de fruits exotiques d\'un poids de 5 à 6 kilogrammes.', 'Ce panier de fruits BIO vous permettra de réaliser de belles salades de fruits.', 5),
+(29, 'fruits BIO grande famille', 'panier_fruit_grand.jpg', 36.5, 'panier', NULL, 'Notre panier de fruits BIO de saison et parfois de fruits exotiques pèse de 7 à 8 kilogrammes.', 'Ce panier de fruits BIO conviendra à toutes les familles qui pourront déguster des fruits savoureux et variées autour d\'un bon repas et dans une atmosphère conviviale.', 5),
+(30, 'Fruit de la passion', 'fruit_passion.jpg', 3.99, 'fruit exotique', NULL, 'Le fruit de la passion est un fruit tropical avec une coque dure et une pulpe douce et juteuse remplie de petites graines comestibles. Il a une saveur acidulée et sucrée qui rappelle celle de l\'ananas et du kiwi.', 'Le fruit de la passion peut être consommé cru, coupé en deux et mangé à la cuillère, ou utilisé pour faire des jus, des smoothies, des sorbets et des desserts tels que des tartes et des crumbles.', 2),
+(31, 'Durian', 'durian.jpg', 9.99, 'fruit exotique', NULL, 'Le durian est un fruit tropical à la peau épineuse et à l\'intérieur charnu, sucré et crémeux. Il est considéré comme le \"roi des fruits\" en Asie du Sud-Est, et se caractérise par son odeur forte et distinctive.', 'Le durian peut être mangé cru, mais il est souvent utilisé pour faire des desserts tels que des glaces, des gâteaux et des pâtisseries. Il peut également être utilisé comme ingrédient dans des plats salés comme le curry.', 1),
+(32, 'Pitaya', 'Pitaya.jpg', 4.49, 'fruit exotique', NULL, 'Le pitaya, également connu sous le nom de fruit du dragon, est un fruit tropical avec une peau rose ou jaune vif et des écailles vertes ou brunes. La pulpe est douce et juteuse, avec une saveur légèrement sucrée et une texture croquante.', 'Le pitaya peut être mangé cru, coupé en tranches ou en cubes, ou utilisé pour faire des smoothies, des jus et des cocktails. Il peut également être utilisé comme garniture pour les plats de fruits ou de salades.', 1);
 
 -- --------------------------------------------------------
 
@@ -209,6 +237,30 @@ CREATE TABLE IF NOT EXISTS `ptdecollecte` (
   `ptcollectetel` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `unit`
+--
+
+DROP TABLE IF EXISTS `unit`;
+CREATE TABLE IF NOT EXISTS `unit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_product` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `unit`
+--
+
+INSERT INTO `unit` (`id`, `unit_product`) VALUES
+(1, 'kg'),
+(2, 'pièce'),
+(3, 'bocal'),
+(4, 'botte'),
+(5, 'panier');
 
 -- --------------------------------------------------------
 
@@ -240,6 +292,29 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `prenom`,
 (20, 'albert.dupontel@gmail.com', '[]', '$2y$13$6VBIrRNingep4yDeSMN3EO21tRQaU/LxeIuUseGEiNxHcfejLztd2', 0, 'albert', 'Dupontel', '0123456789'),
 (21, 'albus.dumbeldore@orange.fr', '[]', '$2y$13$lfQX3y2ZTDTqLNjfRc1al.YFAVyjuVOlaWofzMJIfFGbowW1hs1Pm', 0, 'Albus', 'Dumbledore', '0770707070'),
 (27, 'admin.account@admin.com', '[\"ROLE_ADMIN\"]', '$2y$13$i53z1masDdU/Wvixs.aMP.ZCl82exrKD51EgpDYPyEBk6K6Yn/D/G', 0, 'Admin', 'AdminSurname', '0607080901');
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `FK_6EEAA67DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `commande_product`
+--
+ALTER TABLE `commande_product`
+  ADD CONSTRAINT `FK_25F1760D4584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_25F1760D82EA2E54` FOREIGN KEY (`commande_id`) REFERENCES `commande` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `FK_D34A04ADF8BD700D` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
