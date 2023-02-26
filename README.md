@@ -11,16 +11,3 @@ symfony server:start
 
 npm run watch
 
-4/ s'assurer d'etre sur la branche test
-
- si git branch 
-
-affiche * test dans le terminal
-
-sinon git checkout test pour changer de branche
-
-5/ afficher la page ou les pages
-
-aller sur 127.0.0:8000/nomDelaPage 
-
-ex /home, /compagny/history, /search/products
