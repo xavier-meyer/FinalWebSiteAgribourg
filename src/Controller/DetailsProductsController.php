@@ -18,6 +18,7 @@ class DetailsProductsController extends AbstractController
 
        $detailsProducts = $productRepository->find($id);
 
+
         return $this->render('details_products/details_products.html.twig', [
 
             'item' => $detailsProducts,

@@ -93,6 +93,17 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // requete cards page produit fruit exotique
+
+    public function displayArticlesByFrutsExotic(array $categFrutsExotic) : array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.product_category IN (:product_category)')
+            ->setParameter('product_category', $categFrutsExotic)
+            ->getQuery()
+            ->getResult();
+
+    }
 
     //  repository page produits search fruits
     // fonctionnalité: chercher les produits par l'input en fonction des entrées de l'utilisateur

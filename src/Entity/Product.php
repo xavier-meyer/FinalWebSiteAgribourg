@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,9 +26,6 @@ class Product
     private ?float $product_price = null;
 
     #[ORM\Column(length: 255)]
-    private?string $product_price_unit = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $product_category = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -38,17 +37,23 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $product_advice = null;
 
+    #[ORM\ManyToMany(targetEntity: Commande::class, mappedBy: 'product')]
+    private Collection $commandes;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Unit $unit = null;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getproduct_name(): ?string
-    {
-        return $this->product_name;
-    }
-
-    public function getproductname(): ?string
+    public function getProductName(): ?string
     {
         return $this->product_name;
     }
@@ -58,11 +63,6 @@ class Product
         $this->product_name = $product_name;
 
         return $this;
-    }
-
-    public function getproduct_image(): ?string
-    {
-        return $this->product_image;
     }
 
     public function getProductImage(): ?string
@@ -77,11 +77,6 @@ class Product
         return $this;
     }
 
-    public function getproduct_price(): ?float
-    {
-        return $this->product_price;
-    }
-
     public function getProductPrice(): ?float
     {
         return $this->product_price;
@@ -90,23 +85,6 @@ class Product
     public function setProductPrice(float $product_price): self
     {
         $this->product_price = $product_price;
-
-        return $this;
-    }
-
-    public function getproduct_price_unit() : ?string
-    {
-        return $this->product_price_unit;
-    }
-
-    public function getProductPriceUnit(): ?string
-    {
-        return $this->product_price_unit;
-    }
-
-    public function setProductPriceUnit(string $product_price_unit): self
-    {
-        $this->product_price_unit = $product_price_unit;
 
         return $this;
     }
@@ -158,4 +136,44 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes->add($commande);
+            $commande->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            $commande->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function getUnit(): ?Unit
+    {
+        return $this->unit;
+    }
+
+    public function setUnit(?Unit $unit): self
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
 }

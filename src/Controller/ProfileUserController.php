@@ -11,11 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileUserController extends AbstractController
 {
-//    #[Route('/profil/user', name: 'profile_user')]
+    #[Route('/profil/user', name: 'profile_user')]
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->displayArticlesByCategory(['fruit', 'légume', 'panier']);
-
 
         return $this->render('home/home.html.twig', [
             'controller_name' => 'ProfileUserController',
@@ -23,13 +22,13 @@ class ProfileUserController extends AbstractController
 
         ]);
     }
-//    #[Route('/profil/user/{id}', name: 'profile_user_show')]
+    #[Route('/profil/user/{id}', name: 'profile_user_show')]
     public function showProfile(UserRepository $userRepository, $id, CommandeRepository $commandeRepository): Response
     {
 
-        if (!$this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('app_home');
-        }
+//        if (!$this->isGranted('ROLE_USER')) {
+//            return $this->redirectToRoute('app_home');
+//        }
 
         $userProfil = $userRepository-> find($id);
         $totalProductsPrice = $commandeRepository->findAll();

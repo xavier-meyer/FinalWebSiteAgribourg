@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,35 +20,29 @@ class Commande
     private ?string $command_product_name = null;
 
     #[ORM\Column]
-    private ?float $command_product_price = null;
-
-    #[ORM\Column]
     private ?float $command_product_quantity = null;
 
-//    #[ORM\Column]
-//    private ?float $command_product_total_price = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $command_product_price_unit = null;
+    #[ORM\Column]
+    private ?float $command_product_total_price = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $command_product_date = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?float $command_total_price = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'commandes')]
+    private Collection $product;
+
+    public function __construct()
+    {
+        $this->product = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getcommand_product_name(): ?string
-    {
-        return $this->command_product_name;
     }
 
     public function getCommandProductName(): ?string
@@ -57,18 +53,6 @@ class Commande
     public function setCommandProductName(string $command_product_name): self
     {
         $this->command_product_name = $command_product_name;
-
-        return $this;
-    }
-
-    public function getCommandProductPrice(): ?float
-    {
-        return $this->command_product_price;
-    }
-
-    public function setCommandProductPrice(float $command_product_price): self
-    {
-        $this->command_product_price = $command_product_price;
 
         return $this;
     }
@@ -85,29 +69,18 @@ class Commande
         return $this;
     }
 
-//    public function getCommandProductTotalPrice(): ?float
-//    {
-//        return $this->command_product_total_price;
-//    }
-//
-//    public function setCommandProductTotalPrice(float $command_product_total_price): self
-//    {
-//        $this->command_product_total_price = $command_product_total_price;
-//
-//        return $this;
-//    }
-
-    public function getCommandProductPriceUnit(): ?string
+    public function getCommandProductTotalPrice(): ?float
     {
-        return $this->command_product_price_unit;
+        return $this->command_product_total_price;
     }
 
-    public function setCommandProductPriceUnit(string $command_product_price_unit): self
+    public function setCommandProductTotalPrice(float $command_product_total_price): self
     {
-        $this->command_product_price_unit = $command_product_price_unit;
+        $this->command_product_total_price = $command_product_total_price;
 
         return $this;
     }
+
 
     public function getCommandProductDate(): ?\DateTimeImmutable
     {
@@ -121,18 +94,6 @@ class Commande
         return $this;
     }
 
-    public function getCommandTotalPrice(): ?float
-    {
-        return $this->command_total_price;
-    }
-
-    public function setCommandTotalPrice(?float $command_total_price): self
-    {
-        $this->command_total_price = $command_total_price;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -141,6 +102,30 @@ class Commande
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProduct(): Collection
+    {
+        return $this->product;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->product->contains($product)) {
+            $this->product->add($product);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        $this->product->removeElement($product);
 
         return $this;
     }
