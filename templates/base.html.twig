@@ -13,8 +13,9 @@
     {% block header %}{% include "header.html.twig" %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
-            <script defer src="{{ asset('js/card-hover.js') }}"></script>
+            <script defer src="{{ asset('js/card_hover.js' )}}"></script>
             <script defer src="{{ asset('js/button_go_back_page.js') }}"></script>
+            {# <script defer src="{{ asset('js/choice_quantity_product_basket.js') }}"></script>#}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>

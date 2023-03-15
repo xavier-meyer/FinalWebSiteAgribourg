@@ -10,11 +10,12 @@
             {{ item.productName |nombre_characteres_nom_produit }}
         </h2>
         <p class="my-3 text-color-card-products">
-            {{ item.productPrice }}€
+            {{ item.productPrice }}€/{{ item.unit }}
         </p>
         <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card d-flex justify-content-between align-items-center my-2 my-lg-1 background-color-card-button text-color-card-products">
             <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3" alt="moyen d'ajouter ce produit au panier">Ajouter au panier
         </a>
     </div>
 </div>
+
 

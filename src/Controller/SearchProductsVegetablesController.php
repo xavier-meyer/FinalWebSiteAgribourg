@@ -15,7 +15,7 @@ class SearchProductsVegetablesController extends AbstractController
     #[Route('/search/products/vegetables', name: 'app_search_products_vegetables')]
     public function displayVegetables(ProductRepository $productRepository): Response
     {
-        $articlesVegetable = $productRepository->displayArticlesByFrutCategory(['légume']);
+        $articlesVegetable = $productRepository->displayArticlesByVegetableCategory(['légume']);
 
         return $this->render('search_products_vegetables/search_products_vegetables.html.twig', [
             'controller_name' => 'SearchProductsController',

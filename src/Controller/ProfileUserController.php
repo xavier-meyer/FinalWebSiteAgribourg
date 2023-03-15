@@ -23,20 +23,14 @@ class ProfileUserController extends AbstractController
         ]);
     }
     #[Route('/profil/user/{id}', name: 'profile_user_show')]
-    public function showProfile(UserRepository $userRepository, $id, CommandeRepository $commandeRepository): Response
+    public function showProfile(UserRepository $userRepository, $id): Response
     {
 
-//        if (!$this->isGranted('ROLE_USER')) {
-//            return $this->redirectToRoute('app_home');
-//        }
-
         $userProfil = $userRepository-> find($id);
-        $totalProductsPrice = $commandeRepository->findAll();
 
         return $this->render('profil_user/profil_user.html.twig', [
             'controller_name' => 'ProfileUserController',
             'userProfil' => $userProfil,
-            'totalProductsPrice' => $totalProductsPrice
 
         ]);
     }

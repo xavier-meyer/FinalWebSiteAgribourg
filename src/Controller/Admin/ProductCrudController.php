@@ -22,19 +22,18 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-
-            IdField::new('id')
+             IdField::new('id')
                 ->setFormTypeOption('disabled', true),
 
             TextField::new('product_name'),
 
-            ImageField::new('product_image')
-                ->setUploadDir('assets/images/'),
+            ImageField::new('product_image', 'Product Image')
+                ->setUploadDir('assets/images/')
 
-//                 formatValue: retourner une balise img qui contient l'emplacement de l'image avec une taille maximale de 50x50 pixels.
-//                ->formatValue(function ($value) {
-//                    return '<img src="' . ('assets/images/' . $value) . '" style="max-height:50px; max-width:50px" />';
-//                }),
+                ->formatValue(function ($value) {
+                    return 'build/images'.$value ;
+                }),
+
 
             NumberField::new('product_price'),
             NumberField::new('product_stock'),

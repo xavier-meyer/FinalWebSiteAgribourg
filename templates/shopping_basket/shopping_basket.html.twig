@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %} ShoppingBasketController{% endblock %}
@@ -5,52 +6,42 @@
 {% block body %}
         <h1 class="h1-font-size text-center my-5 main-color">Votre panier</h1>
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="card background-secondary-color col-10 col-sm-8">
-                {# tableau panier produits#}
-                <div>
-                    <table class="table rounded">
-                        <thead class="background-main-color rounded-2">
-                        <tr>
-                            <th scope="col" class="text-color-card-products col-1">nom</th>
-                            <th scope="col" class="text-color-card-products col-1">PrixTTC</th>
-                            <th scope="col" class="text-color-card-products col-1">quantité</th>
-                        </tr>
-                        </thead>
-                        {% for item in app.session.get('Basket') %}
-                            <tbody class="background-secondary-color">
-                            <tr>
-                                <td>{{ item['name'] }}</td>
-                                <td>{{ item['price'] }}€</td>
-                                <td>{{ item['quantity'] }} {{ item['price_unit'] }}</td>
-                            </tr>
-
-                            </tbody>
-                            <tfoot class="background-main-color">
-                                <tr>
-                                    {%  if loop.last %}
-                                        <th class="text-color-card-products" scope="col">Total</th>
-                                        <th class="text-color-card-products" scope="col">{{ totalPriceController }}€ </th>
-                                    {%  endif %}
-                                </tr>
-                            </tfoot>
-                        {%  endfor %}
-                    </table>
-                </div>
-                {# fin section tableau card produit#}
+            <div class="card d-flex justify-content-center align-items-center background-secondary-color col-10 col-sm-8">
+                {% for item in app.session.get('Basket')  %}
+                    <div class="card d-flex justify-content-center flex-column flex-md-row col-10 my-4">
+                        <div class="col-12 col-md-6">
+                            <img src="{{ asset("build/images/"~item['image']~"") }}" class="col-12 object-fit-fill h-100" alt="afficher image du produit">
+                        </div>
+                        <div class="card-body background-main-color col-12 col-md-4">
+                            <h2 class="card-title text-color-card-products">
+                                {# on appliques un filtre pour limiter le nombre de caractères affichées#}
+                                 {{ item['name'] }}
+                            </h2>
+                            <p class="my-3 text-color-card-products">
+                                {{ item['price'] }}€/{{ item['unit'] }}
+                            </p>
+                            <div class="my-3 text-color-card-products">
+                                quantité: {{ item['quantity'] }} {{ item['unit'] }}
+                            </div>
+                            <a type="button" class="text-decoration-none background-color-card-button text-color-card-products rounded-2 p-2"
+                               href="{{ path('app_remove_basket', { 'id': item['id'] }) }}">Supprimer</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="text-color-card-products background-main-color my-3 p-3 rounded-2">Total: {{ totalPriceController }}€</div>
             </div>
         </div>
-    <div class="d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row">
-        <div class="mt-5 d-flex justify-content-around align-items-center">
-            {# bouton pour revenir à la page précédente fonction JS goBack() #}
-            <a onclick="goBack()" type="button" class="button_go_back text-color-card-products">Allez à la page précédente</a>
+        <div class="d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row">
+            <div class="mt-5 d-flex justify-content-around align-items-center">
+                {# bouton pour revenir à la page précédente fonction JS goBack() #}
+                <a onclick="goBack()" type="button" class="button_go_back text-color-card-products">Allez à la page précédente</a>
+            </div>
+            <div class="mt-5 d-flex justify-content-around align-items-center">
+                <a href="{{ path('app_search_products') }}"  type="button" class="button_go_back text-color-card-products">Continuer la commande</a>
+            </div>
+            <div class="mt-5 d-flex justify-content-around align-items-center">
+                <a href="{{ path('app_command') }}"  type="button" class="button_go_back text-color-card-products">Valider la commande</a>
+            </div>
         </div>
-        <div class="mt-5 d-flex justify-content-around align-items-center">
-            <a href="{{ path('app_home') }}"  type="button" class="button_go_back text-color-card-products">Retounez à l'accueil</a>
-        </div>
-        <div class="mt-5 d-flex justify-content-around align-items-center">
-            {# valider le panier #}
-            <a href="{{ path('app_command') }}"  type="button" class="button_go_back text-color-card-products">Passer à la commande</a>
-        </div>
-    </div>
 {% endblock %}
 

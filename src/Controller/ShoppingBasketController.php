@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
+use App\Repository\CommandeRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ShoppingBasketController extends AbstractController
 {
-    #[Route('/shopping/basket', name: 'app_shopping_basket')]
-    public function index(SessionInterface $session): Response
+
+    #[Route('/shopping/basket/', name: 'app_shopping_basket')]
+    public function displayCart(SessionInterface $session): Response
     {
         $totalPrice = 0;
         $basket = $session->get('Basket', []);
@@ -25,20 +26,28 @@ class ShoppingBasketController extends AbstractController
         }
 
         return $this->render('shopping_basket/shopping_basket.html.twig', [
-            'totalPriceController' => $totalPrice
-
-       ]);
+            'totalPriceController' => $totalPrice,
+        ]);
 
     }
 
     #[Route('/add/to/basket/{id}', name: 'app_add_basket')]
-    public function addtocart(ProductRepository $productRepository, $id, SessionInterface $session, Request $request): Response
+    public function addToCart(ProductRepository $productRepository, $id, SessionInterface $session): Response
     {
-
+        //On récupère le contenu du panier depuis la session, ou on crée un nouveau panier vide si la session ne contient pas de panier
         $basket = $session->get('Basket', []);
+        // On récupère le produit correspondant à l'identifiant passé en paramètre
         $product = $productRepository->find($id);
+        // on récupére les propriétés du produit via les méthodes get
         $productName = $product->getProductName();
         $productPrice = $product->getProductPrice();
+        $productUnit = $product->getUnit()->getUnitProduct();
+        $productImage = $product->getProductImage();
+        $productId = $product->getId();
+
+
+        // on initialises les variables $totalPrice à zero et $productQuantity  à 1
+        $productQuantity = 1;
         $totalPrice = 0;
 
         // Vérifier si le produit est déja dans le panier
@@ -47,42 +56,72 @@ class ShoppingBasketController extends AbstractController
             if ($item['name'] === $productName) {
                 $foundProduct = true;
                 break;
+
             }
         }
 
-        // si le produit n'y est pas, on mets la quantité à 1
+        // création d'un tableau contenant le produit
         if (!$foundProduct) {
             $item = [
                 'name' => $productName,
                 'price' => $productPrice,
-                'quantity' => 1,
-
+                'unit' => $productUnit,
+                'quantity' => $productQuantity,
+                'image' => $productImage,
+                'id' => $productId,
             ];
-
             $basket[] = $item;
 
+            // On enregistre le panier dans la session
             $session->set('Basket', $basket);
-
         }
         foreach ($basket as $item) {
-
+            // on effectues la somme des produits ajoutées et on affectes cette valeur à $totalprice
             $totalPrice += $item['price'] * $item['quantity'];
-
         }
 
         return $this->render('shopping_basket/shopping_basket.html.twig', [
-            'totalPriceController' => $totalPrice
-
+            'totalPriceController' => $totalPrice,
+            'id' => $productId,
         ]);
     }
+
+    #[Route('/remove/to/basket/{id}', name: 'app_remove_basket')]
+    public function removeToCart(SessionInterface $session, ProductRepository $productRepository, $id): Response
+    {
+        $totalPrice = 0;
+        $basket = $session->get('Basket', []);
+
+        // on récupéres les ids du produit sélectionné quand on cliques sur supprimer
+
+        $product = $productRepository->find($id);
+        $productId = $product->getId();
+
+        foreach ($basket as $index => $item) {
+            if ($item['id'] == $productId) {
+                unset($basket[$index]);
+            }
+        }
+
+        // mettre à jour la variable de session 'Basket' avec le nouveau panier
+        $session->set('Basket', $basket);
+
+        // mettre à jour le prix total de la commande
+        foreach ($basket as $item) {
+            // on effectues la somme des produits ajoutées et on affectes cette valeur à $totalprice
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+
+        return $this->render('shopping_basket/shopping_basket.html.twig', [
+            'totalPriceController' => $totalPrice,
+            'id' => $productId,
+        ]);
+    }
+
+
 }
-    // explication
-    //On récupère le contenu du panier depuis la session, ou on crée un nouveau panier vide si la session ne contient pas de panier
-    // On récupère le produit correspondant à l'identifiant passé en paramètre
-    // on récupére les propriétés du produit via les méthodes get
-    // on initialises une variable $totalPrice à zero
-    // on vérifies si le produit est deja dans le panier ou pas, si pas, on le rajoute au panier
-    // On enregistre le panier dans la session
-    // on effectues la somme des produits ajoutées et on affectes cette valeur à $totalprice
+
+
+
 
 

@@ -16,15 +16,6 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $command_product_name = null;
-
-    #[ORM\Column]
-    private ?float $command_product_quantity = null;
-
-    #[ORM\Column]
-    private ?float $command_product_total_price = null;
-
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $command_product_date = null;
 
@@ -35,6 +26,9 @@ class Commande
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'commandes')]
     private Collection $product;
 
+    #[ORM\Column]
+    private array $jsonCommand = [];
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
@@ -44,43 +38,6 @@ class Commande
     {
         return $this->id;
     }
-
-    public function getCommandProductName(): ?string
-    {
-        return $this->command_product_name;
-    }
-
-    public function setCommandProductName(string $command_product_name): self
-    {
-        $this->command_product_name = $command_product_name;
-
-        return $this;
-    }
-
-    public function getCommandProductQuantity(): ?float
-    {
-        return $this->command_product_quantity;
-    }
-
-    public function setCommandProductQuantity(float $command_product_quantity): self
-    {
-        $this->command_product_quantity = $command_product_quantity;
-
-        return $this;
-    }
-
-    public function getCommandProductTotalPrice(): ?float
-    {
-        return $this->command_product_total_price;
-    }
-
-    public function setCommandProductTotalPrice(float $command_product_total_price): self
-    {
-        $this->command_product_total_price = $command_product_total_price;
-
-        return $this;
-    }
-
 
     public function getCommandProductDate(): ?\DateTimeImmutable
     {
@@ -129,5 +86,30 @@ class Commande
 
         return $this;
     }
+
+    public function getCommand(): array
+    {
+        return $this->command;
+    }
+
+    public function setCommand(array $command): self
+    {
+        $this->command = $command;
+
+        return $this;
+    }
+
+    public function getJsonCommand(): array
+    {
+        return $this->jsonCommand;
+    }
+
+    public function setJsonCommand(array $jsonCommand): self
+    {
+        $this->jsonCommand = $jsonCommand;
+
+        return $this;
+    }
+
 }
 

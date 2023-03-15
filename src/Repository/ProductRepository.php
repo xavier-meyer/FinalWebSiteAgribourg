@@ -30,8 +30,6 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-
-
     public function remove(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -46,13 +44,14 @@ class ProductRepository extends ServiceEntityRepository
     public function displayArticlesByCategory(array $categs): array
     {
         //Création d'un constructeur de requête
-        return $this->createQueryBuilder('m')
+        return $this->createQueryBuilder('p')
+
             //Filtrer les résultats en fonction de la catégorie de l'article
-            ->where('m.product_category IN (:product_category)')
+            ->where('p.product_category IN (:product_category)')
             //Définir les catégories spécifiées dans le tableau en tant que paramètre pour la requête
             ->setParameter('product_category', $categs)
             //Filtrer les résultats pour n'inclure que les articles qui ont un prix
-            ->andWhere('m.product_price < 3')
+            ->andWhere('p.product_price < 3')
             //Limiter le nombre de résultats retournés à 10
             ->setMaxResults(10)
             //Obtenir les résultats de la requête sous forme d'un tableau
