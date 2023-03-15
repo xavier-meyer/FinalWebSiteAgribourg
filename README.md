@@ -11,3 +11,17 @@ symfony server:start
 
 npm run watch
 
+4/ etre sur la bonne branche newtest
+
+avec commande git branch 
+
+affichage *test
+
+sinon faire git commit checkout test
+
+et vérifier encore git branch *newtest
+
+5/ lancer sur le navigateur de votre choix localhost:8000 pour accéder a la page home
+
+
+
