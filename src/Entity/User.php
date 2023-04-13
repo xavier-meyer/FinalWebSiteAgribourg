@@ -46,15 +46,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commande::class)]
     private Collection $commandes;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: HistoriqueEntreprise::class)]
+    private Collection $relation;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->relation = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    // la méthode __toString est définie pour renvoyer une chaine de caractères qui représente l'objet User
+    public function __toString(): string
+    {
+        return "id=$this->id";
     }
 
     public function getEmail(): ?string
@@ -194,6 +203,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commande->getUser() === $this) {
                 $commande->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HistoriqueEntreprise>
+     */
+    public function getRelation(): Collection
+    {
+        return $this->relation;
+    }
+
+    public function addRelation(HistoriqueEntreprise $relation): self
+    {
+        if (!$this->relation->contains($relation)) {
+            $this->relation->add($relation);
+            $relation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelation(HistoriqueEntreprise $relation): self
+    {
+        if ($this->relation->removeElement($relation)) {
+            // set the owning side to null (unless already changed)
+            if ($relation->getUser() === $this) {
+                $relation->setUser(null);
             }
         }
 

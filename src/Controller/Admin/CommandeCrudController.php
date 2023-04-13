@@ -6,9 +6,9 @@ use App\Entity\Commande;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-
 
 class CommandeCrudController extends AbstractCrudController
 {
@@ -29,7 +29,11 @@ class CommandeCrudController extends AbstractCrudController
 
             DateTimeField::new('commandProductDate'),
 
-            ArrayField::new('json_command')
+            ChoiceField::new('commandProductStatus')->setChoices([
+            'En cours de préparation' => 'En cours de préparation',
+            'En cours de livraison' => 'En cours de livraison',
+            'Livrée' => 'Livrée',
+            ]),
 
         ];
     }

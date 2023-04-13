@@ -26,8 +26,13 @@ class Commande
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'commandes')]
     private Collection $product;
 
-    #[ORM\Column]
-    private array $jsonCommand = [];
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $command_product_status = null;
+
+    #[ORM\Column(nullable: true)]
+    private array $json_command = [];
+
 
     public function __construct()
     {
@@ -99,14 +104,26 @@ class Commande
         return $this;
     }
 
-    public function getJsonCommand(): array
+    public function getCommandProductStatus(): ?string
     {
-        return $this->jsonCommand;
+        return $this->command_product_status;
     }
 
-    public function setJsonCommand(array $jsonCommand): self
+    public function setCommandProductStatus(?string $command_product_status): self
     {
-        $this->jsonCommand = $jsonCommand;
+        $this->command_product_status = $command_product_status;
+
+        return $this;
+    }
+
+    public function getJsonCommand():array
+    {
+        return $this->json_command;
+    }
+
+    public function setJsonCommand(?array $json_command): self
+    {
+        $this->json_command = $json_command;
 
         return $this;
     }

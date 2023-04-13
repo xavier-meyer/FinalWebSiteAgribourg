@@ -20,6 +20,9 @@ class HistoriqueEntreprise
     #[ORM\Column(type: Types::TEXT)]
     private ?string $histdescription = null;
 
+    #[ORM\ManyToOne(inversedBy: 'relation')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class HistoriqueEntreprise
     public function setHistdescription(string $histdescription): self
     {
         $this->histdescription = $histdescription;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

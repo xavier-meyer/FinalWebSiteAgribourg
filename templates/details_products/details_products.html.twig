@@ -4,40 +4,50 @@
 
 {% block body %}
     <h1 class="h1-font-size text-center my-5 main-color">Votre produit</h1>
-    <div class="row d-flex justify-content-center align-items-center">
-        {{ include('card_details_affichage/card_details_affichage.html.twig') }}
-    </div>
-    {# bloc description, command, disponibilité #}
-    <div class="d-flex justify-content-center align-items-center my-3">
-        <div class="card my-3 col-8 col-sm-6 col-md-8 col-lg-7">
-            <div class="card-body background-secondary-color">
-                <h3 class="card-title text-black my-3">Description du produit:</h3>
-                <p class="card-text text-black">{{ item.productDescription }}</p>
-                <h3 class="card-title text-black my-3">Disponibilité:</h3>
-                <p>Ce produit est disponible sous 4h dans le point de collecte choisi.</p>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            {{ include('card_details_affichage/card_details_affichage.html.twig') }}
+        </div>
+        {# bloc description, command, disponibilité #}
+        <div class="row justify-content-center align-items-center my-3">
+             <div class="my-3 col-sm-6 col-md-8 col-lg-7">
+                <div class="card">
+                    <div class="card-body background-secondary-color">
+                        <h3 class="card-title text-black my-3">Description du produit:</h3>
+                        <p class="card-text text-black">{{ item.productDescription }}</p>
+                        <h3 class="card-title text-black my-3">Disponibilité:</h3>
+                        <p>Ce produit est disponible sous 4h dans le point de collecte choisi.</p>
+                    </div>
+                </div>
+             </div>
+        </div>
+        {# fin bloc description, command, disponibilité #}
+        {# bloc conseils #}
+        <div class="row justify-content-center align-items-center my-3">
+            <div class="my-3 col-sm-6 col-md-8 col-lg-7">
+                <div class="card">
+                    <div class="card-body background-secondary-color">
+                        <h3 class="card-title text-black my-3">Conseils:</h3>
+                        <p class="card-text text-black">{{ item.productAdvice}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    {# fin bloc description, command, disponibilité #}
-    {# bloc conseils #}
-    <div class="d-flex justify-content-center align-items-center my-3">
-        <div class="card my-3 col-8 col-sm-6 col-md-8 col-lg-7">
-            <div class="card-body background-secondary-color">
-                <h3 class="card-title text-black my-3">Conseils:</h3>
-                <p class="card-text text-black">{{ item.productAdvice}}</p>
+    <div class="container">
+        {# fin bloc conseils #}
+        <div class="row justify-content-center align-items-center flex-column">
+            <div class="my-4 col-sm-4 col-md-3 col-xl-2 d-flex justify-content-center align-items-center">
+            {# bouton pour ajouter le produit au panier #}
+                <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card background-color-card-button text-color-card-products">
+                    <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3"  alt="moyen d'ajouter ce produit au panier">Ajouter au panier
+               </a>
+            </div>
+            <div class="mt-5 d-flex justify-content-center align-items-center">
+                {# bouton pour revenir à la page précédente fonction JS goBack() #}
+                <a onclick="goBack()" type="button" class="button_go_back text-color-card-products">Allez à la page précédente</a>
             </div>
         </div>
-    </div>
-    {# fin bloc conseils #}
-    <div class="d-flex justify-content-center align-items-center col-12">
-    {# bouton pour ajouter le produit au panier #}
-        <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card d-flex justify-content-between align-items-center my-4 col-8 col-sm-4 col-md-3 col-xl-2 background-color-card-button text-color-card-products">
-            <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3"  alt="moyen d'ajouter ce produit au panier">Ajouter au panier
-        </a>
-    </div>
-    <div class="mt-5 d-flex justify-content-around align-items-center">
-        {# bouton pour revenir à la page précédente fonction JS goBack() #}
-        <a onclick="goBack()" type="button" class="button_go_back text-color-card-products">Allez à la page précédente</a>
     </div>
 {% endblock %}
 

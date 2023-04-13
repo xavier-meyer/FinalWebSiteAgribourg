@@ -21,61 +21,69 @@ class CommandeController extends AbstractController
         session_start();
 
         $totalPrice = 0;
+
         // récuperer les données du panier dans la session
         $basket = $session->get('Basket');
 
-        $basketProducts = array();
+        $json = '';
 
         if ($basket != null) {
-
-            for ($i = 0; $i < count($basket); $i++) {
-
-                $productName = $basket[$i]['name'];
-                $productPrice = $basket[$i]['price'];
+            foreach ($basket as $item) {
+                $productName = $item['name'];
+                $productPrice = $item['price'];
                 // modifier format prix, rajouter le symbole euro
                 $productPriceFormatted = number_format($productPrice, 2, ',', '') . '€';
-                $basket[$i]['price'] = $productPriceFormatted;
+                $item['price'] = $productPriceFormatted;
 
-                $productQuantity = $basket[$i]['quantity'];
-                $productUnit = $basket[$i]['unit'];
+                $productQuantity = $item['quantity'];
+                $productUnit = $item['unit'];
 
                 $totalProductPrice = $productPrice * $productQuantity;
                 $totalPrice += $totalProductPrice;
 
-                $basketProduct = array('name' => $productName, 'price' => $basket[$i]['price'], 'quantity' => $productQuantity, 'unit' => $productUnit);
+                $basketProduct = ['name' => $productName, 'price' => $item['price'], 'quantity' => $productQuantity, 'unit' => $productUnit];
 
                 // On sélectionne le dernier produit et on affiche le prix total
-                if ($i == count($basket) - 1) {
+                if ($item === end($basket)) {
                     $totalPriceFormatted = number_format($totalPrice, 2, ',', '') . '€';
-                    $basketProduct[$i]['totalPrice'] = $totalPriceFormatted;
+                    $basketProduct['totalPrice'] = $totalPriceFormatted;
                 }
 
-                // ajout du produit au tableau
-                $basketProducts[] = $basketProduct;
+                // ajout du produit à la chaine json
+                // .= opérateur de concaténation
 
+                $json .= json_encode($basketProduct, JSON_UNESCAPED_UNICODE) . ',';
             }
 
-            $json = json_encode($basketProducts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            // suppression de la virgule en trop à la fin de la chaine JSON
+            $json = rtrim($json, ',');
 
-            // fin création fichier json
+        }
+        dump($json);
+        // encapsulation de la chaine JSON entre des crochets pour créer un tableau JSON valide
+        $json = '[' . $json . ']';
 
 
-            $command = new Commande;
+        // fin création fichier json
 
-            // stocker la date de validation du panier
-            $date = new DateTimeImmutable();
+        $command = new Commande;
 
-            // mettre la date au format chaine de caractères pour l'afficher dans la vue
-            $newDate = $date->format('d-m-Y');
+        // stocker la date de validation du panier
+        $date = new DateTimeImmutable();
 
-            // user
+
+        // mettre la date au format chaine de caractères pour l'afficher dans la vue
+        $newDate = $date->format('d-m-Y');
+
+        if($basket != null) {
+            // définir les informations que l'on va envoyer en base de données
             $command->setUser($this->getUser())->getId();
             $command->setCommandProductDate($date);
-            $command->setJsonCommand((array)$json);
+            $command->setJsonCommand(array($json));
 
-            // envoyer en base de données la commande
+
+            // stocker en base de données la commande
             $commandeRepository->save($command, true);
-
         }
 
         // afficher toutes les commandes sur la vue
@@ -85,15 +93,16 @@ class CommandeController extends AbstractController
             ['id' => 'DESC']
         );
 
-        if($basket != null) {
+        if ($basket != null ) {
             $messageConfirmationCommand = "Votre commande a bien été prise en compte! merci de votre confiance";
             $newDate = $date->format('d-m-Y');
             $summaryOrderTitle = "Récapitulatif de votre commande";
+
             $userDerniereCommande = $userCommandes[0];
             $commandeData = json_decode($userDerniereCommande->getJsonCommand()[0]);
             $totalPriceOrder = "prix total:";
             $dateOrder = "commande effectuée le:";
-            $totalPrice =  number_format($totalPrice, 2, ',', '') . '€';
+            $totalPrice = number_format($totalPrice, 2, ',', '') . '€';
 
         } else {
             $messageConfirmationCommand = "Votre panier est vide";
@@ -107,7 +116,7 @@ class CommandeController extends AbstractController
         }
 
         // vider le panier utilisateur stocké en session
-        $basket = $session->remove('Basket');
+        $session->remove('Basket');
 
         return $this->render('command/command.html.twig', [
             'controller_name' => 'CommandeController',
@@ -120,11 +129,27 @@ class CommandeController extends AbstractController
             'totalPriceOrder' => $totalPriceOrder,
             'dateOrder' => $dateOrder,
         ]);
+    }
+
+    #[Route('/commands/', name: 'app_commands')]
+    public function displayAllCommands(CommandeRepository $commandeRepository): Response
+    {
+
+        // afficher toutes les commandes sur la vue
+
+        $userCommandes = $commandeRepository->findBy(
+            ['user' => $this->getUser()->getId()],
+            ['id' => 'DESC'],
+
+        );
+        return $this->render("commands/commands.html.twig", [
+            'controller_name' => 'CommandeController',
+            'userCommandes' => $userCommandes,
+
+        ]);
 
     }
 }
-
-
 
 
 

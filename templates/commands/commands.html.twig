@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CommandesController{% endblock %}
+
+{% block body %}
+
+<h1 class="h1-font-size text-center my-5 main-color fs-4">Vos commandes</h1>
+    {% for commande in userCommandes %}
+        {% for contentCommande in commande.jsonCommand %}
+            {% set objCommand = convert_json_to_array(contentCommande, true) %}
+            <div class="container-fluid">
+                <div class="row justify-content-center align-items-center flex-column">
+                    <div class="col-sm-6 col-xl-4 my-3">
+                        <div class="card background-secondary-color">
+                            <div class="row justify-content-center p-3">
+                                <div class="card-body">
+                                    <div class="row justify-content-center flex-column justify-content-md-around">
+                                        <div class="my-3">
+                                            <div class="card-text">
+                                                {% set totalPrice = 0 %}
+                                                {% for item in objCommand %}
+                                                    {% set totalPrice = totalPrice + item.price | convert_variable_to_float %}
+                                                    <p><span class="fw-bold">nom:</span><span> {{ item.name}}</span></p>
+                                                    <p><span class="fw-bold">prix:</span><span> {{ item.price }}</span></p>
+                                                    <p><span class="fw-bold">quantité:</span><span> {{ item.quantity }}{{ item.unit }}</span></p>
+                                                    {% if item == objCommand|last %}
+                                                        <p><span class="fw-bold">Commande passée le:</span><span> {{ commande.commandProductDate | convert_date_to_string }}</span></p>
+                                                        <p><span class="fw-bold">Statut commande:</span><span> {{ commande.commandProductStatus }}</span></p>
+                                                    {%  endif %}
+                                                {% endfor %}
+                                                <p><span class="fw-bold">Prix Total:</span><span class="text-color-card-products"></span> {{ totalPrice }} € </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+
+

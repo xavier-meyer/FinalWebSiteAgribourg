@@ -4,33 +4,41 @@
 
 {% block body %}
 
-    <div class="row d-flex justify-content-center align-items-center">
-            <p class="my-5 fs-4 col-10 text-center">{{ messageConfirmationCommand }}</p>
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <p class="my-5 fs-4 col-10 text-center">{{ messageConfirmationCommand }}</p>
     </div>
     <h1 class="h1-font-size text-center my-5 main-color fs-4">{{ summaryOrderTitle }}</h1>
-    <div>
-        {%  for item in commande %}
-            <div class="row d-flex justify-content-center">
-                <div class="card background-secondary-color col-6 col-md-8 col-xl-6 my-3">
-                    <div class="card-body d-flex justify-content-center col-12 p-3">
-                        <div class="card-text d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row col-10 my-3">
-                            <p><span class="fw-bold">Nom:</span><br>{{ item.name }}</p>
-                            <p><span class="fw-bold">Prix:</span><br>{{ item.price}}</p>
-                            <p><span class="fw-bold">Quantité:</span><br>{{ item.quantity }} {{ item.unit }}</p>
+    {%  for item in commande %}
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-xl-6 my-3">
+                <div class="card background-secondary-color">
+                    <div class="card-body d-flex justify-content-center p-3">
+                        <div class="col-10">
+                            <div class="card-text d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row my-3">
+                                <p><span class="fw-bold">Nom:</span><br>{{ item.name }}</p>
+                                <p><span class="fw-bold">Prix:</span><br>{{ item.price}}</p>
+                                <p><span class="fw-bold">Quantité:</span><br>{{ item.quantity }} {{ item.unit }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {%  endfor %}
-    </div>
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="card background-secondary-color col-6 col-md-8 col-xl-6 my-3">
-            <div class="card-body d-flex justify-content-center col-12 p-3">
-                <div class="card-text d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row col-10 my-3">
-                    <p><span class="fw-bold">{{ dateOrder }}</span> {{ date }}</p>
-                    <p><span class="fw-bold">{{ totalPriceOrder }}</span> {{ totalPrice }}</p>
+        </div>
+    {%  endfor %}
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8 col-xl-6 my-3">
+            <div class="card background-secondary-color">
+                <div class="card-body d-flex justify-content-center p-3">
+                    <div class="col-10">
+                        <div class="card-text d-flex justify-content-center align-items-center flex-column justify-content-md-around flex-md-row my-3">
+                            <p><span class="fw-bold">{{ dateOrder }}</span> {{ date }}</p>
+                            <p><span class="fw-bold">{{ totalPriceOrder }}</span> {{ totalPrice }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

@@ -1,40 +1,41 @@
 
-<div class="card mb-3 col-8 col-sm-6 col-md-8 col-lg-7">
-    <div class="row g-0">
-        {# image section de gauche#}
-        <div class="col-12 col-md-6">
-            <img src="{{ asset("build/images/"~item.productImage~"") }}" class="col-12 object-fit-fill h-100" alt="...">
-        </div>
-        {# prix, titre, tableau section de droite #}
-        <div class="d-flex justify-content-center align-items-center align-items-md-start col-12 col-md-6">
-            <div class="card-body background-color-grey h-100">
-                {# section titre et prix card produit#}
-                <h3 class="card-title">{{ item.productName }}</h3>
-                <div class="d-flex justify-content-start flex-row my-2 text-black">
-                    <p class="card-text">{{ item.productPrice }}€</p>
+    <div class="col-sm-6 col-md-8 col-lg-7 mb-3">
+        <div class="card">
+            <div class="row g-0">
+                {# image section de gauche#}
+                <div class="col-md-6">
+                    <img src="{{ asset("build/images/"~item.productImage~"") }}" class="col-12 object-fit-fill h-100" alt="...">
                 </div>
-                {# fin section titre et prix card produit#}
-                {# section tableau card produit#}
-                <div>
-                    <table class="table">
-                        <thead class="background-main-color">
-                            <tr>
-                                <th scope="col" class="text-color-card-products">nom</th>
+                {# prix, titre, tableau section de droite #}
+                <div class="d-flex justify-content-center align-items-center align-items-md-start col-md-6">
+                    <div class="card-body background-color-grey h-100">
+                        {# section titre et prix card produit#}
+                        <h3 class="card-title">{{ item.productName }}</h3>
+                        <div class="d-flex justify-content-start flex-row my-2 text-black">
+                            <p class="card-text">{{ item.productPrice }}€</p>
+                        </div>
+                        {# fin section titre et prix card produit#}
+                        {# section tableau card produit#}
+                        <div>
+                            <table class="table">
+                                <thead class="background-main-color">
+                                    <tr>
+                                        <th scope="col" class="text-color-card-products">nom</th>
 
-                                <th scope="col" class="text-color-card-products">PrixTTC</th>
-                            </tr>
-                        </thead>
-                        <tbody class="background-secondary-color">
-                            <tr>
-                                <td>{{ item.productName |nombre_characteres_nom_produit }}</td>
-                                <td>{{ item.productPrice }}€</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        <th scope="col" class="text-color-card-products">PrixTTC</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="background-secondary-color">
+                                    <tr>
+                                        <td>{{ item.productName |nombre_characteres_nom_produit }}</td>
+                                        <td>{{ item.productPrice }}€</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {# fin section tableau card produit#}
+                    </div>
                 </div>
-                {# fin section tableau card produit#}
             </div>
         </div>
     </div>
-</div>
-

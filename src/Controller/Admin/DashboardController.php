@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Commande;
+use App\Entity\HistoriqueEntreprise;
 use App\Entity\Product;
 use App\Entity\Unit;
 use App\Entity\User;
@@ -65,6 +66,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Unit');
         yield MenuItem::linkToCrud('Unit', 'fas fa-list', Unit::class)
             ->setController(UnitCrudController::class);
+
+        yield MenuItem::section('HistoricCommand');
+        yield MenuItem::linkToCrud('HistoricCommand', 'fas fa-list', HistoriqueEntreprise::class);
 
         yield MenuItem::section('Return');
         yield MenuItem::linkToRoute('return to profil', 'fas fa-home', 'profile_user');
