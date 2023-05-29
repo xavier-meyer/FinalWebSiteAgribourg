@@ -15,9 +15,9 @@ npm run watch
 
 avec commande git branch 
 
-affichage *test
+affichage *newtest
 
-sinon faire git commit checkout test
+sinon faire git commit checkout newtest
 
 et vérifier encore git branch *newtest
 
