@@ -1,87 +1,88 @@
 
-<div class="container-fluid">
-    <div class="row align-items-center justify-content-around justify-content-sm-between">
-        <div class="col-4 col-sm-3 col-xl-2">
-            <img src="{{ asset("build/images/coq_new.svg") }}" alt="corporate identity rooster logo" class="rounded-circle m-3 img-fluid">
-        </div>
-        <div class="col-6 col-sm-4">
-            <h1 class="text-uppercase text-center mt-3 main-color">Agribourg</h1>
-        </div>
-        <div class="col-sm-2 col-xl-1 d-none d-sm-block">
-            {%  if app.user %}
-                <a href="{{ path('app_shopping_basket') }}">
-                    <img src="{{ asset("build/images/cart.png") }}" alt="accéder à la page produits" class="img-fluid">
-                </a>
-            {% else %}
-                <a href="{{ path('app_login') }}">
-                    <img src="{{ asset("build/images/cart.png") }}" alt="retourner à la page login si aucun utilisateur n'est connecté" class="img-fluid">
-                </a>
-            {%  endif %}
-        </div>
-    </div>
-</div>
-
-<nav class="navbar navbar-expand-lg mt-2 background-main-color">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav justify-content-start">
-                <li class="nav-item">
-                    <a class="nav-link text-color-card-products" href="{{ path('app_home') }}">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-color-card-products" href="{{ path('app_company_history') }}">Notre histoire</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-color-card-products" href="{{ path('app_search_products') }}">Produits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-color-card-products" href="{{ path('app_expertise') }}">Savoir-faire</a>
-                </li>
-                <li class="nav-item">
+<main>
+    <section class="container-fluid">
+        <div class="row align-items-center justify-content-around justify-content-sm-between">
+            <div class="col-4 col-sm-3 col-xl-2">
+                <img src="{{ asset("build/images/coq_new.svg") }}" alt="corporate identity rooster logo" class="rounded-circle m-3 img-fluid rooster-header-logo">
+            </div>
+            <div class="col-6 col-sm-4">
+                <h1 class="text-uppercase text-center mt-3 main-color">Agribourg</h1>
+            </div>
+            <div class="col-sm-2 col-xl-1 d-none d-sm-block">
                 {%  if app.user %}
-                    <a class="nav-link text-color-card-products d-block d-sm-none" href="{{ path('app_shopping_basket') }}">Panier</a>
+                    <a href="{{ path('app_shopping_basket') }}">
+                        <img src="{{ asset("build/images/cart.png") }}" alt="accéder à la page produits" class="img-fluid basket-header-logo">
+                    </a>
                 {% else %}
-                    <a class="nav-link text-color-card-products d-block d-sm-none" href="{{ path('app_login') }}">Panier</a>
+                    <a href="{{ path('app_login') }}">
+                        <img src="{{ asset("build/images/cart.png") }}" alt="retourner à la page login si aucun utilisateur n'est connecté" class="img-fluid basket-header-logo">
+                    </a>
                 {%  endif %}
-                </li>
-            </ul>
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item">
-                    {%  if app.user %}
-                        <a class="text-color-card-products nav-link">Bienvenue {{ app.user.prenom }}</a>
-                    {%  endif %}
-                </li>
-                <li class="nav-item">
-                    {%  if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('app_admin') }}" class="text-color-card-products nav-link">Dashboard</a>
-                    {%  endif %}
-                </li>
-{#                <li class="nav-item">#}
-{#                    {%  if is_granted('ROLE_ADMIN') %}#}
-{#                        <a href="{{ path('app_command_passed') }}" class="text-color-card-products nav-link">Commandes passées</a>#}
-{#                    {%  endif %}#}
-{#                </li>#}
-                <li class="nav-item">
-                    {% if is_granted('ROLE_USER') %}
-                        <a class="nav-link text-color-card-products" href="{{ path('profile_user_show', {'id': app.user.id}) }}">Show Profil</a>
-                    {%  else %}
-                        <a class="nav-link text-color-card-products" href="{{ path('app_register') }}">Inscription</a>
-                    {%  endif %}
-                </li>
-                <li class="nav-item">
-                    {%  if app.user %}
-                        <a class="nav-link text-color-card-products" href="{{ path('app_logout') }}">Déconnexion</a>
-                    {%  else %}
-                        <a class="nav-link text-color-card-products" href="{{ path('app_login') }}">Connexion</a>
-                    {%  endif %}
-                </li>
-            </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </section>
+    <section class="navbar navbar-expand-lg mt-2 background-main-color">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav justify-content-start">
+                    <li class="nav-item">
+                        <a class="nav-link text-color-card-products" href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color-card-products" href="{{ path('app_company_history') }}">Notre histoire</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color-card-products" href="{{ path('app_search_products') }}">Produits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color-card-products" href="{{ path('app_expertise') }}">Savoir-faire</a>
+                    </li>
+                    <li class="nav-item">
+                    {%  if app.user %}
+                        <a class="nav-link text-color-card-products d-block d-sm-none" href="{{ path('app_shopping_basket') }}">Panier</a>
+                    {% else %}
+                        <a class="nav-link text-color-card-products d-block d-sm-none" href="{{ path('app_login') }}">Panier</a>
+                    {%  endif %}
+                    </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        {%  if app.user %}
+                            <a class="text-color-card-products nav-link">Bienvenue {{ app.user.prenom }}</a>
+                        {%  endif %}
+                    </li>
+                    <li class="nav-item">
+                        {%  if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_admin') }}" class="text-color-card-products nav-link">Dashboard</a>
+                        {%  endif %}
+                    </li>
+                    <li class="nav-item">
+                        {%  if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_admin_commands') }}" class="text-color-card-products nav-link">Commandes passées</a>
+                        {%  endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if is_granted('ROLE_USER') %}
+                            <a class="nav-link text-color-card-products" href="{{ path('profile_user_show', {'id': app.user.id}) }}">Show Profil</a>
+                        {%  else %}
+                            <a class="nav-link text-color-card-products" href="{{ path('app_register') }}">Inscription</a>
+                        {%  endif %}
+                    </li>
+                    <li class="nav-item">
+                        {%  if app.user %}
+                            <a class="nav-link text-color-card-products" href="{{ path('app_logout') }}">Déconnexion</a>
+                        {%  else %}
+                            <a class="nav-link text-color-card-products" href="{{ path('app_login') }}">Connexion</a>
+                        {%  endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
 
 
 

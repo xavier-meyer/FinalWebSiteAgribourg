@@ -31,6 +31,9 @@ class ShoppingBasketController extends AbstractController
     #[Route('/add/to/basket/{id}', name: 'app_add_basket')]
     public function addToCart(ProductRepository $productRepository, $id, SessionInterface $session): Response
     {
+
+        // 'Basket' permet d'accéder à une variable de session nommé 'Basket'
+        // 'Basket' stocke les informations relatives au panier d'achat d'un utilisateur
         //On récupère le contenu du panier depuis la session, ou on crée un nouveau panier vide si la session ne contient pas de panier
         $basket = $session->get('Basket', []);
 
@@ -38,11 +41,11 @@ class ShoppingBasketController extends AbstractController
         $product = $productRepository->find($id);
 
         // on récupére les propriétés du produit via les méthodes get
-        $productName = $product->getProductName();
-        $productPrice = $product->getProductPrice();
-        $productUnit = $product->getUnit()->getUnitProduct();
-        $productImage = $product->getProductImage();
-        $productId = $product->getId();
+        $productName = $product->getProductName(); // nom du produit
+        $productPrice = $product->getProductPrice(); // prix du produit
+        $productUnit = $product->getUnit()->getUnitProduct(); // unité du produit
+        $productImage = $product->getProductImage(); // nom de l'image du produit
+        $productId = $product->getId(); // id du produit
 
         // on initialises les variables $totalPrice à zero et $productQuantity  à 1
         $productQuantity = 1;
@@ -70,14 +73,11 @@ class ShoppingBasketController extends AbstractController
             ];
             $basket[] = $item;
 
-            dump($basket);
-
             // On enregistre le panier dans la session
             $session->set('Basket', $basket);
         }
-
+        // on effectues la somme des produits ajoutées et on affectes cette valeur à $totalprice
         foreach ($basket as $item) {
-            // on effectues la somme des produits ajoutées et on affectes cette valeur à $totalprice
             $totalPrice += $item['price'] * $item['quantity'];
         }
 

@@ -1,0 +1,93 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}admin commandes{% endblock %}
+
+{% block body %}
+    {% set currentBuyer = "" %}
+
+    <main>
+        <h1 class="h1-font-size text-center my-5 main-color fs-4"> commandes</h1>
+        {% for commande in userCommandes %}
+            {% if not currentBuyer == commande.user %}
+                {% set currentBuyer = commande.user %}
+                <h2 class="text-center">{{ currentBuyer.prenom }}</h2>
+            {% endif %}
+            {% for contentCommande in commande.jsonCommand %}
+               {% set objCommand = convert_json_to_array(contentCommande, true) %}
+                <section class="container-fluid">
+                    <div class="row justify-content-center align-items-center flex-column">
+                        <div class="col-sm-6 col-xl-4 my-3">
+                            <article class="card background-secondary-color">
+                                <div class="card-body">
+                                    <div class="card-text my-3">
+                                        {% set totalPrice = 0 %}
+                                        {% for item in objCommand %}
+                                            {% set totalPrice = totalPrice + item.price | convert_string_to_float %}
+                                            <p>
+                                                <span class="fw-bold">
+                                                    nom:
+                                                    <span class="fw-normal">
+                                                        {{ item.name}}
+                                                    </span>
+                                                </span>
+                                            </p>
+                                            <p>
+                                                <span class="fw-bold">
+                                                    prix:
+                                                    <span class="fw-normal">
+                                                        {{ item.price }} €
+                                                    </span>
+                                                </span>
+                                            </p>
+                                            <p>
+                                                <span class="fw-bold">
+                                                     quantité:
+                                                    <span class="fw-normal">
+                                                        {{ item.quantity }}{{ item.unit }}
+                                                    </span>
+                                                </span>
+                                            </p>
+                                            <hr>
+                                            {% if item == objCommand| last %}
+                                                <p>
+                                                    <span class="fw-bold fs-5">Commande passée le:
+                                                        <span class="fs-5 fw-normal">
+                                                            {{ commande.commandProductDate | convert_date_to_string }}
+                                                        </span>
+                                                    </span>
+                                                </p>
+                                                <p>
+                                                    <form action="{{ path('app_admin_commands_status', { 'id' : commande.id  }) }}">
+                                                        <label class="label-search my-2 my-md-0 me-md-2 fw-bold fs-5" for="status-{{ commande.id }}">Changer le status</label>
+                                                        <select id="status-{{ commande.id }}" name="status">
+                                                            <option value="En cours de préparation">En cours de préparation</option>
+                                                            <option value="En cours de livraison">En cours de livraison</option>
+                                                            <option value="Livrée">Livrée</option>
+                                                        </select>
+                                                        <input class="input-search-submit my-3 my-md-0 rounded-2 background-main-color text-color-card-products p-2" type="submit" value="modifier" />
+                                                    </form>
+                                                </p>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <p class="rounded-2">
+                                            <span class="fw-bold fs-5">
+                                                Prix Total:
+                                                <span class="fs-5 fw-normal">
+                                                    {{ totalPrice }} €
+                                                </span>
+                                          </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        {% endfor %}
+    </main>
+{% endblock %}
+
+
+

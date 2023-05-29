@@ -24,6 +24,14 @@
 
 // card
 
+.card:hover
+{
+  .link-details-hidden
+  {
+   display: block;
+  }
+}
+
 .card
 {
   border-radius: 0.635rem !important;
@@ -48,11 +56,27 @@
   font-size:1rem;
 }
 
+.link-details-hidden
+{
+ display: none;
+
+}
+
 // bouton sur card
 
-.btn-button-card, .btn-home-page
+.btn-button-card, .btn-home-page, .btn-button-not-card
 {
   font-size:1.1rem;
+}
+
+.btn-button-card:hover
+{
+  color:#D9D9D9;
+}
+
+.btn-button-not-card:hover
+{
+  color:black;
 }
 
 .icon-card

@@ -1,55 +1,60 @@
 
-<div class="container-fluid">
-    <div class="row justify-content-center align-items-center flex-column flex-md-row justify-content-md-around">
-        <div class="col-md-5 col-lg-3 my-4">
-            <div class="d-flex align-items-center justify-content-center flex-column align-items-md-start align-items-lg-center justify-content-lg-around">
-                <img src="{{ asset("build/images/coq_new.svg") }}" alt="corporate identity rooster logo"
-                     class="rounded-circle my-3 col-5 col-sm-4 col-md-6">
-                <h3 class="text-uppercase">Agribourg</h3>
+<main>
+    <section class="container-fluid">
+        <div class="row justify-content-center align-items-center flex-column flex-md-row justify-content-md-around">
+            <div class="col-md-5 col-lg-3 my-4">
+                <div class="d-flex align-items-center justify-content-center flex-column align-items-lg-center justify-content-lg-around">
+                    <img src="{{ asset("build/images/coq_new.svg") }}" alt="corporate identity rooster logo"
+                         class="rounded-circle my-3 col-5 col-sm-4 col-md-6 logo-footer-rooster">
+                    <h3 class="text-uppercase">Agribourg</h3>
+                </div>
             </div>
+            <article class="col-md-5 col-lg-3 my-4 text-center">
+                <h3>Informations pratiques</h3>
+                <ul class="text-black list-unstyled">
+                    <li>Nos horaires</li>
+                    <li>Points de collecte</li>
+                    <li>Réservations pour accés à la ferme</li>
+                    <li>Conditions générales de vente</li>
+                    <li>Mentions légales</li>
+                </ul>
+            </article>
+            <article class="col-md-5 col-lg-3 my-4 text-center">
+                <h3>Où nous trouver</h3>
+                <ul class="mt-2 list-unstyled">
+                    <li>Agribourg</li>
+                    <li>176, route de Bourg en Bresse</li>
+                    <li>
+                        <span class="d-flex justify-content-center align-items-center mt-2">
+                            <img src="{{ asset("build/images/phone.png") }}" alt="Nous contacter par téléphone"
+                                 class="logo-footer-contacts me-2"><span class="footer-font-size-text">04 72 00 00 00</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="d-flex justify-content-center align-items-center mt-2">
+                            <img src="{{ asset("build/images/mail.png") }}" alt="Nous contacter par email" class="logo-footer-contacts me-3"><span
+                          >agribourg@bourg.com</span>
+                        </span>
+                    </li>
+                </ul>
+            </article>
+            <article class="col-md-5 col-lg-3 text-center my-3">
+                <h3>Nous rejoindre</h3>
+                <div class="d-flex justify-content-center align-items-center mt-2">
+                    <img src="{{ asset("build/images/facebook.png") }}" alt="Nous rejoindre sur facebook"
+                         class="me-3 img-icons">
+                    <img src="{{ asset("build/images/twitter.png") }}" alt="Nous rejoindre sur twitter" class="me-3 img-icons">
+                    <img src="{{ asset("build/images/linkedin.png") }}" alt="Nous contacter via linkedin" class="img-icons">
+                </div>
+                <h3 class="my-3">Paiement sécurisé STRIPE</h3>
+                <div class="d-flex justify-content-center">
+                    <img src="{{ asset("build/images/stipe.png") }}" alt="moyen de paiement stipe"
+                     class="icon-stipe">
+                </div>
+            </article>
         </div>
-        <div class="col-md-5 col-lg-3 my-4 text-center">
-            <h3>Informations pratiques</h3>
-            <ul class="text-black list-unstyled">
-                <li>Nos horaires</li>
-                <li>Points de collecte</li>
-                <li>Réservations pour accés à la ferme</li>
-                <li>Conditions générales de vente</li>
-                <li>Mentions légales</li>
-            </ul>
-        </div>
-        <div class=" my-4 my-md-0 align-items-md-start justify-content-md-around col-10 col-md-5 col-lg-3">
-            <h3>Où nous trouver</h3>
-            <span class="mt-2">Agribourg</span>
-            <span class="mt-2">176,route de Bourg en Bresse</span>
-            <div>
-                <span class="d-flex justify-content-center align-items-center align-items-md-start justify-content-md-start mt-2">
-                    <img src="{{ asset("build/images/phone.png") }}" alt="Nous contacter par téléphone"
-                         class="col-1 me-2"><span class="footer-font-size-text">04 72 00 00 00</span>
-                </span>
-                <span class="d-flex justify-content-center align-items-center align-items-md-start justify-content-md-start mt-2">
-                    <img src="{{ asset("build/images/mail.png") }}" alt="Nous contacter par email" class="col-1 me-3"><span
-                  >agribourg@bourg.com</span>
-                </span>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center flex-column my-4 align-items-md-start col-10 col-md-5 col-lg-3">
-            <h3>Nous rejoindre</h3>
-            <div class="d-flex justify-content-start align-items-center mt-2">
-                <img src="{{ asset("build/images/facebook.png") }}" alt="Nous rejoindre sur facebook"
-                     class="me-3 img-icons">
-                <img src="{{ asset("build/images/twitter.png") }}" alt="Nous rejoindre sur twitter" class="me-3 img-icons">
-                <img src="{{ asset("build/images/linkedin.png") }}" alt="Nous contacter via linkedin" class="img-icons">
-            </div>
-            <h3 class="my-3">Paiement sécurisé STRIPE</h3>
-            <div class="d-flex justify-content-center justify-content-md-start">
-                <img src="{{ asset("build/images/stipe.png") }}" alt="moyen de paiement stipe"
-                 class=" col-7 col-md-5 icon-stipe">
-            </div>
-        </div>
-    </div>
-</div>
-
+    </section>
+</main>
 
 
 

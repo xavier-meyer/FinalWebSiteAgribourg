@@ -1,27 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SearchProductsFrutsExoticController{% endblock %}
+{% block title %}Page fruits exotiques{% endblock %}
 {% block body %}
-    <h1 class="h1-font-size text-center my-5 main-color">Nos Fruits Exotiques</h1>
-    {{ include('section_button_search_products.html.twig') }}
-    <form class="d-flex justify-content-center align-items-center flex-column flex-md-row mt-5" action="{{ path('app_search_fruts_exotic') }}">
-        <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
-        <input class="input-search rounded background-secondary-color my-3 my-md-0 me-md-2" type="text" id="name" name="name">
-        <input class="input-search-submit my-3 my-md-0 rounded-2 background-main-color text-color-card-products p-2" type="submit" value="rechercher">
-    </form>
-    <div class="mt-5 w-auto">
-        {# on affiches un message d'erreur grace à la variable 'message_error' passé en paramétre à la vue twig si aucun résultat trouvé#}
-        {% if error_message is defined %}
-            <div class="alert alert-success text-div-alert">{{ error_message }}</div>
-        {% endif %}
-    </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center justify-content-md-center align-items-center my-5">
-            {% for item in articlesFrutsExotic %}
-                {{ include('card_affichage/card_affichage.html.twig') }}
-            {% endfor %}
+    <main>
+        <h1 class="h1-font-size text-center my-5 main-color">Nos Fruits Exotiques</h1>
+        {{ include('section_button_search_products.html.twig') }}
+        <form class="d-flex justify-content-center align-items-center flex-column flex-md-row mt-5" action="{{ path('app_search_fruts_exotic') }}">
+            <label class="label-search my-2 my-md-0 me-md-2"  for="name">Rechercher un produit</label>
+            <input class="input-search rounded background-secondary-color my-3 my-md-0 me-md-2" type="text" id="name" name="name">
+            <input class="input-search-submit my-3 my-md-0 rounded-2 background-main-color text-color-card-products p-2" type="submit" value="rechercher">
+        </form>
+        <div class="mt-5 w-auto">
+            {# on affiches un message d'erreur grace à la variable 'message_error' passé en paramétre à la vue twig si aucun résultat trouvé#}
+            {% if error_message is defined %}
+                <div class="alert alert-success text-div-alert">{{ error_message }}</div>
+            {% endif %}
         </div>
-    </div>
-    {{ include('section_buttons_go_back.html.twig') }}
+        <div class="container-fluid">
+            <div class="row justify-content-center justify-content-md-center align-items-center my-5">
+                {% for item in articlesFrutsExotic %}
+                    {{ include('card_affichage/card_affichage.html.twig') }}
+                {% endfor %}
+            </div>
+        </div>
+        {{ include('section_buttons_go_back.html.twig') }}
+    </main>
 {% endblock %}
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}DetailsProductsController{% endblock %}
+{% block title %}Détails produits{% endblock %}
 
 {% block body %}
     <h1 class="h1-font-size text-center my-5 main-color">Votre produit</h1>
@@ -10,7 +10,7 @@
         </div>
         {# bloc description, command, disponibilité #}
         <div class="row justify-content-center align-items-center my-3">
-             <div class="my-3 col-sm-6 col-md-8 col-lg-7">
+             <div class="my-3 col-10 col-sm-6 col-md-8 col-lg-7">
                 <div class="card">
                     <div class="card-body background-secondary-color">
                         <h3 class="card-title text-black my-3">Description du produit:</h3>
@@ -24,7 +24,7 @@
         {# fin bloc description, command, disponibilité #}
         {# bloc conseils #}
         <div class="row justify-content-center align-items-center my-3">
-            <div class="my-3 col-sm-6 col-md-8 col-lg-7">
+            <div class="my-3 col-10 col-sm-6 col-md-8 col-lg-7">
                 <div class="card">
                     <div class="card-body background-secondary-color">
                         <h3 class="card-title text-black my-3">Conseils:</h3>
@@ -37,7 +37,7 @@
     <div class="container">
         {# fin bloc conseils #}
         <div class="row justify-content-center align-items-center flex-column">
-            <div class="my-4 col-sm-4 col-md-3 col-xl-2 d-flex justify-content-center align-items-center">
+            <div class="my-4 col-10 col-sm-4 col-md-3 col-xl-2 d-flex justify-content-between align-items-center">
             {# bouton pour ajouter le produit au panier #}
                 <a href="{{ path('app_add_basket',{'id' : item.id}) }}" class="btn btn-button-card background-color-card-button text-color-card-products">
                     <img src="{{ asset("build/images/cart_white.png") }}" class="icon-card me-3"  alt="moyen d'ajouter ce produit au panier">Ajouter au panier

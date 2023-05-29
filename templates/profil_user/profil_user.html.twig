@@ -1,29 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} ProfileController{% endblock %}
+{% block title %} Votre profil{% endblock %}
 
 {% block body %}
-    <h1 class="h1-font-size text-center my-5 main-color">Votre profil</h1>
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-sm-8 col-md-6 col-xl-4">
-                <div class="card background-secondary-color">
-                    <div class="card-body p-3">
-                        <h3 class="card-title">Informations générales:</h3>
-                        <div class="card-text my-3">
-                            <p class="p_page_profil"><span class="fw-bold">votre email:</span><br>{{ app.user.email }}</p>
-                            <p><span class="fw-bold">votre prénom:</span><br>{{ app.user.prenom }}</p>
-                            <p><span class="fw-bold">votre nom:</span><br>{{ app.user.nom }}</p>
-                            <p><span class="fw-bold">votre téléphone:</span><br>{{ app.user.telephone }}</p>
+    <main>
+        <h1 class="h1-font-size text-center my-5 main-color">Votre profil</h1>
+        <section class="container-fluid">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-sm-8 col-md-6 col-xl-3">
+                    {% if app.user %}
+                        <article class="card background-secondary-color">
+                            <div class="card-body p-3">
+                                <h3 class="card-title">Informations générales:</h3>
+                                <div class="card-text my-3">
+                                    <p class="p_page_profil">
+                                        <span class="fw-bold">
+                                            votre email:
+                                            <br>
+                                            <span class="fw-normal">
+                                                {{ app.user.email }}
+                                            </span>
+                                        </span>
+                                    </p>
+                                    <p class="p_page_profil">
+                                        <span class="fw-bold">
+                                           votre prénom:
+                                            <br>
+                                            <span class="fw-normal">
+                                                {{ app.user.prenom }}
+                                            </span>
+                                        </span>
+                                    </p>
+                                    <p class="p_page_profil">
+                                        <span class="fw-bold">
+                                          votre nom:
+                                            <br>
+                                            <span class="fw-normal">
+                                               {{ app.user.nom }}
+                                            </span>
+                                        </span>
+                                    </p>
+                                    <p class="p_page_profil">
+                                        <span class="fw-bold">
+                                         votre téléphone:
+                                            <br>
+                                            <span class="fw-normal">
+                                             {{ app.user.telephone }}
+                                            </span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    {% else %}
+                        <div class="text-center">
+                            <p class="my-3">Veuillez vous connectez pour consultez votre profil!</p>
+                            <a href="{{ path('app_login') }}" class="button_go_back text-color-card-products text-center">
+                                Se connecter
+                            </a>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="mt-5 d-flex justify-content-around align-items-center">
-        <a href="{{ path('app_commands') }}" type="button" class="button_go_back  text-color-card-products">Voir toutes les commandes</a>
-        <a href="{{ path('app_home') }}"  type="button" class="button_go_back text-color-card-products">Retounez à l'accueil</a>
-    </div>
+            {% if app.user %}
+                <div class="mt-5 text-center">
+                    <a href="{{ path('app_commands') }}" type="button" class="button_go_back text-color-card-products my-3">Voir toutes les commandes</a>
+                    <a href="{{ path('app_home') }}"  type="button" class="button_go_back text-color-card-products">Retounez à l'accueil</a>
+                </div>
+            {% endif %}
+        </section>
+    </main>
 {% endblock %}
 

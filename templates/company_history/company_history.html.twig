@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CompagnyHistoryController{% endblock %}
+{% block title %}Historique commandes{% endblock %}
 
 {% block body %}
     <h1 class="h1-font-size main-color">Notre histoire</h1>
@@ -9,7 +9,7 @@
             <div>
                 <h3>{{ item.histannee }}</h3>
             </div>
-            <p class="p_historique_description background-secondary-color">{{  item.histdescription }}</p>
+            <p class="p_historique_description background-secondary-color">{{ item.histdescription }}</p>
         </div>
         <div class="center-hr">
         {# on affiches le hr sauf pour le dernier élement #}

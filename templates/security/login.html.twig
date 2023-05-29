@@ -1,46 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <h1 class="h1-font-size text-center my-5 main-color">Connexion</h1>
-    <div class="d-flex justify-content-center align-items-center flex-column">
-        <div class="card col-10 col-md-8 col-xl-5 background-secondary-color">
-            <form method="post" class="d-flex justify-content-center align-items-center flex-column">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+    <main>
+        <h1 class="h1-font-size text-center my-5 main-color">Connexion</h1>
+        <section class="d-flex justify-content-center align-items-center flex-column">
+            <div class="card col-10 col-md-8 col-xl-5 background-secondary-color">
+                <form method="post" class="d-flex justify-content-center align-items-center flex-column">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <label for="inputEmail" class="my-3 label-search" >Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                           class="background-main-color text-color-card-products rounded-2 col-10 col-sm-6 col-xl-5 text-center p-1" autocomplete="email" required autofocus>
+                    <label for="inputPassword" class="my-3 label-search" >Password</label>
+                    <input type="password" name="password" id="inputPassword"
+                           class="background-main-color text-color-card-products rounded-2 col-10 col-sm-6 col-xl-5 p-1" autocomplete="current-password" required>
+
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <div class="d-flex justify-content-center align-items-center my-3">
+                        <button class="btn btn-lg btn-primary my-3 background-main-color text-color-card-products" type="submit">
+                            Se connecter
+                        </button>
                     </div>
-                {% endif %}
-
-                <label for="inputEmail" class="my-3 label-search" >Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                       class="background-main-color text-color-card-products rounded-2 col-10 col-sm-6 col-xl-5 text-center p-1" autocomplete="email" required autofocus>
-                <label for="inputPassword" class="my-3 label-search" >Password</label>
-                <input type="password" name="password" id="inputPassword"
-                       class="background-main-color text-color-card-products rounded-2 col-10 col-sm-6 col-xl-5 p-1" autocomplete="current-password" required>
-
-                <input type="hidden" name="_csrf_token"
-                       value="{{ csrf_token('authenticate') }}"
-                >
-                <div class="d-flex justify-content-center align-items-center my-3">
-                    <button class="btn btn-lg btn-primary my-3 background-main-color text-color-card-products" type="submit">
-                        Se connecter
-                    </button>
-                </div>
-            </form>
-            <div class="d-flex justify-content-center align-items-center flex-column flex-md-row">
-            <label for="input" class="label-search me-md-3">Pas encore de compte?</label>
-            <a href="{{ path('app_register') }}" class="btn btn-lg btn-primary my-3 background-main-color text-color-card-products" type="button">
-                S'inscrire
-            </a>
+                </form>
+                <div class="d-flex justify-content-center align-items-center flex-column flex-md-row">
+                <label for="input" class="label-search me-md-3">Pas encore de compte?</label>
+                <a href="{{ path('app_register') }}" class="my-3 text-decoration-none text-black" >
+                    S'inscrire
+                </a>
+            </div>
         </div>
-    </div>
-    </div>
+        </section>
+    </main>
 {% endblock %}
 
 

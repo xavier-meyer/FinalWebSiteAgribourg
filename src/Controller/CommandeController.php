@@ -5,14 +5,16 @@ namespace App\Controller;
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CommandeController extends AbstractController
 {
-    #[Route('/command/', name: 'app_command')]
+    #[Route('/command', name: 'app_command')]
     public function sentCommandToDatabase(SessionInterface $session, CommandeRepository $commandeRepository): Response
     {
 
@@ -32,36 +34,33 @@ class CommandeController extends AbstractController
                 $productName = $item['name'];
                 $productPrice = $item['price'];
                 // modifier format prix, rajouter le symbole euro
-                $productPriceFormatted = number_format($productPrice, 2, ',', '') . '€';
+                $productPriceFormatted = number_format($productPrice, 2, ',', '');
                 $item['price'] = $productPriceFormatted;
-
                 $productQuantity = $item['quantity'];
                 $productUnit = $item['unit'];
+
 
                 $totalProductPrice = $productPrice * $productQuantity;
                 $totalPrice += $totalProductPrice;
 
-                $basketProduct = ['name' => $productName, 'price' => $item['price'], 'quantity' => $productQuantity, 'unit' => $productUnit];
+                $basketProduct = ['name' => $productName, 'price' => $item['price'], 'quantity' => $productQuantity,
+                    'unit' => $productUnit];
 
-                // On sélectionne le dernier produit et on affiche le prix total
-                if ($item === end($basket)) {
-                    $totalPriceFormatted = number_format($totalPrice, 2, ',', '') . '€';
-                    $basketProduct['totalPrice'] = $totalPriceFormatted;
-                }
+                    // ajout du produit à la chaine json
+                    // .= opérateur de concaténation
 
-                // ajout du produit à la chaine json
-                // .= opérateur de concaténation
+                    $json .= json_encode($basketProduct, JSON_UNESCAPED_UNICODE) . ',';
 
-                $json .= json_encode($basketProduct, JSON_UNESCAPED_UNICODE) . ',';
             }
+
 
             // suppression de la virgule en trop à la fin de la chaine JSON
             $json = rtrim($json, ',');
 
+
         }
-        dump($json);
         // encapsulation de la chaine JSON entre des crochets pour créer un tableau JSON valide
-        $json = '[' . $json . ']';
+        $jsonBasket = '[' . $json . ']';
 
 
         // fin création fichier json
@@ -71,16 +70,18 @@ class CommandeController extends AbstractController
         // stocker la date de validation du panier
         $date = new DateTimeImmutable();
 
+        // définir status commande
+        $statutCommand = "En cours de préparation";
 
         // mettre la date au format chaine de caractères pour l'afficher dans la vue
-        $newDate = $date->format('d-m-Y');
+         $date->format('d-m-Y');
 
         if($basket != null) {
             // définir les informations que l'on va envoyer en base de données
             $command->setUser($this->getUser())->getId();
             $command->setCommandProductDate($date);
-            $command->setJsonCommand(array($json));
-
+            $command->setJsonCommand(array($jsonBasket));
+            $command->setCommandProductStatus($statutCommand);
 
             // stocker en base de données la commande
             $commandeRepository->save($command, true);
@@ -131,7 +132,7 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/commands/', name: 'app_commands')]
+    #[Route('/commands', name: 'app_commands')]
     public function displayAllCommands(CommandeRepository $commandeRepository): Response
     {
 
@@ -149,6 +150,38 @@ class CommandeController extends AbstractController
         ]);
 
     }
+
+    #[Route('/admin/commands', name: 'app_admin_commands')]
+    public function displayAllCommandsForAdmin(CommandeRepository $commandeRepository) : response
+    {
+        //afficher les commandes pour l' administrateur
+
+        $commandes = $commandeRepository->findBy([], ['user' => "ASC"]);
+
+        return $this->render("admin_commands/admin_commands.html.twig", [
+            'controller_name' => 'CommandeController',
+            'userCommandes' => $commandes,
+        ]);
+
+    }
+    #[Route('/admin/commands/{id}/status', name: 'app_admin_commands_status')]
+    public function changeStatus(Commande $commande, EntityManagerInterface $em, Request $request) : response
+    {
+        $status = $request->get('status');
+
+        if($status == "En cours de préparation") {
+            $commande->setCommandProductStatus("En cours de livraison");
+        } elseif($status == "En cours de livraison") {
+            $commande->setCommandProductStatus("Livrée");
+        }
+
+        $em->persist($commande);
+        $em->flush();
+
+        return $this->redirectToRoute('app_admin_commands');
+
+    }
+
 }
 
 

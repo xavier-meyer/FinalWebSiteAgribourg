@@ -3,8 +3,10 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Agribourg{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Agribourg est une société basée sur Bourg en Bresse qui propose des fruits et légumes frais et biologiques à la vente en ligne et sur place" />
+        <meta name="title" content="Agribourg vente en ligne fruits légumes frais et biologiques sur Bourg en Bresse" />
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -13,9 +15,7 @@
     {% block header %}{% include "header.html.twig" %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
-            <script defer src="{{ asset('js/card_hover.js' )}}"></script>
             <script defer src="{{ asset('js/button_go_back_page.js') }}"></script>
-            {# <script defer src="{{ asset('js/choice_quantity_product_basket.js') }}"></script>#}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
